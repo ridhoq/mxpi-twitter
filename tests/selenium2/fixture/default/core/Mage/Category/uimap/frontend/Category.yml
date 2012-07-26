@@ -1,0 +1,142 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#
+category_page_before_reindex:
+    mca: %categoryUrl%.html
+    title: %categoryTitle%
+    uimap: &categoryUIMap
+        form: &categoryPage
+            fieldsets:
+                -
+                    category_view:
+                        xpath: //div[@class='category-products']
+                        dropdowns:
+                            show_per_page: //div[@class='toolbar']//div[@class='limiter']/select
+                            sort_by: //div[@class='toolbar']//div[@class='sorter']//select
+                        links:
+                            list: //a[@class='list']
+                            grid: //a[@class='grid']
+                            next_page: //a[@title='Next']
+                            learn_more: //li[h2/a='%productName%']//a[@class='link-learn']
+                            add_to_wishlist: //li[h2/a='%productName%']//a[@class='link-wishlist']
+                            add_to_compare: //li[h2/a='%productName%']//a[@class='link-compare']
+                            reviews: //a[contains(text(),'Review(s)')]
+                        buttons:
+                            add_to_cart: //li[h2/a='%productName%']//button[span='Add to Cart']
+                        pageelements:
+                            product_name_header: //div[@class='category-products']//a[text()='%productName%']
+                            price_regular: //li[h2/a='%productName%']//span[@class='regular-price']/span[@class='price' and normalize-space(text())='%price%']
+                            price_excluding_tax: //li[h2/a='%productName%']//span[@class='price-excluding-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_including_tax: //li[h2/a='%productName%']//span[@class='price-including-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_old: //li[h2/a='%productName%']//p[@class='old-price' and //span[normalize-space(text())='%price%']]
+                            price_special: //li[h2/a='%productName%']//p[@class='special-price' and //span[normalize-space(text())='%price%']]
+                            price_special_excluding_tax: //li[h2/a='%productName%']//p[@class='special-price']/span[@class='price-excluding-tax' and normalize-space(text())='%price%']
+                            price_special_inlcuding_tax: //li[h2/a='%productName%']//p[@class='special-price']/span[@class='price-including-tax' and normalize-space(text())='%price%']
+                            as_low_as: //li[h2/a='%productName%']//a[@class='minimal-price-link']/span[@class='price' and normalize-space(text())='%price%']
+                            description: //li[h2/a='%productName%']//div[@class='desc std']
+                            ex_price_regular: //li[h2/a='%productName%']//span[@class='regular-price']
+                            ex_price_excluding_tax: //li[h2/a='%productName%']//span[@class='price-excluding-tax']/span[@class='price']
+                            ex_price_including_tax: //li[h2/a='%productName%']//span[@class='price-including-tax']/span[@class='price']
+                            ex_price_old: //li[h2/a='%productName%']//p[@class='old-price']
+                            ex_price_special: //li[h2/a='%productName%']//p[@class='special-price']
+                            ex_price_special_excluding_tax: //li[h2/a='%productName%']//p[@class='special-price']/span[@class='price-excluding-tax']
+                            ex_price_special_inlcuding_tax: //li[h2/a='%productName%']//p[@class='special-price']/span[@class='price-including-tax']
+                            ex_as_low_as: //li[h2/a='%productName%']//a[@class='minimal-price-link']/span[@class='price']
+                -
+                    category_title:
+                        xpath: //div[@class='page-title']
+                        pageelements:
+                            product_tagged: //div[@class='page-title']/h1[contains(.,'%tagName%')]
+                -
+                    compare_products:
+                        xpath: //div[contains(div/strong/span,'Compare Products')]
+                        links:
+                          compare_clear_all: //a[text()='Clear All']
+                          compare_delete_product: //li[p='%productName%']/a
+                          compare_product_link: //ol[@id='compare-items']//a[text()='%productName%']
+                        buttons:
+                          compare: //button[@title='Compare']
+                        pageelements:
+                          compare_block_empty: //p[text()='You have no items to compare.']
+                          compare_block_title: //div[@class='block-title' and contains(. /strong/span, 'Compare Products')]
+                -
+                    my_cart:
+                        xpath: //div[@class[contains(.,'block-cart')]]
+                -
+                    recently_viewed:
+                        xpath: //div[@class[contains(.,'block-viewed')]]
+                -
+                    community_poll:
+                        xpath: //div[@class='block block-poll']
+                        pageelements:
+                          poll_title: //p[@class='block-subtitle' and contains(text(),'%pollTitle%')]
+                        buttons:
+                          vote: //button[span='Vote']
+                        radiobuttons:
+                            vote: //li[span/label='%answer%']/input
+                -
+                    newsletter:
+                        xpath: //div[@class='block block-subscribe']
+                        buttons:
+                            subscribe: //button[span='Subscribe']
+                        fields:
+                            sign_up_newsletter: //input[@id='newsletter']
+                -
+                    popular_tags:
+                        xpath: //div[@class[contains(.,'block block-tags')]]
+                        links:
+                            tag_name: //ul[@class='tags-list']/li/a[text()='%tagName%']
+                            view_all_tags: //a[text()='View All Tags']
+        messages: &categoryPageMessages
+            newsletter_invalid_email: //div[@class='validation-advice' and text()='Please enter a valid email address. For example johndoe@domain.com.']
+            newsletter_reqired_field: //*[@id='advice-required-entry-newsletter']
+            newsletter_success_subscription: //li[normalize-space(@class)='success-msg' and contains(.,'Thank you for your subscription.')]
+            newsletter_email_used: "//li[normalize-space(@class)='error-msg' and contains(.,'There was a problem with the subscription: This email address is already assigned to another user.')]"
+            newsletter_long_email: "//li[normalize-space(@class)='error-msg' and contains(.,'There was a problem with the subscription: Please enter a valid email address.')]"
+            product_added_to_comparison: //li[normalize-space(@class)='success-msg' and contains(.//span,'The product %productName% has been added to comparison list.')]
+            confirmation_for_removing_product_from_compare: Are you sure you would like to remove this item from the compare products?
+            confirmation_clear_all_from_compare: Are you sure you would like to remove all products from your comparison?
+            compare_list_cleared: //li[normalize-space(@class)='success-msg' and contains(.//span,'The comparison list was cleared.')]
+            product_removed_from_comparison: //li[normalize-space(@class)='success-msg' and contains(.//span,'The product %productName% has been removed from comparison list.')]
+
+category_page_after_reindex:
+    mca: catalog/category/view/s/%categoryUrl%/id/%id%/
+    title: %categoryTitle%
+    uimap: *categoryUIMap
+
+sub_category_page_before_reindex:
+    mca: %rotCategoryUrl%/%categoryUrl%.html
+    title: %categoryTitle%
+    uimap: *categoryUIMap
+
+category_page_index:
+    mca: %categoryUrl%.html%categoryParam%
+    title: %categoryTitle%
+    uimap:
+        form: *categoryPage
+        messages: *categoryPageMessages

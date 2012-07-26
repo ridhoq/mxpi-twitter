@@ -1,0 +1,66 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+store_information:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: general_general
+        configuration:
+            store_name: Test Store Name
+
+shipping_settings_usa:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: sales_shipping_settings
+        configuration:
+            country: United States
+            region_state: California
+            zip_postal_code: 90034
+            city: Los Angeles
+            street_address: 3212 Bagley Avenue
+
+shipping_settings_france:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: sales_shipping_settings
+        configuration:
+            country: France
+            region_state: Dordogne
+            zip_postal_code: 24100
+            city: Bergerac
+            street_address: 10, rue Jean Vilar
+
+shipping_settings_default:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: sales_shipping_settings
+        configuration:
+            country: United States
+            region_state: California
+            zip_postal_code: 90034
+            city:
+            street_address:

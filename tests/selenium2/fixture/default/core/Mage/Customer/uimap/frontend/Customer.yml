@@ -1,0 +1,114 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#It was created for version CE 1.5.0.0. Operability fot other versions is not guaranteed.  Theme change can also influence accuracy of UImap forms
+
+# 'Create an Account' page
+register_account:
+    mca: customer/account/create/
+    title: Create New Customer Account
+    uimap:
+        form: &newCustomerForm
+            fieldsets:
+                -
+                    account_info:
+                        xpath: //form[@id='form-validate']
+                        buttons:
+                            submit: //button[span='Submit']
+                        checkboxes:
+                            sign_up_newsletter: //input[@id='is_subscribed']
+                            remember_me: //input[@name='persistent_remember_me']
+                        links:
+                            back: p[@class='back-link']/a
+                        fields:
+                            first_name: //input[@id='firstname']
+                            last_name: //input[@id='lastname']
+                            email: //input[@id='email_address']
+                            password: //input[@id='password']
+                            password_confirmation: //input[@id='confirmation']
+                        pageelements:
+                            captcha: //img[@alt='CAPTCHA']
+                        required: [first_name, last_name, email, password, password_confirmation]
+        messages:
+            not_valid_length_first_name: //li[normalize-space(@class)='error-msg' and contains(.,'"First Name" length must be equal or less than 255 characters.')]
+            not_valid_length_last_name: //li[normalize-space(@class)='error-msg' and contains(.,'"Last Name" length must be equal or less than 255 characters.')]
+            not_valid_length_email: //li[normalize-space(@class)='error-msg' and contains(.,'"Email" exceeds the allowed length.')]
+            empty_required_field: %fieldXpath%/following-sibling::*[text()='This is a required field.']
+            invalid_mail: //div[@id='advice-validate-email-email_address']
+            passwords_not_match: //div[@id='advice-validate-cpassword-confirmation']
+            short_passwords: //div[@id='advice-validate-password-password']
+            email_exists: //li[span='There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.']
+
+# 'Login or Create an Account' page
+customer_login:
+    mca: customer/account/login/
+    title: Customer Login
+    uimap:
+        form: &customerLogin
+            fieldsets:
+                -
+                    new_account:
+                        xpath: //div[normalize-space(@class)='col-1 new-users']
+                        buttons:
+                            create_account: //button[span='Create an Account' or span='Register']
+                -
+                    log_in_customer:
+                        xpath: //div[normalize-space(@class)='col-2 registered-users']
+                        buttons:
+                            login: //button[span='Login']
+                        links:
+                            forgot_password: //a[text()='Forgot Your Password?']
+                        fields:
+                            email: //input[@id='email']
+                            password: //input[@id='pass']
+        messages:
+            empty_required_field: %fieldXpath%/following-sibling::*[text()='This is a required field.']
+            invalid_mail: //div[@id='advice-validate-email-email']
+            invalid_login_or_password: //li[normalize-space(@class)='error-msg' and contains(.,'Invalid login or password.')]
+
+edit_account_info:
+    mca: customer/account/edit/
+    title: Account Information
+    uimap:
+        form:
+            fieldsets:
+                -
+                    account_info:
+                        xpath: //form[@id='form-validate']
+                        buttons:
+                            save: //button[span='Save']
+                        checkboxes:
+                            change_password: //input[@id='change_password']
+                        fields:
+                            first_name: //input[@id='firstname']
+                            last_name:  //input[@id='lastname']
+                            email: //input[@id='email']
+                            current_password: //input[@id='current_password']
+                            new_password: //input[@id='password']
+                            confirm_new_password: //input[@id='confirmation']
+        messages:
+            empty_required_field: %fieldXpath%/following-sibling::*[text()='This is a required field.']

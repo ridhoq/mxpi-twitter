@@ -1,0 +1,60 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+license_agreement_data:
+    agree_conditions: Yes
+
+localization_data:
+    locale: English (United States) / English (United States)
+    timezone: Pacific Standard Time (America/Los_Angeles)
+    currency: US Dollar
+
+configuration_data:
+    host: www.localhost.com
+    database_name: magento
+    user_name: root
+    user_password:
+    tables_prefix: %noValue%
+    base_url: http://www.localhost.com/magento/
+    admin_path: admin
+    enable_charts: Yes
+    skip_base_url_validation: %noValue%
+    use_rewrites: %noValue%
+    use_secure: %noValue%
+    run_admin_with_ssl: %noValue%
+    secure_base_url: %noValue%
+    skip_secure_url_validation: %noValue%
+    session_save_in: File System
+
+admin_account_data:
+    first_name: First Name
+    last_name: Last Name
+    email: admin@example.com
+    user_name: admin
+    password: 123123q
+    confirm_password: 123123q
+    encryption_key:

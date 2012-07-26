@@ -1,0 +1,80 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Log in to Admin Panel page
+log_in_to_admin:
+    mca:
+    title: Log into Magento Admin Page
+    uimap: &adminUimap
+        form: &logInPanel
+            fieldsets:
+                -
+                    log_in:
+                        xpath: //div[@class='login-container']
+                        buttons:
+                            login: //input[@title='Login']
+                        fields:
+                            user_name: //input[@id='username']
+                            password: //input[@id='login']
+                        links:
+                            forgot_password: //a[text()='Forgot your password?']
+        messages: &loginMessages
+            empty_user_name: "//input[@id='username']/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+            empty_password: "//input[@id='login']/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+            wrong_credentials: //li[normalize-space(@class)='error-msg' and (contains(.,'Invalid User Name or Password.') or contains(.,'Invalid Username or Password.'))]
+            access_denied: //li[normalize-space(@class)='error-msg' and contains(.,'Access denied.')]
+            inactive_account: //li[normalize-space(@class)='error-msg' and contains(.,'This account is inactive.')]
+            account_locked: //li[normalize-space(@class)='error-msg' and contains(.,'This account is locked.')]
+            empty_email: "//input[@id='email']/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+            wrong_email: //li[normalize-space(@class)='error-msg' and contains(.,'Cannot find the email address.')]
+            password_sent: //li[normalize-space(@class)='success-msg' and contains(.,'A new password was sent to your email address. Please check your email and click Back to Login.')]
+            retrieve_password: //li[normalize-space(@class)='success-msg' and contains(.,'If there is an account associated with %adminEmail% you will receive an email with a link to reset your password.')]
+
+
+log_in_admin_page:
+    mca: index/login/
+    title: Log into Magento Admin Page
+    uimap: *adminUimap
+
+# 'Forgot your user name or password?' page
+forgot_password:
+    mca: index/forgotpassword/
+    title: Log into Magento Admin Page
+    uimap:
+        form: &forgotPassword
+            fieldsets:
+                -
+                    forgot_password:
+                        xpath: //div[@class='login-container']
+                        buttons:
+                            retrieve_password: //button[span="Retrieve Password"]
+                        fields:
+                            email: //input[@id='email']
+                        links:
+                            back_to_login: //a[text()='« Back to Login']
+                        pageelements:
+                            captcha: //img[@id='backend_forgotpassword']
+        messages: *loginMessages

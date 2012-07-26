@@ -1,0 +1,135 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+
+#*******************************************************
+#*   Test data for customer registration(Frontend)     *
+#*******************************************************
+customer_account_register:
+    first_name: First name
+    last_name: Last name
+    email: test_frontend_%randomize%@domain.com
+    password: 123123q
+    password_confirmation: 123123q
+
+#*******************************************************
+#*       Data for system configuration(Backend)        *
+#*******************************************************
+disable_customer_captcha:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: customers_customer_configuration
+        configuration:
+            captcha_enable_frontend: No
+
+#*******************************************************
+#*       Test data for customer creation(Backend)      *
+#*******************************************************
+generic_customer_account:
+    associate_to_website: Main Website
+    group: General
+    prefix: %noValue%
+    first_name: First Name
+    middle_name: %noValue%
+    last_name: Last Name
+    suffix: %noValue%
+    email: test_admin_%randomize%@domain.com
+    date_of_birth: %noValue%
+    tax_vat_number: %noValue%
+    gender: %noValue%
+    send_welcome_email: %noValue%
+    send_from: %noValue%
+    password: 123123q
+    auto_generated_password: %noValue%
+
+all_fields_customer_account:
+    associate_to_website: Main Website
+    group: General
+    prefix: Prefix
+    first_name: First Name
+    middle_name: Middle Name
+    last_name: Last Name
+    suffix: Suffix
+    email: test_admin_%randomize%@domain.com
+    date_of_birth: 12/12/1983
+    tax_vat_number: 123123
+    gender: Male
+    send_welcome_email: Yes
+    send_from: Default Store View
+    password: 123123q
+    auto_generated_password: No
+
+#Test data for Customer Addresses
+generic_address:
+    prefix: %noValue%
+    first_name: First Name
+    middle_name: %noValue%
+    last_name: Last Name
+    suffix: %noValue%
+    company: %noValue%
+    street_address_line_1: 10441 Jefferson Blvd
+    street_address_line_2: Suite 200
+    city: Culver City
+    country: United States
+    state: California
+    region: %noValue%
+    zip_code: 90232
+    telephone: 530-918-3581
+    fax: %noValue%
+    default_billing_address: %noValue%
+    default_shipping_address: %noValue%
+
+all_fields_address:
+    prefix: Prefix
+    first_name: First Name
+    middle_name: Middle Name
+    last_name: Last Name
+    suffix: Suffix
+    company: Magento
+    street_address_line_1: 10441 Jefferson Blvd
+    street_address_line_2: Suite 200
+    city: Culver City
+    country: United States
+    state: California
+    region: %noValue%
+    zip_code: 90232
+    telephone: 530-918-3581
+    fax: 530-918-3581
+    default_billing_address: Yes
+    default_shipping_address: Yes
+
+search_customer:
+    id_from: %noValue%
+    id_to: %noValue%
+    name: %noValue%
+    email: %noValue%
+    group: General
+    telephone: %noValue%
+    zip_code: %noValue%
+    country: %noValue%
+    region: %noValue%
+    website: Main Website

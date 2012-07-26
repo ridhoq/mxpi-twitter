@@ -1,0 +1,96 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Xcom
+ * @package     Xcom_Mapping
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+ /** @var $this Xcom_Mapping_Block_Adminhtml_Attribute_Name_Edit */
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $this->getHeaderText() ?></h3></td>
+            <td class="form-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<h4><?php echo $this->helper('xcom_mapping')->getAttributeSetBreadcrumb() ?></h4>
+<?php echo $this->getChildHtml('form'); ?>
+<script type="text/javascript">
+//<![CDATA[
+    var attributeSetTemplateSyntax = /(^|.|\r|\n)({{(\w+)}})/;
+    var attributeNameForm = new varienForm('attributeNameForm');
+
+    function setSettings(urlTemplate, attributeElement, targetElement)
+    {
+        if (attributeNameForm.validate()) {
+            var template = new Template(urlTemplate, attributeSetTemplateSyntax);
+            setLocation(template.evaluate({attribute_id:$F(attributeElement),mapping_attribute_id:$F(targetElement)}));
+        }
+    }
+
+var FORM_KEY = "<?php echo $this->getFormKey();?>";
+var AttributeMapping = Class.create();
+AttributeMapping.prototype = {
+    initialize: function(formId) {
+        this.formId = formId;
+        this.varienForm =  new varienForm(formId);
+        this.continueUrl = '<?php echo Mage::helper('xcom_mapping')->getAttributeMappingContinueUrl() ?>';
+        this.beforeContinueUrl = '<?php echo Mage::helper('xcom_mapping')->getAttributeMappingValidateBeforeContinueUrl() ?>';
+
+        $('continue_button').down('button.save').observe('click', this.validateBeforeContinue.bindAsEventListener(this));
+    },
+
+    validateBeforeContinue: function() {
+        new Ajax.Request(this.beforeContinueUrl, {
+            method: 'post',
+            parameters: {
+                form_key: FORM_KEY,
+                attribute_id: $('attribute_id').value,
+                attribute_set_id: $('attribute_set_id').value,
+                mapping_attribute_id: $('mapping_attribute_id').value},
+            onSuccess: function(transport) {
+                try {
+                    var response = transport.responseText.evalJSON();
+                    if (response.error) {
+                        alert(response.message);
+                    }
+                    else if (response.exception) {
+                        this.varienForm.validate();
+                    }
+                    else {
+                        setSettings(this.continueUrl, 'attribute_id', 'mapping_attribute_id');
+                    }
+                }
+                catch (e) {
+                    alert(e);
+                }
+            }.bind(this)
+        });
+    }
+};
+var varAttributeMapping = new AttributeMapping('attributeNameForm');
+//]]>
+</script>

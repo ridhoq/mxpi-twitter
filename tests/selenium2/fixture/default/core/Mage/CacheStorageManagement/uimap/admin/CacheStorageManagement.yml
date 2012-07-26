@@ -1,0 +1,55 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+cache_storage_management:
+    mca: cache/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'cache/')]
+    title: Cache Management / System / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    cache_grid:
+                        xpath: //div[@id='cache_grid']
+                        buttons:
+                            submit: //button[span='Submit']
+                        checkboxes:
+                            select_cache: //tr[td[normalize-space(text())='%indexName%']]//input
+                        dropdowns:
+                            cache_action: //select[@id='cache_grid_massaction-select']
+                        links:
+                            select_all: //a[text()='Select All']
+                            unselect_all: //a[text()='Unselect All']
+                            select_visible: //a[text()='Select Visible']
+                            unselect_visible: //a[text()='Unselect Visible']
+                        pageelements:
+                            selected_items: //strong[@id='cache_grid_massaction-count']
+                            cache_invalided: //tr[normalize-space(td/span)='Invalidated']
+                            cache_disabled: //tr[normalize-space(td/span)='Disabled']
+        messages:
+            success_refreshed_cache: //li[normalize-space(@class)='success-msg' and contains(.,'%qtySelected% cache type(s) refreshed.)]
+            success_disabled_cache: //li[normalize-space(@class)='success-msg' and contains(.,'%qtySelected% cache type(s) disabled.)]
+            success_enabled_cache: //li[normalize-space(@class)='success-msg' and contains(.,'%qtySelected% cache type(s) enabled.)]

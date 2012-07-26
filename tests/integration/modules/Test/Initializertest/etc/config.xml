@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Integration test
+ * @package     Test_Initializertest
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Test_Initializertest>
+            <version>0.1.0</version>
+        </Test_Initializertest>
+    </modules>
+    <global>
+        <models>
+            <test_initializertest>
+                <class>Test_Initializertest_Model</class>
+                <resourceModel>test_initializertest_resource</resourceModel>
+            </test_initializertest>
+            <test_initializertest_resource>
+                <class>Test_Initializertest_Model_Resource</class>
+                <entities>
+                    <job>
+                        <table>test_initializertest_job</table>
+                    </job>
+                </entities>
+            </test_initializertest_resource>
+        </models>
+        <resources>
+            <test_initializertest_setup>
+                <setup>
+                    <module>Test_Initializertest</module>
+                </setup>
+            </test_initializertest_setup>
+        </resources>
+        <helpers>
+            <test_initializertest>
+                <class>Test_Initializertest_Helper</class>
+            </test_initializertest>
+        </helpers>
+        <blocks>
+            <test_initializertest>
+                <class>Test_Initializertest_Block</class>
+            </test_initializertest>
+        </blocks>
+    </global>
+    <default>
+        <xcom>
+            <initializer_acl>
+                <integration_test>
+                    <denied>
+                        <controller>
+                            <index>Test_Initializertest/index</index>
+                        </controller>
+                    </denied>
+                    <allowed>
+                        <action>
+                            <index>Test_Initializertest/index::index</index>
+                        </action>
+                    </allowed>
+                </integration_test>
+            </initializer_acl>
+        </xcom>
+    </default>
+    <frontend>
+        <routers>
+            <initializertest>
+                <use>standard</use>
+                <args>
+                    <module>Test_Initializertest</module>
+                    <frontName>initializertest</frontName>
+                </args>
+            </initializertest>
+        </routers>
+    </frontend>
+</config>

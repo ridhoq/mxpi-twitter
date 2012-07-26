@@ -1,0 +1,411 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+################################################################################
+#                                                                              #
+#                         Shopping Cart Price Rules Test Data                  #
+#                                                                              #
+################################################################################
+
+search_shopping_cart_rule:
+    filter_id: %noValue%
+    filter_rule_name: %noValue%
+    filter_coupon_code: %noValue%
+    filter_date_start_from: %noValue%
+    filter_date_start_to: %noValue%
+    filter_date_expire_from: %noValue%
+    filter_date_expire_to: %noValue%
+    filter_status: %noValue%
+    filter_priority: %noValue%
+
+all_conditions: &allConditions
+    select_conditions_aggregator: ANY
+    select_conditions_value: 'FALSE'
+    condition_1:
+        select_condition_new_child: Subtotal
+        select_condition_operator: is not one of
+        type_condition_value: Subtotal Value
+    condition_2:
+        select_condition_new_child: Total Items Quantity
+        select_condition_operator: is not one of
+        type_condition_value: Total Items Quantity Value
+    condition_3:
+        select_condition_new_child: Total Weight
+        select_condition_operator: is not one of
+        type_condition_value: Total Weight Value
+    condition_4:
+        select_condition_new_child: Payment Method
+        select_condition_operator: is not
+        select_condition_value: Payflow Pro
+    condition_5:
+        select_condition_new_child: Shipping Method
+        select_condition_operator: is not
+        select_condition_value: '[flatrate] Fixed'
+    condition_6:
+        select_condition_new_child: Shipping Postcode
+        select_condition_operator: is not one of
+        type_condition_value: Shipping Postcode Value
+    condition_7:
+        select_condition_new_child: Shipping Region
+        select_condition_operator: is not one of
+        type_condition_value: Shipping Region Value
+    condition_8:
+        select_condition_new_child: Shipping State/Province
+        select_condition_operator: is not
+        select_condition_value: Alabama
+    condition_9:
+        select_condition_new_child: Shipping Country
+        select_condition_operator: is not
+        select_condition_value: United States
+    condition_10:
+        select_condition_new_child: Product attribute combination
+        select_condition_value: NOT FOUND
+        select_condition_aggregator: ANY
+        sub_condition_1:
+            select_condition_new_child: Price in cart
+            select_condition_operator: is not
+            type_condition_value: 150
+        sub_condition_2:
+            select_condition_new_child: Quantity in cart
+            select_condition_operator: is not
+            type_condition_value: 10
+        sub_condition_3:
+            select_condition_new_child: Row total in cart
+            select_condition_operator: is not
+            type_condition_value: 300
+        sub_condition_4:
+            select_condition_new_child: Attribute Set
+            select_condition_operator: is not
+            select_condition_value: Default
+        sub_condition_5:
+            select_condition_new_child: Category
+            select_condition_operator: is not
+            category: Default Category
+        sub_condition_6:
+            select_condition_new_child: Conditions Combination
+            select_condition_aggregator: ANY
+            select_condition_value: 'FALSE'
+            sub_condition_1:
+                select_condition_new_child: Price in cart
+                select_condition_operator: is not
+                type_condition_value: 100
+            sub_condition_2:
+                select_condition_new_child: Quantity in cart
+                select_condition_operator: is not
+                type_condition_value: 10
+            sub_condition_3:
+                select_condition_new_child: Row total in cart
+                select_condition_operator: is not
+                type_condition_value: 300
+            sub_condition_4:
+                select_condition_new_child: Attribute Set
+                select_condition_operator: is not
+                select_condition_value: Default
+    condition_11:
+        select_condition_new_child: Products subselection
+        select_condition_attribute: total amount
+        select_condition_operator: is not
+        type_condition_value: United States
+        select_condition_aggregator: ANY
+    condition_12:
+        select_condition_new_child: Conditions combination
+        select_condition_aggregator: ANY
+        select_condition_value: 'FALSE'
+
+test_shopping_cart_rule:
+    info:
+        rule_name: test_shopping_cart_rule
+        description: description for test shopping cart rule
+        status: Inactive
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+        uses_per_coupon: 15
+        uses_per_customer: 15
+        from_date: 11/9/11
+        to_date: 11/9/12
+        priority: 10
+        public_in_rss_feed: No
+#    conditions: *allConditions
+    actions:
+        apply: Buy X get Y free (discount amount is Y)
+        discount_amount: 15
+        maximum_qty_discount_is_applied_to: 100
+        discount_qty_step: 100
+        apply_to_shipping_amount: Yes
+        free_shipping: For shipment with matching items
+        stop_further_rules_processing: Yes
+        action_conditions:
+            select_conditions_aggregator: ANY
+            select_actions_value: 'FALSE'
+            action_1:
+                select_action_new_child: Conditions Combination
+                select_action_aggregator: ANY
+                select_action_value: 'FALSE'
+                sub_action_1:
+                    select_action_new_child: Price in cart
+                    select_action_operator: is not
+                    type_action_value: 150
+                sub_action_2:
+                    select_action_new_child: Quantity in cart
+                    select_action_operator: is not
+                    type_action_value: 10
+                sub_action_3:
+                    select_action_new_child: Row total in cart
+                    select_action_operator: is not
+                    type_action_value: 300
+                sub_action_4:
+                    select_action_new_child: Attribute Set
+                    select_action_operator: is not
+                    select_action_value: Default
+    labels:
+        default_rule_label: default rule label(shop.cart)
+        store_view_labels:
+            Default Store View: rule label(shop.cart) for store view
+
+########################################################################################################################
+#<-----------------------------------------------Shopping Cart Price Rules--------------------------------------------->
+########################################################################################################################
+specific_category_condition: &specificCategory
+    select_conditions_aggregator: ALL
+    select_conditions_value: 'TRUE'
+    condition_1:
+        select_condition_new_child: Product attribute combination
+        select_condition_value: FOUND
+        select_condition_aggregator: ALL
+        sub_condition_1:
+            select_condition_new_child: Category
+            select_condition_operator: is
+            category: %noValue%
+
+scpr_required_fields:
+    info:
+        rule_name: test_shopping_cart_rule
+        status: Inactive
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+    actions:
+        apply: Percent of product price discount
+        discount_amount: 15
+
+scpr_all_fields:
+    info:
+        rule_name: test_shopping_cart_rule
+        description: description for test shopping cart rule
+        status: Inactive
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+        uses_per_coupon: 15
+        uses_per_customer: 15
+        from_date: 11/9/11
+        to_date: 11/9/12
+        priority: 10
+        public_in_rss_feed: No
+    conditions: %noValue%
+    actions:
+        apply: Percent of product price discount
+        discount_amount: 15
+        maximum_qty_discount_is_applied_to: 100
+        discount_qty_step: 100
+        apply_to_shipping_amount: Yes
+        free_shipping: For shipment with matching items
+        stop_further_rules_processing: No
+    labels:
+        default_rule_label: default rule label(shop.cart)
+        store_view_labels:
+            Default Store View: rule label(shop.cart) for store view
+
+
+#<-----------------------------------------Percent of Product Price Discount------------------------------------------->
+scpr_percent_of_product_price_discount:
+    info:
+        rule_name: test_shopping_cart_rule
+        description: description for test shopping cart rule
+        status: Active
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+        uses_per_coupon: 15
+        uses_per_customer: 15
+        from_date: 11/9/11
+        to_date: 11/9/12
+        priority: 10
+        public_in_rss_feed: No
+    conditions: *specificCategory
+    actions:
+        apply: Percent of product price discount
+        discount_amount: 15
+        maximum_qty_discount_is_applied_to: 0
+        discount_qty_step: 1
+        apply_to_shipping_amount: No
+        free_shipping: No
+        stop_further_rules_processing: No
+    labels:
+        default_rule_label: default rule label(shop.cart)
+        store_view_labels:
+            Default Store View: rule label(shop.cart) for store view
+
+prices_for_percent_of_product_price_discount:
+    product_1:
+        product_name: %noValue%
+        unit_price: $111.11
+        qty: 2
+        subtotal: $222.22
+    product_2:
+        product_name: %noValue%
+        unit_price: $100.00
+        qty: 3
+        subtotal: $300.00
+    product_3:
+        product_name: %noValue%
+        unit_price: $15.51
+        qty: 5
+        subtotal: $77.55
+
+totals_for_percent_of_product_price_discount:
+    subtotal: $599.77
+    shipping_handling_flat_rate_fixed: $50.00
+    discount_rule_label_shop_cart_for_store_view: -$89.97
+    tax: $49.48
+    grand_total: $609.28
+
+
+#<----------------------------------------------Fixed Amount Discount-------------------------------------------------->
+
+scpr_fixed_amount_discount:
+    info:
+        rule_name: test_shopping_cart_rule
+        description: description for test shopping cart rule
+        status: Active
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+        uses_per_coupon: 15
+        uses_per_customer: 15
+        from_date: 11/9/11
+        to_date: 11/9/12
+        priority: 10
+        public_in_rss_feed: No
+    conditions: *specificCategory
+    actions:
+        apply: Fixed amount discount
+        discount_amount: 15
+        maximum_qty_discount_is_applied_to: 0
+        discount_qty_step: 1
+        apply_to_shipping_amount: No
+        free_shipping: No
+        stop_further_rules_processing: No
+    labels:
+        default_rule_label: default rule label(shop.cart)
+        store_view_labels:
+            Default Store View: rule label(shop.cart) for store view
+
+prices_for_fixed_amount_discount:
+    product_1:
+        product_name: %noValue%
+        unit_price: $111.11
+        qty: 2
+        subtotal: $222.22
+    product_2:
+        product_name: %noValue%
+        unit_price: $100.00
+        qty: 3
+        subtotal: $300.00
+    product_3:
+        product_name: %noValue%
+        unit_price: $15.51
+        qty: 5
+        subtotal: $77.55
+
+totals_for_fixed_amount_discount:
+    subtotal: $599.77
+    shipping_handling_flat_rate_fixed: $50.00
+    discount_rule_label_shop_cart_for_store_view: -$150.00
+    tax: $49.48
+    grand_total: $549.25
+
+#<--------------------------------------Fixed Amount Discount For Whole Cart------------------------------------------->
+
+scpr_fixed_amount_discount_for_whole_cart:
+    info:
+        rule_name: test_shopping_cart_rule
+        description: description for test shopping cart rule
+        status: Active
+        websites: Main Website
+        customer_groups: NOT LOGGED IN, General, Wholesale, Retailer
+        coupon: Specific Coupon
+        coupon_code: test_code
+        uses_per_coupon: 15
+        uses_per_customer: 15
+        from_date: 11/9/11
+        to_date: 11/9/12
+        priority: 10
+        public_in_rss_feed: No
+    conditions: *specificCategory
+    actions:
+        apply: Fixed amount discount for whole cart
+        discount_amount: 15
+        maximum_qty_discount_is_applied_to: 0
+        discount_qty_step: 1
+        apply_to_shipping_amount: No
+        free_shipping: No
+        stop_further_rules_processing: No
+    labels:
+        default_rule_label: default rule label(shop.cart)
+        store_view_labels:
+            Default Store View: rule label(shop.cart) for store view
+
+prices_for_fixed_amount_discount_for_whole_cart:
+    product_1:
+        product_name: %noValue%
+        unit_price: $111.11
+        qty: 2
+        subtotal: $222.22
+    product_2:
+        product_name: %noValue%
+        unit_price: $100.00
+        qty: 3
+        subtotal: $300.00
+    product_3:
+        product_name: %noValue%
+        unit_price: $15.51
+        qty: 5
+        subtotal: $77.55
+
+totals_for_fixed_amount_discount_for_whole_cart:
+    subtotal: $599.77
+    shipping_handling_flat_rate_fixed: $50.00
+    discount_rule_label_shop_cart_for_store_view: -$15.00
+    tax: $49.48
+    grand_total: $684.25

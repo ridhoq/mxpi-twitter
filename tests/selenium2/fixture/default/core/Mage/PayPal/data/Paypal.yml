@@ -1,0 +1,107 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+paypal_sandbox_new_buyer_account_visa:
+    country: United States
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: Visa
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_buyer_account_mastercard:
+    country: United States
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: MasterCard
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_buyer_account_discover:
+    country: United States
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: Discover
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_buyer_account_amex:
+    country: United States
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: American Express
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_buyer_account_solo:
+    country: United Kingdom
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: Solo
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_buyer_account_switch_maestro:
+    country: United Kingdom
+    account_type_buyer: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: 'Switch/Maestro'
+    add_bank_account_yes: Yes
+    account_balance: 9999
+    notes: 12345678
+
+paypal_sandbox_new_pro_account:
+    country: United States
+    account_type_pro: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: Visa
+    add_bank_account_yes: Yes
+    account_balance: 10
+    notes: 12345678
+
+paypal_sandbox_new_pro_account_gbp:
+    country: United Kingdom
+    account_type_pro: Yes
+    login_email: %randomize%
+    login_password: 12345678
+    add_credit_card: Switch/Maestro
+    add_bank_account_yes: Yes
+    account_balance: 10
+    notes: 12345678
+

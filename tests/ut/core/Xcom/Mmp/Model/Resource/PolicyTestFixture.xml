@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="xcom_channel_policy">
+        <column>policy_id</column>
+        <column>channel_id</column>
+        <column>name</column>
+        <column>payment_name</column>
+        <column>shipping_name</column>
+        <column>is_active</column>
+        <column>mp_policy_id</column>
+        <row>
+            <null/>
+            <null/>
+            <null/>
+            <null/>
+            <null/>
+            <null/>
+            <null/>
+        </row>
+    </table>
+</dataset>

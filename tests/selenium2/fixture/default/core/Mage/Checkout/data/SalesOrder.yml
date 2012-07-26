@@ -1,0 +1,1211 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#*********************************************
+#*      Order address Data                   *
+#*********************************************
+
+#<------------Billing Address Required------------>
+billing_address_req:
+    address_choice: new
+    billing_first_name: 'billing_Steven'
+    billing_last_name: 'billing_Stevenson'
+    billing_street_address_1: '11832 W. Pico Blvd'
+    billing_city: 'Los Angeles'
+    billing_country: 'United States'
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: '90064'
+    billing_telephone: '(310) 954-8012'
+
+billing_address_req_usa: &billingReqUsa
+    address_choice: new
+    billing_first_name: 'billing_Steven'
+    billing_last_name: 'billing_Stevenson'
+    billing_street_address_1: '11832 W. Pico Blvd'
+    billing_city: 'Los Angeles'
+    billing_country: 'United States'
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: '90064'
+    billing_telephone: '(310) 954-8012'
+
+billing_address_req_france: &billingReqFrance
+    address_choice: new
+    billing_first_name: Jean
+    billing_last_name: Reno
+    billing_street_address_1: 13, rue Jean Vilar
+    billing_city: Bergerac
+    billing_country: France
+    billing_state: Dordogne
+    billing_region: %noValue%
+    billing_zip_code: 24100
+    billing_telephone: 06 88 07 44 27
+
+#<------------Shipping Address Required------------>
+shipping_address_req:
+    address_choice: new
+    shipping_first_name: 'shipping_Steven'
+    shipping_last_name: 'shipping_Stevenson'
+    shipping_street_address_1: '11832 W. Pico Blvd'
+    shipping_city: 'Los Angeles'
+    shipping_country: 'United States'
+    shipping_state: California
+    shipping_region: %noValue%
+    shipping_zip_code: '90064'
+    shipping_telephone: '(310) 954-8012'
+
+shipping_address_req_usa: &shippingReqUsa
+    address_choice: new
+    shipping_first_name: 'shipping_Steven'
+    shipping_last_name: 'shipping_Stevenson'
+    shipping_street_address_1: '11832 W. Pico Blvd'
+    shipping_city: 'Los Angeles'
+    shipping_country: 'United States'
+    shipping_state: California
+    shipping_region: %noValue%
+    shipping_zip_code: '90064'
+    shipping_telephone: '(310) 954-8012'
+
+#<------------Billing Address ALL------------>
+billing_address_all: &billingAll
+    address_choice: new
+    billing_prefix: 'Mr(billing)'
+    billing_first_name: 'Steven(billing)'
+    billing_middle_name: 'Y(billing)'
+    billing_last_name: 'Stevenson(billing)'
+    billing_suffix: 'Jr(billing)'
+    billing_company: 'home(billing)'
+    billing_street_address_1: 'street_address_1(billing)'
+    billing_street_address_2: 'street_address_2(billing)'
+    billing_city: 'Palo Alto'
+    billing_country: 'United States'
+    billing_state: California
+    billing_zip_code: '94306'
+    billing_telephone: '091019019(billing)'
+    billing_fax: '0919327869(billing)'
+    billing_save_in_address_book: yes
+
+#<------------Shipping Address ALL------------>
+shipping_address_all: &shippingAll
+    address_choice: new
+    shipping_same_as_billing_address: no
+    shipping_prefix: 'Mr(shipping)'
+    shipping_first_name: 'Steven(shipping)'
+    shipping_middle_name: 'Y(shipping)'
+    shipping_last_name: 'Stevenson(shipping)'
+    shipping_suffix: 'Jr(shipping)'
+    shipping_company: 'home(shipping)'
+    shipping_street_address_1: 'street_address_1(shipping)'
+    shipping_street_address_2: 'street_address_2(shipping)'
+    shipping_city: 'Palo Alto'
+    shipping_country: 'United States'
+    shipping_state: California
+    shipping_zip_code: '94306'
+    shipping_telephone: '091019019(shipping)'
+    shipping_fax: '0919327869(shipping)'
+    shipping_save_in_address_book: yes
+
+shipping_address_same_as_blling: &shippingSameAsBilling
+    address_choice: sameAsBilling
+#*********************************************
+#*      Order customer Data                  *
+#*********************************************
+
+new_customer:
+    associate_to_website: Main Website
+    group: General
+    prefix: 'Mr'
+    first_name: 'Steven'
+    middle_name: %noValue%
+    last_name: 'Stevenson'
+    suffix: 'Jr'
+    email: 'test_purpose@example.com'
+    date_of_birth: 01/01/1976
+    tax_vat_number: '123123'
+    gender: 'Male'
+    send_welcome_email: No
+    send_from: %noValue%
+    password: 123123q
+    auto_generated_password: No
+
+shipping:
+    shipping_prefix: 'Mr(shipping)'
+    shipping_first_name: 'Steven(shipping)'
+    shipping_middle_name: 'Y(shipping)'
+    shipping_last_name: 'Stevenson(shipping)'
+    shipping_suffix: 'Jr(shipping)'
+    shipping_company: 'home(shipping)'
+    shipping_street_address_1: 'street_address_1(shipping)'
+    shipping_street_address_2: 'street_address_2(shipping)'
+    shipping_city: 'Palo Alto'
+    shipping_country: 'United States'
+    shipping_state: California
+    shipping_zip_code: '94306'
+    shipping_telephone: '091019019(shipping)'
+    shipping_fax: '0919327869(shipping)'
+    default_shipping_address: Yes
+    default_billing_address: no
+
+billing: &billingAll
+    billing_first_name: 'Steven(billing)'
+    billing_middle_name: 'Y(billing)'
+    billing_last_name: 'Stevenson(billing)'
+    billing_suffix: 'Jr(billing)'
+    billing_company: 'home(billing)'
+    billing_street_address_1: 'street_address_1(billing)'
+    billing_street_address_2: 'street_address_2(billing)'
+    billing_city: 'Palo Alto'
+    billing_country: 'United States'
+    billing_state: California
+    billing_zip_code: '94306'
+    billing_telephone: '091019019(billing)'
+    billing_fax: '0919327869(billing)'
+    default_billing_address: yes
+    default_shipping_address: No
+
+#*********************************************
+#*      Products Data                        *
+#*********************************************
+
+#<------------SIMPLE------------>
+simple_low_qty:
+    product_attribute_set: Default
+    general_name: Simple Product For Order(%randomize%)
+    general_description: Description for Simple Product
+    general_short_description: Short Description for Simple Product
+    general_sku: simple_sku_Order(%randomize%)
+    general_weight: 18.56
+    general_status: Enabled
+    prices_price: 54.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 2
+    inventory_stock_availability: In Stock
+    websites: Main Website
+
+simple_with_increments:
+    product_attribute_set: Default
+    general_name: Simple Product For Order(%randomize%)
+    general_description: Description for Simple Product
+    general_short_description: Short Description for Simple Product
+    general_sku: simple_sku_Order(%randomize%)
+    general_weight: 18.56
+    general_status: Enabled
+    prices_price: 54.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_enable_qty_increments_default: No
+    inventory_enable_qty_increments: Yes
+    inventory_qty_increments_default: No
+    inventory_qty_increments: 10
+    inventory_stock_availability: In Stock
+    websites: Main Website
+
+simple_out_of_stock:
+    product_attribute_set: Default
+    general_name: Simple Product For Order(%randomize%)
+    general_description: Description for Simple Product
+    general_short_description: Short Description for Simple Product
+    general_sku: simple_sku_Order(%randomize%)
+    general_weight: 18.56
+    general_status: Enabled
+    prices_price: 54.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 0
+    inventory_stock_availability: Out of Stock
+    websites: Main Website
+
+simple_min_allowed_qty:
+    product_attribute_set: Default
+    general_name: Simple Product For Order(%randomize%)
+    general_description: Description for Simple Product
+    general_short_description: Short Description for Simple Product
+    general_sku: simple_sku_Order(%randomize%)
+    general_weight: 18.56
+    general_status: Enabled
+    prices_price: 54.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_min_allowed_qty_default: No
+    inventory_min_allowed_qty: 10
+    inventory_stock_availability: In Stock
+    websites: Main Website
+
+simple_max_allowed_qty:
+    product_attribute_set: Default
+    general_name: Simple Product For Order(%randomize%)
+    general_description: Description for Simple Product
+    general_short_description: Short Description for Simple Product
+    general_sku: simple_sku_Order(%randomize%)
+    general_weight: 18.56
+    general_status: Enabled
+    prices_price: 54.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_max_allowed_qty_default: No
+    inventory_max_allowed_qty: 10
+    inventory_stock_availability: In Stock
+    websites: Main Website
+
+#<------------DOWNLOADABLE------------>
+downloadable_product_for_order:
+    product_attribute_set: Default
+    general_name: Downloadable Product For Order(%randomize%)
+    general_description: Description for Downloadable Product
+    general_short_description: Short Description for Downloadable Product
+    general_sku: downloadable_sku_Order(%randomize%)
+    general_status: Enabled
+    prices_price: 14.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    custom_options_data: %noValue%
+    downloadable_information_data:
+        downloadable_links_purchased_separately: Yes
+        downloadable_link_1:
+            downloadable_link_row_title: Link Row Title
+            downloadable_link_row_price: 12
+            downloadable_link_row_unlimited_downloads: No
+            downloadable_link_max_downloads: 100
+            downloadable_link_shareable: No
+            downloadable_link_row_sample_url_radiobutton: Yes
+            downloadable_link_row_sample_url: www.sample.com
+            downloadable_link_row_url_radiobutton: Yes
+            downloadable_link_row_file_url: www.file.com
+            downloadable_link_row_sort_order: 1
+
+#<------------GROUPED------------>
+grouped_product_for_order:
+    product_attribute_set: Default
+    general_name: Grouped Product For Order(%randomize%)
+    general_description: Description for Grouped Product
+    general_short_description: Short Description for Grouped Product
+    general_sku: grouped_sku_Order(%randomize%)
+    general_status: Enabled
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    associated_grouped_data:
+        associated_grouped_1:
+            associated_search_sku: %associated_1%
+        associated_grouped_2:
+            associated_search_sku: %associated_2%
+        associated_grouped_3:
+            associated_search_sku: %associated_3%
+
+#<------------BUNDLE------------>
+fixed_bundle_for_order:
+    product_attribute_set: Default
+    general_name: Bundle(Fixed) Product For Order(%randomize%)
+    general_description: Description for Bundle(Fixed) Product
+    general_short_description: Short Description for Bundle(Fixed) Product Product
+    general_sku_type: Fixed
+    general_sku: bundle_fixed_sku_Order(%randomize%)
+    general_weight_type: Fixed
+    general_weight: 0.999
+    general_status: Enabled
+    prices_price_type: Fixed
+    prices_price: 12.55
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    bundle_items_data:
+        ship_bundle_items: Separately
+        item_1:
+            bundle_items_default_title: Multiple Select
+            bundle_items_input_type: Multiple Select
+            bundle_items_is_required: Yes
+            bundle_items_position: 1
+            add_product_1:
+                bundle_items_search_sku: %add_product_1%
+            add_product_2:
+                bundle_items_search_sku: %add_product_2%
+        item_2:
+            bundle_items_default_title: Drop-down
+            bundle_items_input_type: Drop-down
+            bundle_items_is_required: Yes
+            bundle_items_position: 2
+            add_product_1:
+                bundle_items_search_sku: %add_product_1%
+            add_product_2:
+                bundle_items_search_sku: %add_product_2%
+        item_3:
+            bundle_items_default_title: Radio Buttons
+            bundle_items_input_type: Radio Buttons
+            bundle_items_is_required: Yes
+            bundle_items_position: 3
+            add_product_1:
+                bundle_items_search_sku: %add_product_1%
+            add_product_2:
+                bundle_items_search_sku: %add_product_2%
+        item_4:
+            bundle_items_default_title: Checkbox
+            bundle_items_input_type: Checkbox
+            bundle_items_is_required: Yes
+            bundle_items_position: 4
+            add_product_1:
+                bundle_items_search_sku: %add_product_1%
+            add_product_2:
+                bundle_items_search_sku: %add_product_2%
+
+#<------------CONFIGURABLE------------>
+configurable_product_for_order:
+    product_attribute_set: Default
+    configurable_attribute_title: %noValue%
+    general_name: Configurable Product For Order(%randomize%)
+    general_description: Description for Configurable Product
+    general_short_description: Short Description for Configurable Product
+    general_sku: configurable_sku_Order(%randomize%)
+    general_status: Enabled
+    general_visibility: Catalog, Search
+    prices_price: 14.95
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    associated_configurable_data:
+        associated_configurable_1:
+            associated_search_sku: %associated_1%
+        associated_configurable_2:
+            associated_search_sku: %associated_2%
+        associated_configurable_3:
+            associated_search_sku: %associated_3%
+
+#*********************************************
+#*          Credit Card Data                 *
+#*********************************************
+
+#<------------Saved CC------------>
+saved_empty_all:
+    name_on_card: ' '
+    card_type: ' '
+    card_number: ' '
+    expiration_month: ' '
+    expiration_year: ' '
+    card_verification_number: ' '
+
+saved_american_express: &americanExpressSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'American Express'
+    card_number: '341111111111111'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '1234'
+
+saved_visa: &visaSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Visa'
+    card_number: '4000000000000002'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_mastercard: &mastercardSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'MasterCard'
+    card_number: 5200000000000007
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_jcb: &jcbSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'JCB'
+    card_number: '3000000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '1234'
+
+saved_laser: &laserSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Laser'
+    card_number: '4024007127653'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_uatp: &uatpSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'UATP'
+    card_number: '4024007127653'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_diners_club: &dinersClubSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Diners Club'
+    card_number: '30569309025904'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_switch_maestro: &switchMaestroSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Switch/Maestro'
+    card_number: '6759343422308233'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+    issue_number: 1234
+    start_date_month: 12 - December
+    start_date_year: 2011
+
+saved_discover: &discoverSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Discover'
+    card_number: '6011000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_solo: &soloSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Solo'
+    card_number: '6767705369846419'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+    issue_number:
+    start_date_month: 12 - December
+    start_date_year: 2012
+
+saved_enroute: &enrouteSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'enRoute'
+    card_number: '6011000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+saved_other: &otherSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Other'
+    card_number: '6011000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+#<------------ELSE------------>
+else_american_express: &americanExpressElse
+    card_type: 'American Express'
+    card_number: '371449635398431'
+    #card_number: '341111111111111' #not work with payfloPro without3D
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '1234'
+
+else_american_express_direct:
+    card_type: 'American Express'
+    card_number: '340000000000009'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '1234'
+
+else_visa: &visaElse
+    card_type: 'Visa'
+    card_number: '4000000000000002'
+    #card_number: '4832011527418035' #not work with payfloPro without3D
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+else_visa_direct:
+    card_type: 'Visa'
+    card_number: '4832011527418035'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+
+else_mastercard: &mastercardElse
+    card_type: 'MasterCard'
+    card_number: 5200000000000007
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+else_discover: &discoverElse
+    card_type: 'Discover'
+    card_number: '6011000990139424'
+    #card_number: '6011000000000004' #not work with payfloPro without3D
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+else_discover_direct:
+    card_type: 'Discover'
+    card_number: '6011000000000004'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+
+else_other: &otherElse
+    card_type: 'Other'
+    card_number: '6011000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+else_jcb: &jcbElse
+    card_type: 'JCB'
+    card_number: 3566002020360505
+    #card_number: '3000000000000004'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '1234'
+
+else_jcb_3d: &jcbElse3D
+    card_type: 'JCB'
+    #card_number: '3000000000000004' is not working even according to 3D secure checklist
+    card_number: '3566002020360505'
+    #expiration_month: '07 - July' is not working. to get eciflag 07 and no errors month should be 01 - January
+    expiration_month: '01 - January'
+    #expiration_year: '2020' is not working. year should be current year + 1
+    expiration_year: '2013'
+    card_verification_number: '1234'
+
+else_solo: &soloElse
+    card_type: 'Solo'
+    card_number: '6767661395122343'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+    issue_number: 1234
+    start_date_month: 12 - December
+    start_date_year: 2011
+
+else_switch_maestro: &switchMaestroElse
+    card_type: 'Switch/Maestro'
+    card_number: '6759343422308233'
+    #card_number: '4024007127653'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+    issue_number: 1234
+    start_date_month: 12 - December
+    start_date_year: 2011
+
+#*********************************************
+#*              Payment Data                 *
+#*********************************************
+
+payment_check_money: &checkMoney
+    payment_method: Check / Money order
+
+payment_saved_cc_visa: &savedCCVisa
+    payment_method: Credit Card (saved)
+    payment_info: *visaSavedCC
+
+payment_paypal_direct_uk: &paypalDirectUkMastercard
+    payment_method: PayPal Direct Payment Payflow Edition
+    payment_info: *mastercardElse
+
+payment_paypal_direct: &paypalDirectMastercard
+    payment_method: PayPal Direct Payment
+    payment_info: *mastercardElse
+
+payment_payflo_pro: &payfloProVisa
+    payment_method: Payflow Pro
+    payment_info: *visaElse
+
+payment_authorize: &authorizeNetVisa
+    payment_method: Credit Card (Authorize.net)
+    payment_info: *visaElse
+
+#*********************************************
+#*             Shipping Data                 *
+#*********************************************
+
+shipping_flatrate: &flatRate
+    shipping_service: Flat Rate
+    shipping_method: Fixed
+
+shipping_free: &freeShipping
+    shipping_service: Free Shipping
+    shipping_method: Free
+
+shipping_ups: &ups
+    shipping_service: United Parcel Service
+    shipping_method: Ground
+
+shipping_upsxml: &upsXml
+    shipping_service: United Parcel Service XML
+    shipping_method: Ground
+
+shipping_usps: &usps
+    shipping_service: United States Postal Service
+    shipping_method: Express Mail
+
+shipping_fedex: &fedex
+    shipping_service: Federal Express
+    shipping_method: Home Delivery
+
+shipping_dhl:
+    shipping_service: DHL
+    shipping_method: International Express
+
+# Data for a release after CE1.6.2
+#
+#shipping_dhl_usa: &dhl_usa
+#    shipping_service: DHL USA
+#    shipping_method: Express
+#
+#shipping_dhl_int: &dhl_int
+#    shipping_service: DHL
+#    shipping_method: Express easy
+
+#*********************************************
+#*      ConfigurableOptions For Products     *
+#*********************************************
+
+#<------------TEMPLATE------------>
+configure_field_multiselect:
+    fieldType: multiselect
+    fieldsValue: %noValue%
+
+configure_field_dropdown:
+    fieldType: dropdown
+    fieldsValue: %noValue%
+
+configure_field_checkbox:
+    fieldType: checkbox
+    fieldParameter: %noValue%
+    fieldsValue: Yes
+
+configure_field_radiobutton:
+    fieldType: radiobutton
+    fieldParameter: %noValue%
+    fieldsValue: Yes
+
+configure_field_input:
+    fieldType: field
+    fieldParameter: %noValue%
+    fieldsValue: %noValue%
+
+configure_option:
+    title: %noValue%
+    field_1: %noValue%
+    field_2: %noValue%
+
+#<------------Configure Options For Product------------>
+config_option_download:
+    option_1:
+        title: Links
+        field_link:
+            fieldType: checkbox
+            fieldParameter: Link Row Title
+            fieldsValue: Yes
+    option_2:
+        title: Quantity
+        field_qty:
+            fieldType: field
+            fieldsValue: 10
+
+config_option_bundle:
+    option_1:
+        title: Multiple Select
+        field_multiselect: %noValue%
+    option_2:
+        title: Drop-down
+        field_dropdow: %noValue%
+        field_dropdow_qty:
+            fieldType: field
+            fieldParameter: 'Qty:'
+            fieldsValue: 2
+    option_3:
+        title: Radio Buttons
+        field_radio: %noValue%
+        field_radio_qty:
+            fieldType: field
+            fieldParameter: 'Qty:'
+            fieldsValue: 3
+    option_4:
+        title: Checkbox
+        field_checkbox: %noValue%
+    option_5:
+        title: Quantity
+        field_product_qty:
+            fieldType: field
+            fieldsValue: 5
+
+config_option_configurable:
+    option_1:
+        title: %noValue%
+        field_dropdown:
+            fieldType: dropdown
+            fieldsValue: %noValue%
+
+config_option_grouped:
+    option_1:
+        title: %noValue%
+        field_dropdown:
+            fieldType: field
+            fieldParameter: %noValue%
+            fieldsValue: 5
+    option_2: %noValue%
+
+config_option_custom_options:
+    option_1:
+        title: Custom Option Field
+        field_dropdown:
+            fieldType: field
+            fieldsValue: Custom Option Field Text
+    option_2:
+        title: Custom Option Area
+        field_dropdown:
+            fieldType: field
+            fieldsValue: Custom Option Area Text
+    option_3:
+        title: Custom Option Date
+        field_dropdown_1:
+            fieldType: dropdown
+            fieldParameter: day
+            fieldsValue: 29
+        field_dropdown_2:
+            fieldType: dropdown
+            fieldParameter: month
+            fieldsValue: 12
+        field_dropdown_3:
+            fieldType: dropdown
+            fieldParameter: year
+            fieldsValue: 2012
+    option_4:
+        title: Custom Options Date & Time
+        field_dropdown_1:
+            fieldType: dropdown
+            fieldParameter: day
+            fieldsValue: 24
+        field_dropdown_2:
+            fieldType: dropdown
+            fieldParameter: month
+            fieldsValue: 11
+        field_dropdown_3:
+            fieldType: dropdown
+            fieldParameter: year
+            fieldsValue: 2012
+        field_dropdown_4:
+            fieldType: dropdown
+            fieldParameter: hour
+            fieldsValue: 11
+        field_dropdown_5:
+            fieldType: dropdown
+            fieldParameter: minute
+            fieldsValue: 59
+        field_dropdown_6:
+            fieldType: dropdown
+            fieldParameter: day_part
+            fieldsValue: PM
+    option_5:
+        title: Custom Option Time
+        field_dropdown_1:
+            fieldType: dropdown
+            fieldParameter: hour
+            fieldsValue: 10
+        field_dropdown_2:
+            fieldType: dropdown
+            fieldParameter: minute
+            fieldsValue: 50
+        field_dropdown_3:
+            fieldType: dropdown
+            fieldParameter: day_part
+            fieldsValue: PM
+    option_6:
+        title: Custom Option Drop-down
+        field_dropdown:
+            fieldType: dropdown
+            fieldsValue: Title 1
+    option_7:
+        title: Custom Option Checkbox
+        field_checkbox:
+            fieldType: checkbox
+            fieldParameter: Title 1
+            fieldsValue: Yes
+    option_8:
+        title: Custom Option Multiple Select
+        field_multiselect:
+            fieldType: multiselect
+            fieldsValue: Title 1
+    option_9:
+        title: Custom Option Radio Buttons
+        field_checkbox:
+            fieldType: radiobutton
+            fieldParameter: Title 1
+            fieldsValue: Yes
+
+#*********************************************
+#*       Create Order Data                   *
+#*********************************************
+
+#<------------PHYSICAL------------>
+order_physical:
+    customer_data:
+        id: %noValue%
+        name: %noValue%
+        email: %noValue%
+        telephone: %noValue%
+        zip_code: %noValue%
+        country: %noValue%
+        region: %noValue%
+        store_name: %noValue%
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: customer_for_order_%randomize%@domain.com
+    products_to_add:
+        product_1: &product
+            filter_id: %noValue%
+            filter_name: %noValue%
+            filter_sku: %noValue%
+            filter_price_from: %noValue%
+            filter_price_to: %noValue%
+            qty_to_add: %noValue%
+            configurable_options: %noValue%
+            custom_price_use: %noValue%
+            custom_price: %noValue%
+            product_qty: %noValue%
+            apply: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingReqUsa
+    payment_data:
+        payment_method: Check / Money order
+        payment_info: %noValue%
+    shipping_data:
+        shipping_service: Flat Rate
+        shipping_method: Fixed
+    gift_messages: %noValue%
+
+#<------------VIRTUAL------------>
+order_virtual:
+    customer_data:
+        id: %noValue%
+        name: %noValue%
+        email: %noValue%
+        telephone: %noValue%
+        zip_code: %noValue%
+        country: %noValue%
+        region: %noValue%
+        store_name: %noValue%
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: customer_for_order_%randomize%@domain.com
+    products_to_add:
+        product_1: &product
+            filter_id: %noValue%
+            filter_name: %noValue%
+            filter_sku: %noValue%
+            filter_price_from: %noValue%
+            filter_price_to: %noValue%
+            qty_to_add: %noValue%
+            configurable_options: %noValue%
+            custom_price_use: %noValue%
+            custom_price: %noValue%
+            product_qty: %noValue%
+            apply: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    payment_data:
+        payment_method: Check / Money order
+        payment_info: %noValue%
+
+#<------------New Customer, Check/Money, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_checkmoney_flatrate_usa: &orderNewCustomerCheckFlatrateUsa
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            configurable_options: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *checkMoney
+    shipping_data: *flatRate
+    gift_messages: %noValue%
+
+order_newcustomer_checkmoney_flatrate_france:
+    <<: *orderNewCustomerCheckFlatrateUsa
+    billing_addr_data: *billingReqFrance
+
+order_newcustomer_checkmoney_flatrate:
+    <<: *orderNewCustomerCheckFlatrateUsa
+
+#<------------New Customer, Saved CC, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_savedcc_flatrate:
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *savedCCVisa
+    shipping_data: *flatRate
+
+#<------------New Customer, PaypalDirectUk, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_paypaldirectuk_flatrate:
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *paypalDirectUkMastercard
+    shipping_data: *flatRate
+
+#<------------New Customer, PaypalDirect, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_paypaldirect_flatrate:
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *paypalDirectMastercard
+    shipping_data: *flatRate
+
+#<------------New Customer, PayflowPro, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_payflowpro_flatrate:
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *payfloProVisa
+    shipping_data: *flatRate
+
+#<------------New Customer, Authorize.net, FlatRate, ShippingSameAsBilling------------>
+order_newcustomer_authorizenet_flatrate:
+    store_view: Default Store View
+    account_data:
+        customer_group: General
+        customer_email: %noValue%
+    products_to_add:
+        product_1: &product
+            filter_sku: %noValue%
+            product_qty: %noValue%
+        product_2: %noValue%
+    coupons:
+        coupon_1: %noValue%
+    billing_addr_data: *billingReqUsa
+    shipping_addr_data: *shippingSameAsBilling
+    payment_data: *authorizeNetVisa
+    shipping_data: *flatRate
+
+#*********************************************
+#*           INVOICE DATA                    *
+#*********************************************
+
+products_to_invoice:
+    product_1:
+        invoice_product_sku: %noValue%
+        qty_to_invoice: 5
+    product_2: %noValue%
+
+#*********************************************
+#*           Shipment Data                   *
+#*********************************************
+
+products_to_ship:
+    product_1:
+        ship_product_sku: %noValue%
+        ship_product_qty: 5
+    product_2: %noValue%
+
+#*********************************************
+#*           CreditMemo Data                 *
+#*********************************************
+products_to_refund:
+    product_1:
+        return_filter_sku: %noValue%
+        return_to_stock: Yes
+        qty_to_refund: 5
+    product_2: %noValue%
+
+#*********************************************
+#*              Coupon Data                  *
+#*********************************************
+
+coupon_fixed_amount:
+    info:
+        rule_name: coupon_fixed_amount_%randomize%
+        description: some_desc
+        status: Active
+        websites: Main Website
+        customer_groups: General, NOT LOGGED IN
+        coupon: Specific Coupon
+        coupon_code: coupon_code_%randomize%
+        uses_per_coupon: 100
+        uses_per_customer: 100
+        priority: 1
+    actions:
+        apply: Fixed amount discount for whole cart
+        discount_amount: 100
+        maximum_qty_discount_is_applied_to: 0
+        discount_qty_step: 0
+        apply_to_shipping_amount: Yes
+        free_shipping: No
+        stop_further_rules_processing: No
+
+coupon_percent:
+    info:
+        rule_name: coupon_percent_%randomize%
+        description: some_desc
+        status: Active
+        websites: Main Website
+        customer_groups: General
+        coupon: Specific Coupon
+        coupon_code: coupon_code_%randomize%
+        uses_per_coupon: 100
+        uses_per_customer: 100
+        priority: 1
+    actions:
+        apply: Percent of product price discount
+        discount_amount: 20
+        maximum_qty_discount_is_applied_to: 0
+        discount_qty_step: 0
+        apply_to_shipping_amount: No
+        free_shipping: No
+        stop_further_rules_processing: No
+
+#*********************************************
+#*           Gift Messages                   *
+#*********************************************
+
+gift_messages_individual:
+    individual: &forProduct
+        product_1:
+            sku_product: %noValue%
+            to: me
+            from: guess_who
+            message: How you doing?
+
+gift_messages_per_order:
+    entire_order: &forOrder
+        from_order_level: guess_who
+        to_order_level: me
+        message_order_level: How you doing?
+
+gift_messages: &allGiftMessages
+    entire_order: *forOrder
+    individual: *forProduct
+
+gift_messages_with_empty_fields:
+    entire_order:
+        from_order_level: ' '
+        to_order_level: ' '
+        message_order_level: How you doing?
+    individual:
+        product_1:
+            sku_product: %noValue%
+            to: ' '
+            from: ' '
+            message: How you doing?
+
+gift_messages_with_empty_fields_expected:
+    entire_order:
+        from_order_level: billing_Steven billing_Stevenson
+        to_order_level: shipping_Steven shipping_Stevenson
+        message_order_level: How you doing?
+    individual:
+        product_1:
+            sku_product: %noValue%
+            to: shipping_Steven shipping_Stevenson
+            from: billing_Steven billing_Stevenson
+            message: How you doing?
+
+#*************************************************
+#         3D-Secure Log Verification Data        *
+#*************************************************
+
+verification_3d_secure:
+    response:
+        Enrolled: Y
+        ASCUrl: url
+        Payload: value
+        ErrorNo: 0
+        ErrorDesc:
+        PAResStatus: Y
+        SignatureVerification: Y
+        EciFlag: "05"
+        Xid: xid_value
+        Cavv: cavv_value

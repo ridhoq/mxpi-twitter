@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Integration test
+ * @package     Test_Initializertest
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Test_Eventstest>
+            <version>0.1.0</version>
+        </Test_Eventstest>
+    </modules>
+    <global>
+        <models>
+            <test_eventstest>
+                <class>Test_Eventstest_Model</class>
+                <resourceModel>test_eventstest_resource</resourceModel>
+            </test_eventstest>
+            <test_eventstest_resource>
+                <class>Test_Eventstest_Model_Resource</class>
+                <entities>
+                    <job>
+                        <table>test_eventstest_job</table>
+                    </job>
+                </entities>
+            </test_eventstest_resource>
+        </models>
+        <resources>
+            <test_eventstest_setup>
+                <setup>
+                    <module>Test_Eventstest</module>
+                </setup>
+            </test_eventstest_setup>
+        </resources>
+        <helpers>
+            <test_eventstest>
+                <class>Test_Eventstest_Helper</class>
+            </test_eventstest>
+        </helpers>
+        <blocks>
+            <test_eventstest>
+                <class>Test_Eventstest_Block</class>
+            </test_eventstest>
+        </blocks>
+        <events>
+            <response_message_received>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testMessageReceived</method>
+                    </message>
+                </observers>
+            </response_message_received>
+            <response_message_validate>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testMessageValidate</method>
+                    </message>
+                </observers>
+            </response_message_validate>
+            <response_message_validated>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testMessageValidated</method>
+                    </message>
+                </observers>
+            </response_message_validated>
+            <response_message_process>
+                <observers>
+                    <message_test>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessMessages</method>
+                    </message_test>
+                </observers>
+            </response_message_process>
+            <response_message_process_message_ping>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessMessagePing</method>
+                    </message>
+                </observers>
+            </response_message_process_message_ping>
+            <response_message_looped_process_message_ping>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessLoopMessagePing</method>
+                    </message>
+                </observers>
+            </response_message_looped_process_message_ping>
+            <response_message_process_postponed_message_ping>
+                <observers>
+                    <message>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessMessagePostponed</method>
+                    </message>
+                </observers>
+            </response_message_process_postponed_message_ping>
+            <response_message_process_com_x_core_v1_messagereceived>
+                <observers>
+                    <message_test_event>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessMessageComXCoreV1MessageReceived</method>
+                    </message_test_event>
+                </observers>
+            </response_message_process_com_x_core_v1_messagereceived>
+            <response_message_process_com_x_core_v1_messagevalidated>
+                <observers>
+                    <message_test_event>
+                        <class>test_eventstest/observer</class>
+                        <method>testProcessMessageComXCoreV1MessageValidated</method>
+                    </message_test_event>
+                </observers>
+            </response_message_process_com_x_core_v1_messagevalidated>            
+        </events>
+    </global>
+    <frontend>
+        <routers>
+            <eventstest>
+                <use>standard</use>
+                <args>
+                    <module>Test_Eventstest</module>
+                    <frontName>eventstest</frontName>
+                </args>
+            </eventstest>
+        </routers>
+    </frontend>
+</config>

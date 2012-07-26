@@ -1,0 +1,132 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  configuration
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+################################################################################
+#                                                                              #
+#                      Browsers for running tests                              #
+#                                                                              #
+################################################################################
+browsers:
+    googlechrome: &googlechrome
+         name: 'Google Chrome'
+         browser: '*googlechrome'
+         host: 'localhost'
+         port: 4444
+         timeout: 40
+         restartBrowser: true
+    firefox: &firefox
+         name: 'Firefox'
+         browser: '*chrome'
+         host: 'localhost'
+         port: 4444
+         timeout: 40
+         restartBrowser: false
+    iexplorer: &iexplorer
+         name: 'Internet Explorer'
+         browser: '*iexplore'
+         host: 'localhost'
+         port: 4444
+         timeout: 60
+         restartBrowser: false
+    default: *firefox
+################################################################################
+#                                                                              #
+#                     Framework configuration                                  #
+#                                                                              #
+################################################################################
+framework:
+    fixture_base_path: 'fixture'
+    testsuite_base_path: 'testsuite'
+    coverageScriptUrl: ''
+    #captureScreenshotOnFailure works only for browsers that support it: Firefox/Chrome, IE with snapsIE tool
+    captureScreenshotOnFailure: true
+    saveHtmlPageOnFailure: false
+    load_all_fixtures: true
+    cache:
+        frontend:
+            name: 'core'
+            options:
+                caching: false
+                cache_id_prefix: 'selenium_'
+                automatic_serialization: true
+        backend:
+            name: 'file'
+            options:
+                cache_dir: 'var/cache'
+################################################################################
+#                                                                              #
+#                  Applications for running tests                              #
+#                                                                              #
+################################################################################
+applications:
+    mage: &mage
+        fallbackOrderFixture: 'default'
+        fallbackOrderHelper: 'Core'
+        areas:
+            admin:
+                url: 'http://www.localhost.com/magento/admin/'
+                base_page_uimap: 'log_in_to_admin'
+                uimap_path: 'admin'
+                login: 'admin_login'
+                password: 'admin_password'
+            frontend:
+                url: 'http://www.localhost.com/magento/'
+                base_page_uimap: 'home_page'
+                uimap_path: 'frontend'
+                login: ''
+                password: ''
+            paypal_sandbox: &paypalSandbox
+                url: 'https://www.sandbox.paypal.com/'
+                base_page_uimap: 'paypal_sandbox'
+                uimap_path: 'paypal_sandbox'
+                login: 'paypal_sandbox_login'
+                password: 'paypal_sandbox_password'
+            paypal_developer: &paypalDeveloper
+                url: 'https://developer.paypal.com/'
+                base_page_uimap: 'home'
+                uimap_path: 'paypal_developer'
+                login: 'paypal_developer_login'
+                password: 'paypal_developer_password'
+    enterprise: &enterprise
+        fallbackOrderFixture: 'enterprise, default'
+        fallbackOrderHelper: 'Enterprise, Core'
+        areas:
+            admin:
+                url: 'http://www.localhost.com/magento_enterprise/admin/'
+                base_page_uimap: 'log_in_to_admin'
+                uimap_path: 'admin'
+                login: 'admin_login'
+                password: 'admin_password'
+            frontend:
+                url: 'http://www.localhost.com/magento_enterprise/'
+                base_page_uimap: 'home_page'
+                uimap_path: 'frontend'
+                login: ''
+                password: ''
+            paypal_sandbox: *paypalSandbox
+            paypal_developer: *paypalDeveloper
+    default: *mage

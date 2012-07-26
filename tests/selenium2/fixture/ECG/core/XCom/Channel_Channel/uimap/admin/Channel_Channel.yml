@@ -1,0 +1,170 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+
+#eBay Channels page
+settings_channels:
+    mca: channel/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'channel/')]
+    title: Magento Admin
+    uimap:
+        form: &channelform
+            tabs: &channel_tabs
+                -
+                    ebay:
+                        xpath: //a[@title='eBay']
+                        fieldsets:
+                            -
+                                ebay_grid:
+                                    xpath: //*[@id='content']
+                                    buttons:
+                                        search: //button[span='Search']
+                                        reset_filter: //button[span='Reset Filter']
+                                        submit: //button[span='Submit']
+                                    fields:
+                                        page: //input[@name='page']
+                                        filter_channel: //*[@id='filter_title']
+                                        filter_ebay_id: //*[@id='filter_marketplace']
+                                        filter_policy: //*[@id='filter_policy_name']
+                                    dropdowns:
+                                        view_per_page: //select[@name='limit']
+                                        filter_view: //*[@id='filter_store']
+                                        filter_status: //*[@id='filter_is_active']
+                                    links:
+                                        edit_ebay_channel: //tr[td[contains(text(), 'my eBay site')]]//a[text()='Edit']
+                -
+                    google:
+                        xpath: //a[@title='Google Product Search']
+                        fieldsets:
+                            -
+                                google_account_grid:
+                                    xpath:
+        buttons: &channelButtons
+            add_a_channel: //button[span='Configure an eBay Channel']
+        messages: &channelMessages
+            success_channel_saved: //li[@class='success-msg']//li[span='The Channel has been saved.']
+            success_policy_saved: //li[@class='success-msg']//li[span='The Policy has been saved.']
+
+#Add eBay Channels page
+new_channel:
+    mca: ebay_channel/new/
+    title: Manage Channel / eBay / Channel / Magento Admin
+    uimap:
+        form: &newchannel
+            tabs: &channeltab
+                -
+                    general:
+                        xpath: //a[@title='General Settings']/span
+                        fieldsets:
+                            -
+                                general_settings:
+                                    xpath: //div[@id='channel_tab_content']
+                                    fields:
+                                        name: //*[@id='name']
+                                    dropdowns:
+                                        store_view: //*[@id='store_id']
+                                        ebay_site: //*[@id='site_code']
+                                        ebay_account: //*[@id='account_id']
+                                        status: //*[@id='is_active']
+
+                -
+                    policy:
+                        xpath: //a[@title='Policy Settings']/span
+                        fieldsets:
+                            -
+                                policy_settings:
+                                    xpath: //*[@id='channel_info_tabs_policy_content']
+                                    buttons:
+                                        add_policy: //*[@id='add_policy_button']
+                                        cancel: //*[@id='cancel_policy_button']
+                                        save_policy: //*[@id='save_policy_button']
+                                        add_shipping: //button[span='Add Shipping']
+                                    fields:
+                                        zip_location: //*[@id='postal_code']
+                                        name_policy: //*[@id='channelPolicyAccordion']//*[@name='name']
+                                        paypal_address: //*[@name='payment_paypal_email']
+                                        shipping_methods_cost: //*[@class='validate-zero-or-greater validate-number shipping-cost required-entry']
+                                    dropdowns:
+                                        shipping_service: //*[@id='policy_shipping_0']
+                                        handling_time: //*[@id='handling_time']
+                                        country: //*[@id='country']
+                                        currency: //*[@id='currency']
+                                        return_accepted: //*[@id='return_accepted']
+                                        contact_within: //*[@id='return_by_days']
+                                        refund_type: //*[@id='refund_method']
+                                        refund_payer: //*[@id='shipping_paid_by']
+                                        policy_status: //*[@id='policy_is_active']
+                                        policy_status: //*[@id='is_active']
+                                    checkboxes:
+                                        payment_methods_amex: //*[@value='AMEX']
+                                        payment_methods_paypal: //*[@value='PAYPAL']
+                                        tax_rule: //*[@id='apply_tax']
+                                    links:
+                                        edit_ebay_policy: //tr[td[contains(text(), 'Equipment')]]//a[text()='Edit']
+                                        general_tab: //*[@id='dt-general']/a
+                                        payment_tab: //*[@id='dt-payment']/a
+                                        shipping_tab: //*[@id='dt-shipping']/a
+                                        return_tab: //*[@id='dt-return']/a
+                                        shipping_tab: //*[@id='dt-shipping']/a
+        buttons: &newchannelButtons
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save: //button[span='Save']
+            save_and_continue_edit: //button[span='Save And Continue Edit']
+        messages: *channelMessages
+
+#eBay Channels tab page
+ebay_channels:
+    mca: channel/index/type/ebay/
+    title: Magento Admin
+    uimap:
+        form: *channelform
+        tabs: *channel_tabs
+        buttons: *channelButtons
+        messages: *channelMessages
+
+#Edit eBay Channel Back
+edit_ebay_channel_back:
+    mca: ebay_channel/edit/channel_id/%url_new_channel%/back/edit/
+    title: Manage Channel / eBay / Channel / Magento Admin
+#    click_xpath: //a[contains(@href, 'ebay_channel/edit')]
+    uimap:
+        form: *newchannel
+        tab: *channeltab
+        buttons: *newchannelButtons
+        messages: *channelMessages
+
+#Edit eBay Channel
+edit_ebay_channel:
+    mca: %url1%
+    title: Manage Channel / eBay / Channel / Magento Admin
+    click_xpath: //a[contains(@href, 'ebay_channel/edit')]
+    uimap:
+        form: *newchannel
+        tab: *channeltab
+        buttons: *newchannelButtons
+        messages: *channelMessages

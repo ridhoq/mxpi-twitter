@@ -1,0 +1,254 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#CMS Widgets page
+manage_cms_widgets:
+    mca: widget_instance/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'widget_instance/')]
+    title: Widgets / CMS / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    cms_widgets_grid:
+                        xpath: //div[@id='widgetInstanceGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_type: //select[@name='type']
+                            filter_design_package_theme: //select[@name='package_theme']
+                        fields:
+                            page: //input[@name='page']
+                            filter_widget_id: //input[@name='instance_id']
+                            filter_title: //input[@name='title']
+                            filter_sort_order: //input[@name='sort_order']
+                        pageelements:
+                            widget_grid_head: //div[@id='widgetInstanceGrid']//thead/tr[@class='headings']
+            buttons:
+                add_new_widget_instance: //button[span='Add New Widget Instance']
+            messages:
+                successfully_saved_widget: //li[normalize-space(@class)='success-msg' and contains(.,'The widget instance has been saved.')]
+                successfully_deleted_widget: //li[normalize-space(@class)='success-msg' and contains(.,'The widget instance has been deleted.')]
+
+
+create_cms_widget:
+    mca: widget_instance/new/
+    title: New Instance / Widgets / CMS / Magento Admin
+    uimap:
+        form:
+            tabs:
+                -
+                    settings:
+                        xpath: //a[@title='Settings']
+                        fieldsets:
+                            -
+                                settings_fieldset:
+                                    xpath: //div[@id='base_fieldset']
+                                    dropdowns:
+                                        type: //select[@name='type']
+                                        design_package_theme: //select[@name='package_theme']
+                                    buttons:
+                                        continue: //button[span='Continue']
+
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+
+
+add_widget_options:
+    mca: widget_instance/edit/type/%type%/package/%package%/theme/%theme%/
+    title: New Instance / Widgets / CMS / Magento Admin
+    uimap:
+        form: &addWidgetOptions
+            tabs:
+                -
+                    frontend_properties:
+                        xpath: //a[@title='Frontend Properties']
+                        fieldsets:
+                            -
+                                frontend_properties_fieldset:
+                                    xpath: //div[@id='base_fieldset']
+                                    dropdowns:
+                                        type: //select[@name='type']
+                                        design_package_theme: //select[@name='package_theme']
+                                    fields:
+                                        widget_instance_title: //input[@name='title']
+                                        sort_order: //input[@name='sort_order']
+                                    multiselects:
+                                        assign_to_store_views: //select[@name='store_ids[]']
+                            -
+                                layout_updates_header:
+                                    xpath: //div[@class='entry-edit-head' and h4='Layout Updates']
+                                    buttons:
+                                        add_layout_update: //button[span='Add Layout Update']
+                            -
+                                layout_updates_body:
+                                    xpath: //div[@class='entry-edit-head' and h4='Layout Updates']/following-sibling::div[@class='fieldset']
+                                    dropdowns:
+                                        select_display_on: //select[@name='widget_instance[%index%][page_group]']
+                                        select_block_reference: //select[@name='widget_instance[%index%][%layout%][block]']
+                                        select_template: //select[@name='widget_instance[%index%][%layout%][template]']
+                                        select_page: //select[@name='widget_instance[%index%][%layout%][layout_handle]']
+                                        page: //div[@id='%layout%_%index%']//input[@name='page']
+                                        filter_any: //div[@id='%layout%_%index%']//select[@name='in_products']
+                                    fields:
+                                        specific_category: //input[@name='widget_instance[%index%][%layout%][entities]']
+                                        filter_id: //div[@id='%layout%_%index%']//input[@name='entity_id']
+                                        filter_sku: //div[@id='%layout%_%index%']//input[@name='chooser_sku']
+                                        filter_product_name: //div[@id='%layout%_%index%']//input[@name='chooser_name']
+                                    radiobuttons:
+                                        all_categories_products_radio: //input[@name='widget_instance[%index%][%layout%][for]' and @value='all']
+                                        specific_categories_products_radio: //input[@name='widget_instance[%index%][%layout%][for]' and @value='specific']
+                                    links:
+                                        open_chooser: //div[@id='%layout%_ids_%index%']//a[@title='Open Chooser']
+                                        apply: //div[@id='%layout%_ids_%index%']//a[@title='Apply']
+#                                        select_category_anchor: //div[@id='page_group_container_%index%']//a[span='%categoryName%']
+                                        root_category: %widgetParam%//ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+#                                    checkboxes:
+#                                        select_category_non_anchor: //div[@id='page_group_container_%index%']//div[./a[span='%categoryName%']]//input[@type='checkbox']
+                                    buttons:
+                                        remove_layout_update: //div[@id='page_group_container_%index%']//button[span='Remove Layout Update']
+                            -
+                                layout_products_fieldset:
+                                    xpath: //div[@id='%layout%_ids_%index%']
+                                    buttons:
+                                        reset_filter: //button[span='Reset Filter']
+                                        search: //button[span='Search']
+                                    fields:
+                                        filter_id: //input[@name='entity_id']
+                                        filter_sku: //input[@name='chooser_sku']
+                                        filter_product_name: //input[@name='chooser_name']
+                -
+                    widgets_options:
+                        xpath: //a[@title='Widget Options']
+                        fieldsets:
+                            -
+                                widget_options_fieldset:
+                                    xpath: //div[@id='widget_instace_tabs_properties_section_content']
+                                    fields:
+                                        anchor_custom_text: //input[@name='parameters[anchor_text]']
+                                        anchor_custom_title: //input[@name='parameters[title]']
+                                        number_of_products_to_display: //input[@name='parameters[products_count]']
+                                        number_of_products_to_display_compared_and_viewed: //input[@name='parameters[page_size]']
+                                        cache_lifetime: //input[@name='parameters[cache_lifetime]']
+                                    buttons:
+                                        select_option: //div[div/h4='Widget Options']//button[contains(span,'Select')]
+                                    pageelements:
+                                        chosen_option: //label[@class='widget-option-label']
+                                        chosen_option_verify: //label[@class='widget-option-label' and normalize-space(text())='%elementName%']
+                                        page_id: //input[@name='parameters[page_id]']
+                                        block_id: //input[@name='parameters[block_id]']
+                                        category_id: //input[@name='parameters[id_path]']
+                            -
+                                select_page:
+                                    xpath: //div[@id='widget-chooser' and //div[text()='Select Page...']]
+                                    fields:
+                                        page: //input[@name='page']
+                                        filter_id: //input[@name='chooser_id']
+                                        filter_title: //input[@name='chooser_title']
+                                        filter_url_key: //input[@name='chooser_identifier']
+                                    dropdowns:
+                                        view_per_page: //select[@name='limit']
+                                        filter_layout: //select[@name='chooser_root_template']
+                                        filter_status: //select[@name='chooser_is_active']
+                                    buttons:
+                                        reset_filter: //button[span='Reset Filter']
+                                        search: //button[span='Search']
+                                        close_page_insertion: //div[@id='widget-chooser_close']
+                                    pageelements:
+                                        product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+                            -
+                                select_block:
+                                    xpath: //div[@id='widget-chooser' and //div[text()='Select Block...']]
+                                    fields:
+                                        page: //input[@name='page']
+                                        filter_id: //input[@name='chooser_id']
+                                        filter_title: //input[@name='chooser_title']
+                                        filter_identifier: //input[@name='chooser_identifier']
+                                    dropdowns:
+                                        view_per_page: //select[@name='limit']
+                                        filter_status: //select[@name='chooser_is_active']
+                                    buttons:
+                                        reset_filter: //button[span='Reset Filter']
+                                        search: //button[span='Search']
+                                        close_block_insertion: //div[@id='widget-chooser_close']
+                                    pageelements:
+                                        product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+                            -
+                                select_category:
+                                    xpath: //div[@id='widget-chooser' and //div[text()='Select Category...']]
+                                    links:
+                                        root_category: %widgetParam%//ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                                    buttons:
+                                        close_category_insertion: //div[@id='widget-chooser_close']
+                            -
+                                select_product:
+                                    xpath: //div[@id='widget-chooser' and //div[text()='Select Product...']]
+                                    fields:
+                                        page: //input[@name='page']
+                                        filter_id: //input[@name='entity_id']
+                                        filter_sku: //input[@name='chooser_sku']
+                                        filter_product_name: //input[@name='chooser_name']
+                                    dropdowns:
+                                        view_per_page: //select[@name='limit']
+                                    buttons:
+                                        reset_filter: //button[span='Reset Filter']
+                                        search: //button[span='Search']
+                                        close_product_insertion: //div[@id='widget-chooser_close']
+                                    links:
+                                        root_category: %widgetParam%//ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: %widgetParam%//*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                                    pageelements:
+                                        product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save: //button[span='Save']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages:
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+
+
+edit_cms_widget:
+    mca: widget_instance/edit/instance_id/%id%/
+    title: %widgetName% / Widgets / CMS / Magento Admin
+    uimap:
+        form: *addWidgetOptions
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save: //button[span='Save']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+            delete: //button[span='Delete']
+        messages:
+            confirmation_for_delete: Are you sure you want to do this?

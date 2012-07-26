@@ -1,0 +1,147 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+
+# Manage Attribute Set Mapping
+attribute_set_mapping:
+    mca: map_attribute/
+    click_xpath: //div[@class='nav-bar']//a[span='Attribute Mapping']
+    title: Manage Attribute Set Mapping / Magento Admin
+    uimap:
+        form: 
+            fieldsets:
+                -
+                    attribute_set_grid:
+                        xpath: //*[@id='attributeSetGrid']
+                        buttons:
+                            search: //button[span='Search']
+                            reset_filter: //button[span='Reset Filter']                            
+                        fields:
+                           page: //input[@name='page']
+                           attribute_set: //*[@id='attribute_set_filter_attribute_set_name']
+                           target_set: //*[@id='attribute_set_filter_product_type_name']
+                        dropdowns:
+                           view_per_page: //select[@name='limit']
+                        links:
+                           map_now: //tr[td[contains(text(),'Sport')]]//a[text()='Map Now']
+                           edit_mapping: //tr[td[contains(text(),'Sport')]]//a[text()='Edit Mapping']
+        dropdowns:
+            target_system: //*[@id="target_system_switcher"]
+
+#New Set Mapping page
+new_set_mapping:
+    mca: map_attribute/editSet/target_system/xcommerce/attribute_set_id/%idmagatset%/
+    title: New Attribute Set Mapping / Magento Admin
+    uimap:
+        form: 
+            fieldsets:
+                -
+                    set_mapping_settings:
+                        xpath:  //form[@id='attributeSetForm']
+                        fields:
+                            magento_set: //*[@for='attribute_set']
+                        links:
+                            collapse_all: //a[contains(text(), 'Collapse All')]
+                            expand_all: //a[contains(text(), 'Expand All')]
+                            target_set: //a/span[contains(text(), 'Planers')]
+                        buttons:
+                            continue: //button[span='Continue']
+        buttons:
+            back: //button[span='Back']
+
+#Attribute Mapping page
+attribute_mapping:
+    mca: mapping_attribute/index/mapping_product_type_id/%producttypeid%/target_system/xcommerce/attribute_set_id/%idmagatset%/
+    title: Manage Attributes Mapping / Magento Admin
+    uimap:
+        form: &attributemappingform
+            fieldsets:
+                -
+                    attribute_boxes:
+                        xpath: //*[@id='edit_form']
+                        links:
+                            edit: //tr[td]//a[text()='Edit']
+                        buttons:
+                            add_attribute_mapping: //button[span='Add Attribute Mapping']
+                        dropdowns:
+                            magento_attribute: //*[@id='attribute_id']
+                            target_attribute: //*[@id="mapping_attribute_id"]
+                -
+                    attribute_grid:
+                        xpath: //*[@id='attributes_grid']
+                        buttons:
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            delete_attribute: //select[option='Delete']
+                        checkboxes:
+                            checkbox_for_delete: //td/input[@name='relation_attribute_ids']
+                        links:
+                            map_now_attribute: //tr[td[contains(text(),'Condition')]]//a[text()='Map Now']
+                            edit_mapping: //tr[td[contains(text(),'Condition')]]//a[text()='Edit Mapping']
+        buttons: &attributemappingbuttons
+            back: //button[span='Back']
+        messages: &attributemappingmessages
+            mapping_saved: //li[@class='success-msg']//li[span='Attribute Mapping has been saved.']
+            pending_attribute: //li[@class='error-msg']//li[span='You have pending mandatory Attributes to be mapped']
+
+#Attribute Mapping page after save
+attribute_mapping_save:
+    mca: mapping_attribute/index/attribute_set_id/%idmagatset%/mapping_product_type_id/%producttypeid%/
+    title: Manage Attributes Mapping / Magento Admin
+    uimap:
+        form: *attributemappingform
+        buttons: *attributemappingbuttons
+        messages: *attributemappingmessages
+
+#Attribute Mapping page after Edit mapping
+attribute_mapping_edit:
+    mca: mapping_attribute/index/type/edit/mapping_product_type_id/%producttypeid%/attribute_set_id/%idmagatset%/
+    title: Manage Attribute Mapping / Magento Admin
+    uimap:
+        form: *attributemappingform
+        buttons: *attributemappingbuttons
+        messages: *attributemappingmessages
+
+#Attribute Value page
+attribute_value_mapping:
+    mca: map_attribute/value/mapping_product_type_id/%producttypeid%/attribute_set_id/%idmagatset%/mapping_attribute_id/%map_att_id%/attribute_id/%idmagatvalue%/
+    title: Attribute Value Mapping / Magento Admin
+    uimap:
+        form: &attributevalueform
+            fieldsets:
+                -
+                    attribute_value_mapping_settings:
+                        xpath: //*[@id='attributeValueForm']
+                        dropdowns:
+                            target_attribute_value_0: //*[@id='target_attribute_value_0']
+        buttons: &attributevaluebuttons
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save: //button[span='Save']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: &attributevaluemessages
+            mapping_value_saved: //li[@class='success-msg']//li[span='Attribute Mapping has been saved.']

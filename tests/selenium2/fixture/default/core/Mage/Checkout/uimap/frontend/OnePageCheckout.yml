@@ -1,0 +1,227 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# 'Checkout' page
+
+onepage_checkout:
+    mca: checkout/onepage/
+    click_xpath: //ul[@class='links']//a[text()= 'Checkout']
+    title: Checkout
+    uimap:
+        form: &checkoutForm
+            fieldsets:
+                -
+                    checkout_method:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-login']
+                        buttons:
+                            checkout_method_continue: //button[span='Continue']
+                            login: //button[span='Login']
+                        fields:
+                            email_address: //input[@id='login-email']
+                            password: //input[@id='login-password']
+                        checkboxes:
+                            checkout_as_guest: //input[@id='login:guest']
+                            register: //input[@id='login:register']
+                        links:
+                            forgot_password: //a[text()='Forgot your password?']
+                -
+                    billing_information:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-billing']
+                        buttons:
+                            billing_information_continue: //button[span='Continue']
+                        dropdowns:
+                            billing_address_choice: //select[@id='billing-address-select']
+                            billing_state: //select[@id='billing:region_id']
+                            billing_country: //select[@id='billing:country_id']
+                        fields:
+                            billing_first_name: //input[@id='billing:firstname']
+                            billing_last_name: //input[@id='billing:lastname']
+                            billing_company: //input[@id='billing:company']
+                            billing_email: //input[@id='billing:email']
+                            billing_street_address_1: //input[@id='billing:street1']
+                            billing_street_address_2: //input[@id='billing:street2']
+                            billing_city: //input[@id='billing:city']
+                            billing_region: //input[@id='billing:region']
+                            billing_zip_code: //input[@id='billing:postcode']
+                            billing_telephone: //input[@id='billing:telephone']
+                            billing_fax: //input[@id='billing:fax']
+                            billing_password: //input[@id='billing:customer_password']
+                            billing_confirm_password: //input[@id='billing:confirm_password']
+                        checkboxes:
+                            billing_save_in_address_book: //input[@id='billing:save_in_address_book']
+                        radiobuttons:
+                            ship_to_this_address: //input[@id='billing:use_for_shipping_yes']
+                            ship_to_different_address: //input[@id='billing:use_for_shipping_no']
+                        required: [billing_first_name, billing_last_name, billing_email, billing_street_address_1, billing_city, billing_region, billing_country, billing_zip_code, billing_telephone]
+                -
+                    shipping_information:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-shipping']
+                        buttons:
+                            shipping_information_continue: //button[span='Continue']
+                        dropdowns:
+                            shipping_address_choice: //select[@id='shipping-address-select']
+                            shipping_state: //select[@id='shipping:region_id']
+                            shipping_country: //select[@id='shipping:country_id']
+                        fields:
+                            shipping_first_name: //input[@id='shipping:firstname']
+                            shipping_last_name: //input[@id='shipping:lastname']
+                            shipping_company: //input[@id='shipping:company']
+                            shipping_street_address_1: //input[@id='shipping:street1']
+                            shipping_street_address_2: //input[@id='shipping:street2']
+                            shipping_city: //input[@id='shipping:city']
+                            shipping_region: //input[@id='shipping:region']
+                            shipping_zip_code: //input[@id='shipping:postcode']
+                            shipping_telephone: //input[@id='shipping:telephone']
+                            shipping_fax: //input[@id='shipping:fax']
+                        checkboxes:
+                            shipping_save_in_address_book: //input[@id='shipping:save_in_address_book']
+                            use_billing_address: //input[@id='shipping:same_as_billing']
+                        links:
+                            back: //p[@class='back-link']/a[@href]
+                        required: [shipping_first_name, shipping_last_name, shipping_street_address_1, shipping_city, shipping_state, shipping_country, shipping_zip_code, shipping_telephone]
+                -
+                    shipping_method:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-shipping_method']
+                        buttons:
+                            shipping_method_continue: //button[span='Continue']
+                        checkboxes:
+                            add_gift_options: //*[label='Add gift options.']/input
+                            gift_option_for_the_entire_order: //input[@id='allow_gift_messages_for_order']
+                            gift_option_for_individual_items: //input[@id='allow_gift_messages_for_items']
+                        radiobuttons:
+                            ship_method: //dt[text()='%shipService%']/following-sibling::*//input[@type='radio' and following-sibling::*[contains(text(),'%shipMethod%')]]
+                            one_method_selected: //dt[text()='%shipService%']/following-sibling::*//input[@type='radio' and ../following-sibling::*[contains(text(),'%shipMethod%')]]
+                        fields:
+                            ship_service_name: //dt[text()='%shipService%']
+                            gift_option_entire_order_from: //input[[@id='gift-message-whole-from']
+                            gift_option_entire_order_to: //input[@id='gift-message-whole-to']
+                            gift_option_entire_order_message: //input[@id='gift-message-whole-message']
+                            gift_option_for_individual_items_from: //div[h5[contains(.,'%productName%')]]//input[@title='From']
+                            gift_option_for_individual_items_to: //div[h5[contains(.,'%productName%')]]//input[@title='To']
+                            gift_option_for_individual_items_message: //div[h5[contains(.,'%productName%')]]//textarea[@title='From']
+                        links:
+                            back: //p[@class='back-link']/a[@href]
+                -
+                    payment_method:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-payment']
+                        buttons:
+                            payment_method_continue: //button[span='Continue']
+                        radiobuttons:
+                            check_payment_method: //input[@title='%paymentTitle%']
+                            selected_one_payment: //label[normalize-space(text())='%paymentTitle%']
+                        fields:
+                            name_on_card: //input[@id='%paymentId%_cc_owner']
+                            card_number: //input[@id='%paymentId%_cc_number']
+                            card_verification_number : //input[@id='%paymentId%_cc_cid']
+                        dropdowns:
+                            card_type: //select[@id='%paymentId%_cc_type']
+                            expiration_month: //select[@id='%paymentId%_expiration']
+                            expiration_year: //select[@id='%paymentId%_expiration_yr']
+                        links:
+                            back: //p[@class='back-link']/a[@href]
+                        required: [card_type, card_number, expiration_month, expiration_year, card_verification_number, name_on_card]
+                -
+                    3d_secure_card_validation: &3DSecureCardValidation
+                        xpath: //div[@id='centinel_authenticate_block']
+                        pageelements:
+                            3d_secure_iframe: //iframe[@id='centinel_authenticate_iframe']
+                -
+                    3d_secure_frame: &3DSecureCardValidation
+                        xpath:
+                        fields:
+                            3d_password: //input[@name='external.field.password']
+                        buttons:
+                            3d_submit: //input[@value='Submit']
+                            3d_continue: //input[@value='Continue']
+                        pageelements:
+                            incorrect_password: //b[text()='Incorrect, Please try again']
+                            verification_successful: //h1[text()='Verification Successful']
+                -
+                    order_review:
+                        xpath: //ol[@id='checkoutSteps']//li[@id='opc-review']
+                        pageelements:
+                            product_table_head: //table[@id='checkout-review-table']/thead
+                            price_totals: //table[@id='checkout-review-table']/tfoot
+                            product_line:  //table[@id='checkout-review-table']/tbody/tr
+                        fields:
+                            product_name: //table[@id='checkout-review-table']/tbody//td[h3= '%productName%']
+                            product_price: //table[@id='checkout-review-table']/tbody/tr[./td/h3[contains(.,'%productName%')]]/td[2]/span[contains(.,'%price%')]
+                            product_qty: //table[@id='checkout-review-table']/tbody/tr[./td/h3[contains(.,'%productName%')]]/td[3][contains(.,'%qty%')]
+                            product_subtotal: //table[@id='checkout-review-table']/tbody/tr[./td/h3[contains(.,'%productName%')]]/td[4][contains(.,'%subtotal%')]
+                            subtotal_total: //table[@id='checkout-review-table']/tfoot/tr[contains(.,'Subtotal')]/td[contains(.,'%subtotalTotal%')]
+                            shipping_total: //table[@id='checkout-review-table']/tfoot/tr[contains(.,'Shipping')]/td[contains(.,'%shippingTotal%')]
+                            grand_total: //table[@id='checkout-review-table']/tfoot/tr[contains(.,'Grand Total')]/td[contains(.,'%grandTotal%')]
+                        buttons:
+                            place_order: //button[span='Place Order']
+                        links:
+                            edit_cart: //a[contains(.,'Edit Your Cart')]
+                -
+                    checkout_progress:
+                        xpath: //div[@class='block block-progress opc-block-progress']
+                        fields:
+                            billing_address_checkout: //dt[contains(.,'Billing Address')]/following-sibling::dd[1]/address
+                            shipping_address_checkout: //dt[contains(.,'Shipping Address')]/following-sibling::dd[1]/address
+                            shipping_method_checkout: //dt[contains(.,'Shipping Method')]/following-sibling::dd[1]
+                            payment_method_checkout: //dt[contains(.,'Payment Method')]/following-sibling::dd[1]
+                        links:
+                            billing_address_change_link: //dt[contains(.,'Billing Address')]/a[@href='#billing']
+                            shipping_address_change_link: //dt[contains(.,'Shipping Address')]/a[@href='#payment']
+                            shipping_method_change_link: //dt[contains(.,'Shipping Method')]/a[@href='#shipping_method']
+                            payment_method_change_link: //dt[contains(.,'Payment Method')]/a[@href='#payment']
+            links:
+                order_number: //a[contains(@href, '/sales/order/view/order_id/')]
+            messages: &checkoutMessages
+                empty_required_field: "//*[@id='advice-required-entry-%fieldId%'][not(contains(@style,'display: none;'))]"
+                please_select_option: "//*[@id='advice-validate-select-%fieldId%'][not(contains(@style,'display: none;'))]"
+                different_passwords: "//*[@id='advice-validate-cpassword-%fieldId%'][not(contains(@style,'display: none;'))]"
+                invalid_password_length: "//*[@id='advice-validate-password-%fieldId%'][not(contains(@style,'display: none;'))]"
+                invalid_email_address: "//*[@id='advice-validate-email-%fieldId%'][not(contains(@style,'display: none;'))]"
+                exist_email_alert: There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account.
+                long_value_alert: '"%fieldName%" length must be equal or less than 255 characters.'
+                #nor verefied
+                invalid_credit_card_number: "//div[@id='advice-validate-cc-type-ccsave_cc_number' and not(contains(@style,'display: none;'))]"
+                invalid_credit_card_type: "//div[@id='advice-validate-cc-type-select-ccsave_cc_type' and not(contains(@style,'display: none;'))]"
+                incorrect_credit_card_exp_date: "//div[@id='advice-validate-cc-exp-ccsave_expiration' and not(contains(@style,'display: none;'))]"
+                empty_shipping_methods_for_all_addresses: //li[normalize-space(@class)='error-msg' and contains(.,'Please select shipping methods for all addresses')]
+                success_saved_address: //li[normalize-space(@class)='success-msg' and contains(.,'The address has been saved.')]
+                payment_method_not_defined: //li[normalize-space(@class)='error-msg' and contains(.,'Payment method is not defined')]
+                no_shipping: //*[@id='checkout-shipping-method-load']/p[text()='Sorry, no quotes are available for this order at this time.']
+                ship_method_unavailable: //dt[strong='%shipService%']/following::dd[1]//li[@class='error-msg'][text()='This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.']
+                paypal_alert: There was an error processing your order. Please contact us or try again later.
+                shipping_alert: Please specify shipping method.
+                payment_alert: Please specify payment method.
+                success_checkout: //h1[contains(.,'Your order has been received')]
+
+onepage_checkout_success:
+    mca: checkout/onepage/success/
+    title: Magento Commerce
+    uimap:
+        form: &successForm
+        messages:
+            success_checkout: //h1[contains(.,'Your order has been received')]
+        links:
+            order_number: //a[contains(@href, '/sales/order/view/order_id/')]

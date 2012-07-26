@@ -1,0 +1,70 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Tags creating
+
+#*********************************************
+#*         Backend                           *
+#*********************************************
+
+backend_search_tag:
+    tag_name: %noValue%
+    products_from: %noValue%
+    products_to: %noValue%
+    customers_from: %noValue%
+    customers_to: %noValue%
+    tags_status: %noValue%
+    store_view: %noValue%
+
+backend_base_tag:
+    tag_name: tag_name
+    tag_status: Approved
+
+backend_new_tag:
+    tag_name: tag_name
+    tag_status: Approved
+    base_popularity: %noValue%
+    switch_store: %noValue%
+
+backend_new_tag_with_product:
+    tag_name: tag_name
+    tag_status: Approved
+    base_popularity: %noValue%
+    switch_store: Default Store View
+    products_tagged_by_admins:
+        prod_tag_admin_id_from: %noValue%
+        prod_tag_admin_id_to: %noValue%
+        prod_tag_admin_name: %noValue%
+        prod_tag_admin_name_in_default_sore_view: %noValue%
+        prod_tag_admin_type: %noValue%
+        prod_tag_admin_attribute_set_name: %noValue%
+        prod_tag_admin_sku: %noValue%
+        prod_tag_admin_price_from: %noValue%
+        prod_tag_admin_price_to: %noValue%
+        prod_tag_admin_price_in: %noValue%
+        prod_tag_admin_visibility: %noValue%
+        prod_tag_admin_status: %noValue%

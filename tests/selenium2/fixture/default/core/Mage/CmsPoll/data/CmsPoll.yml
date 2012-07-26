@@ -1,0 +1,72 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Test Datasets for Add New Poll for each types
+
+
+#*********************************************
+#*         Poll Answers                      *
+#*********************************************
+answers_set: &answersSet
+  answer_1: &answer1
+    answer_title: answer_%randomize%
+    votes_count: 1
+  answer_2:
+    answer_title: answer_%randomize%
+    votes_count: 1
+  answer_3:
+    answer_title: answer_%randomize%
+    votes_count: 1
+
+#*********************************************
+#*         General Poll Data                 *
+#*********************************************
+
+poll_open:
+    poll_question: Test Poll(%randomize%)
+    poll_status: Open
+    visible_in: Default Store View
+    assigned_answers_set: *answersSet
+
+search_poll:
+    filter_id: %noValue%
+    filter_question: %noValue%
+    filter_number_of_responses_from: %noValue%
+    filter_umber_of_responses_to: %noValue%
+    filter_date_posted_from: %noValue%
+    filter_date_posted_to: %noValue%
+    filter_date_closed_from: %noValue%
+    filter_date_closed_to: %noValue%
+    filter_visible_in: %noValue%
+    filter_status: %noValue%
+
+poll_empty_required:
+    poll_question: Test Poll(%randomize%)
+    poll_status: Open
+    visible_in: Default Store View
+    assigned_answers_set:
+        answer_1: *answer1

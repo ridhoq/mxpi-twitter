@@ -1,0 +1,246 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+flatrate_enable:
+    configuration_scope: Default Config
+    tab_1: &flatrate
+        tab_name: sales_shipping_methods
+        configuration:
+            flat_rate_enabled: Yes
+            flat_rate_title: Flat Rate
+            flat_rate_method_name: Fixed
+            flat_rate_type: Per Item
+            flat_rate_price: 5.00
+            flat_rate_calculate_handling_fee: Fixed
+            flat_rate_handling_fee: %noValue%
+            flat_rate_displayed_error_message: This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.
+            flat_rate_ship_to_applicable_countries: All Allowed Countries
+            flat_rate_ship_to_specific_countries: %noValue%
+            flat_rate_show_method_if_not_applicable: %noValue%
+            flat_rate_sort_order: %noValue%
+
+tablerate_enable:
+    configuration_scope: Default Config
+    tab_1: &tablerate
+        tab_name: sales_shipping_methods
+        configuration:
+            table_rates_enabled: Yes
+            table_rates_ship_to_applicable_countries: All Allowed Countries
+
+free_enable:
+    configuration_scope: Default Config
+    tab_1: &free
+        tab_name: sales_shipping_methods
+        configuration:
+            free_shipping_enabled: Yes
+            free_shipping_title: Free Shipping
+            free_shipping_method_name: Free
+            free_shipping_minimum_order_amount: 1
+            free_shipping_displayed_error_message: This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.
+            free_shipping_ship_to_applicable_countries: All Allowed Countries
+            free_shipping_ship_to_specific_countries: %noValue%
+            free_shipping_show_method_if_not_applicable: %noValue%
+            free_shipping_sort_order: %noValue%
+
+ups_enable:
+    configuration_scope: Default Config
+    tab_1: &ups
+        tab_name: sales_shipping_methods
+        configuration:
+            ups_enabled: Yes
+            ups_ups_type: United Parcel Service
+            ups_gateway_url: http://www.ups.com/using/services/rave/qcostcgi.cgi
+            ups_title: United Parcel Service
+            ups_container: %noValue%
+            ups_destination_type: %noValue%
+            ups_weight_unit: %noValue%
+            ups_pickup_method: %noValue%
+            ups_maximum_package_weight: 150
+            ups_minimum_package_weight: 0.1
+            ups_calculate_handling_fee: %noValue%
+            ups_handling_applied: %noValue%
+            ups_handling_fee: %noValue%
+            ups_allowed_methods: All
+            ups_free_method: %noValue%
+            ups_free_shipping_with_minimum_order_amount: %noValue%
+            ups_minimum_order_amount_for_free_shipping: %noValue%
+            ups_displayed_error_message: This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.
+            ups_ship_to_applicable_countries: All Allowed Countries
+            ups_ship_to_specific_countries: %noValue%
+            ups_debug: Yes
+            ups_show_method_if_not_applicable: Yes
+            ups_sort_order: %noValue%
+
+upsxml_enable:
+    configuration_scope: Default Config
+    tab_1: &upsxml
+        tab_name: sales_shipping_methods
+        configuration:
+            ups_enabled: Yes
+            ups_ups_type: United Parcel Service XML
+            ups_password: magento200
+            ups_access_license_number: 8C7A97595F3B8818
+            ups_userid: magento
+            ups_mode: Development
+            ups_gateway_xml_url: https://onlinetools.ups.com/ups.app/xml/Rate
+            ups_origin_of_the_shipment: United States Domestic Shipments
+            ups_enable_negotiated_rates: Yes
+            ups_title: United Parcel Service XML
+            ups_shipper_number: 207W88
+            ups_container: %noValue%
+            ups_destination_type: %noValue%
+            ups_tracking_xml_url: net uimap
+            ups_pickup_method: %noValue%
+            ups_maximum_package_weight: 150
+            ups_minimum_package_weight: 0.1
+            ups_calculate_handling_fee: %noValue%
+            ups_handling_applied: %noValue%
+            ups_handling_fee: %noValue%
+            ups_allowed_methods: All
+            ups_free_method: %noValue%
+            ups_free_shipping_with_minimum_order_amount: %noValue%
+            ups_minimum_order_amount_for_free_shipping: %noValue%
+            ups_displayed_error_message: This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.
+            ups_ship_to_applicable_countries: All Allowed Countries
+            ups_ship_to_specific_countries: %noValue%
+            ups_debug: Yes
+            ups_show_method_if_not_applicable: Yes
+            ups_sort_order: %noValue%
+
+usps_enable:
+    configuration_scope: Default Config
+    tab_1: &usps
+        tab_name: sales_shipping_methods
+        configuration:
+            usps_enabled_for_checkout: Yes
+            usps_user_id: 213MAGEN6752
+            usps_password: 326ZL84XF990
+            usps_ship_to_applicable_countries: All Allowed Countries
+            usps_debug: Yes
+
+fedex_enable:
+    configuration_scope: Default Config
+    tab_1: &fedex
+        tab_name: sales_shipping_methods
+        configuration:
+            fedex_enabled_for_checkout: Yes
+            fedex_account_id: 510087801
+            fedex_meter_number: 100047915
+            fedex_key: INdxa6ug7qZ2KD7y
+            fedex_password: 4vaGsDBmeBCzvpl1S1DT1jXAB
+            fedex_sandbox_mode: Yes
+            fedex_residential_delivery: Yes
+            fedex_allowed_methods: all
+            fedex_ship_to_applicable_countries: All Allowed Countries
+            fedex_debug: Yes
+
+dhl_enable:
+    configuration_scope: Default Config
+    tab_1: &dhl
+        tab_name: sales_shipping_methods
+        configuration:
+            dhl_enabled: Yes
+            dhl_title: DHL
+            dhl_gateway_url: HTTPS://eCommerce.airborne.com/ApiLandingTest.asp
+            dhl_access_id: MAGEN_2925
+            dhl_password: 503P85QMZ2
+            dhl_account_number: 799909537
+            dhl_shipping_key_int: 54233F2B2C4E5C4B4C5E5A595655304F404F5140475E575A55
+            dhl_ship_to_applicable_countries: All Allowed Countries
+            dhl_allowed_methods: all
+            dhl_debug: Yes
+
+# Data for a release after CE1.6.2
+#
+#dhl_usa_enable:
+#    configuration_scope: Default Config
+#    tab_1: &dhl_usa
+#        tab_name: sales_shipping_methods
+#        configuration:
+#            dhl_usa_enabled: Yes
+#            dhl_usa_title: DHL USA
+#            dhl_usa_gateway_url: HTTPS://eCommerce.airborne.com/ApiLandingTest.asp
+#            dhl_usa_access_id: VENDR_7626
+#            dhl_usa_password: 5Q479265S0
+#            dhl_usa_account_number: 799909537
+#            dhl_usa_shipping_key_int: 54233F2B2C4E5C4B4C5E5A595655305A46485447445C5658
+#            dhl_usa_shipping_key: 54233F2B2C4E5C4B4C5E5A595655304F424B5D44415D5A5A5C5A
+#            dhl_usa_ship_to_applicable_countries: All Allowed Countries
+#            dhl_usa_allowed_methods: all
+#
+#dhl_int_common_configuration: &dhl_int_common_config
+#    dhl_int_enabled: Yes
+#    dhl_int_title: DHL
+#    dhl_int_account_number: 799909537
+#    dhl_int_displayed_error_message: This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.
+#    dhl_int_ship_to_applicable_countries: All Allowed Countries
+#    dhl_int_content_type: Non documents
+#    dhl_int_allowed_methods_nondoc: all
+#
+#dhl_int_ap_enable:
+#    configuration_scope: Default Config
+#    tab_1: &dhl_int_ap
+#        tab_name: sales_shipping_methods
+#        configuration:
+#            <<: *dhl_int_common_config
+#            dhl_int_access_id: EvgeniyUK
+#            dhl_int_password: aDfc45Dfo9
+#
+#dhl_int_am_enable:
+#    configuration_scope: Default Config
+#    tab_1: &dhl_int_am
+#        tab_name: sales_shipping_methods
+#        configuration:
+#            <<: *dhl_int_common_config
+#            dhl_int_access_id: EvgeniyUSA
+#            dhl_int_password: okG43dHy7
+#
+#dhl_int_ea_enable:
+#    configuration_scope: Default Config
+#    tab_1: &dhl_int_ea
+#        tab_name: sales_shipping_methods
+#        configuration:
+#            <<: *dhl_int_common_config
+#            dhl_int_access_id: EvgeniyDE
+#            dhl_int_password: aplNb6Rop
+#
+#dhl_int_enable:
+#    configuration_scope: Default Config
+#    tab_1: *dhl_int_ea
+
+shipping_disable:
+    configuration_scope: Default Config
+    tab_1:
+        tab_name: sales_shipping_methods
+        configuration:
+            fedex_enabled_for_checkout: No
+            usps_enabled_for_checkout: No
+            ups_enabled: No
+            free_shipping_enabled: No
+#            dhl_usa_enabled: No
+#            dhl_int_enabled: No
+            dhl_enabled: No

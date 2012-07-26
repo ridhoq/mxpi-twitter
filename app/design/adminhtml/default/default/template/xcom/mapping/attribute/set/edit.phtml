@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Xcom
+ * @package     Xcom_Mapping
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/** @var $this Xcom_Mapping_Block_Adminhtml_Attribute_Set_Edit */
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $this->getHeaderText() ?></h3></td>
+
+            <td class="form-buttons">
+                <?php echo $this->getButtonsHtml() ?>
+            </td>
+        </tr>
+    </table>
+</div>
+<h4><?php echo $this->getBreadcrumb() ?></h4>
+<?php echo $this->getChildHtml('form'); ?>
+<script type="text/javascript">
+//<![CDATA[
+    var attributeSetTemplateSyntax = /(^|.|\r|\n)({{(\w+)}})/;
+    var attributeSetForm = new varienForm('attributeSetForm');
+    function setSettings(urlNoAction, urlSave,  targetElement)
+    {
+        var srcValue = $F('mapping_product_type_id_src');
+        if (!srcValue.empty() && (srcValue != $F(targetElement))) {
+            if(!confirm('If you change Target Attribute Set, it will delete all mapping for it.\n\n'
+                + 'Are you sure you want to change it?')) {
+                return;
+            }
+        }
+        if (attributeSetForm.validate()) {
+            if ($F('mapping_product_type_id_src') != $F(targetElement)) {
+                var template = new Template(urlSave, attributeSetTemplateSyntax);
+                setLocation(template.evaluate({mapping_product_type_id:$F(targetElement)}));
+            } else {
+                setLocation(urlNoAction);
+            }
+        }
+    }
+//]]>
+</script>

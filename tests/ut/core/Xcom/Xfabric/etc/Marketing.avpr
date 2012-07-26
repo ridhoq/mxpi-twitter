@@ -1,0 +1,537 @@
+{
+  "protocol" : "Marketing",
+  "namespace" : "com.x.service.marketing.message",
+  "types" : [ {
+    "type" : "record",
+    "name" : "MarketingChannelError",
+    "doc" : "* A general error message",
+    "fields" : [ {
+      "name" : "xId",
+      "type" : "string"
+    }, {
+      "name" : "timeStamp",
+      "type" : "long"
+    }, {
+      "name" : "errorCode",
+      "type" : "string"
+    }, {
+      "name" : "errorMessage",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "MarketingCampaignPriority",
+    "doc" : "* Campaign priorities",
+    "symbols" : [ "CONSERVATIVE", "COMPETITIVE", "AGGRESSIVE", "DOMINANT" ],
+    "topics" : "/marketing/campaignPriority/find/success"
+  }, {
+    "type" : "enum",
+    "name" : "MarketingCampaignStatus",
+    "doc" : "* Campaign statuses",
+    "symbols" : [ "ACTIVE", "PAUSED", "DELETED" ]
+  }, {
+    "type" : "enum",
+    "name" : "MarketingSegment",
+    "doc" : "* Marketing segments (TBD)",
+    "symbols" : [ ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingSegmentOptions",
+    "doc" : "* An array of available marketing segment options",
+    "fields" : [ {
+      "name" : "marketSegmentOptions",
+      "type" : {
+        "type" : "array",
+        "items" : "MarketingSegment"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "AdvertisingBudgetOption",
+    "doc" : "* A single budget option",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "AdverstisingBudgetOptions",
+    "doc" : "* An array of possible budget options",
+    "fields" : [ {
+      "name" : "options",
+      "type" : {
+        "type" : "array",
+        "items" : "AdvertisingBudgetOption"
+      }
+    } ],
+    "topics" : "/marketing/advertisingBudgetOption/find/success"
+  }, {
+    "type" : "record",
+    "name" : "AdvertisingBudget",
+    "doc" : "* A budget selected by the user",
+    "fields" : [ {
+      "name" : "isCustom",
+      "type" : "boolean"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/advertisingBudget/success"
+  }, {
+    "type" : "record",
+    "name" : "CampaignPriorityOptions",
+    "doc" : "* An array of available campaign priorities",
+    "fields" : [ {
+      "name" : "campaignPriorities",
+      "type" : {
+        "type" : "array",
+        "items" : "MarketingCampaignPriority"
+      }
+    } ],
+    "topics" : "/marketing/campaignPriorityOption/success"
+  }, {
+    "type" : "record",
+    "name" : "AdvertisingTemplate",
+    "doc" : "* A template used to generate ads (may contain place holders {})",
+    "fields" : [ {
+      "name" : "xId",
+      "type" : "string"
+    }, {
+      "name" : "headline",
+      "type" : "string"
+    }, {
+      "name" : "line1",
+      "type" : "string"
+    }, {
+      "name" : "line2",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/advertisingTemplate/find/success, /marketing/advertisingTemplate/update, /marketing/advertisingTemplate/update/success"
+  }, {
+    "type" : "record",
+    "name" : "MarketingCampaignFilter",
+    "doc" : "* A filter for controlling which campaigns are being\r\n\t * requested",
+    "fields" : [ {
+      "name" : "filter",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "FindMarketingCampaign",
+    "doc" : "* A message for receiving campaigns\r\n     * Topic: /channel/marketing/campaign/find",
+    "fields" : [ {
+      "name" : "filter",
+      "type" : "MarketingCampaignFilter"
+    } ],
+    "topics" : "/marketing/campaign/find"
+  }, {
+    "type" : "record",
+    "name" : "MarketingCampaign",
+    "doc" : "* A campaign",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "status",
+      "type" : "MarketingCampaignStatus"
+    }, {
+      "name" : "priority",
+      "type" : "MarketingCampaignPriority"
+    }, {
+      "name" : "selectedTemplates",
+      "type" : {
+        "type" : "array",
+        "items" : "AdvertisingTemplate"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingCampaigns",
+    "doc" : "* An array of campaigns",
+    "fields" : [ {
+      "name" : "campaigns",
+      "type" : {
+        "type" : "array",
+        "items" : "MarketingCampaign"
+      }
+    }, {
+      "name" : "filter",
+      "type" : "MarketingCampaignFilter"
+    } ],
+    "topics" : "/marketing/advertisingBudgetOption/success"
+  }, {
+    "type" : "record",
+    "name" : "ProductAdvertisingTemplates",
+    "doc" : "* An array of ad templates",
+    "fields" : [ {
+      "name" : "isSelected",
+      "type" : "boolean"
+    }, {
+      "name" : "adTemplates",
+      "type" : {
+        "type" : "array",
+        "items" : "AdvertisingTemplate"
+      }
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/productAdvertisingTemplate/find/success"
+  }, {
+    "type" : "record",
+    "name" : "Credential",
+    "doc" : "* Credentials for specific channel (i.e. Google, Facebook)",
+    "fields" : [ {
+      "name" : "properties",
+      "type" : {
+        "type" : "map",
+        "values" : "string"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingAccountCredentials",
+    "doc" : "* An aggregator for channel credentials",
+    "fields" : [ {
+      "name" : "xId",
+      "type" : "string"
+    }, {
+      "name" : "googleCredentials",
+      "type" : "Credential"
+    }, {
+      "name" : "bingCredentials",
+      "type" : "Credential"
+    }, {
+      "name" : "faceBookCredentials",
+      "type" : "Credential"
+    } ],
+    "topics" : "/marketing/accountCredential/find/success, /marketing/accountCredential/update, /marketing/accountCredential/update/success"
+  }, {
+    "type" : "record",
+    "name" : "CurrencyAmount",
+    "fields" : [ {
+      "name" : "amount",
+      "type" : "double"
+    }, {
+      "name" : "code",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "StandardProductIdType",
+    "symbols" : [ "ISBN", "UPC", "EAN" ]
+  }, {
+    "type" : "record",
+    "name" : "StandardProductId",
+    "fields" : [ {
+      "name" : "type",
+      "type" : "StandardProductIdType"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "ImagePurpose",
+    "symbols" : [ "FEATURED", "GALLERY", "THUMBNAIL" ]
+  }, {
+    "type" : "enum",
+    "name" : "ConditionType",
+    "symbols" : [ "NEW", "REFURBISHED", "VERY_GOOD", "GOOD", "USED" ]
+  }, {
+    "type" : "record",
+    "name" : "ProductImage",
+    "fields" : [ {
+      "name" : "purpose",
+      "type" : "ImagePurpose"
+    }, {
+      "name" : "locationURL",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductDetails",
+    "fields" : [ {
+      "name" : "xId",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "sku",
+      "type" : "string"
+    }, {
+      "name" : "productId",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "StandardProductId"
+      } ]
+    }, {
+      "name" : "manufacturer",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "mpn",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "brand",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "msrp",
+      "type" : [ "null", "CurrencyAmount" ]
+    }, {
+      "name" : "imageURL",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ProductImage"
+      } ]
+    }, {
+      "name" : "shortDescription",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "description",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "condition",
+      "type" : [ "null", "ConditionType" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "FindProductAdvertisingTemplates",
+    "doc" : "* A message to retrieve ad templates based on a set of products",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductDetails"
+      }
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/productAdvertisingTemplate/find"
+  }, {
+    "type" : "record",
+    "name" : "MarketingProductCampaign",
+    "doc" : "* A message to create a campaign containing the given set of products",
+    "fields" : [ {
+      "name" : "campaign",
+      "type" : "MarketingCampaign"
+    }, {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductDetails"
+      }
+    } ],
+    "topics" : "/marketing/productCampaign/create, /marketing/productCampaign/create/success, /marketing/productCampaign/update, /marketing/productCampaign/update/success"
+  }, {
+    "type" : "record",
+    "name" : "MarketingCampaignTarget",
+    "doc" : "* A single campaign target option (i.e. Google, Facebook)",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingCampaignTargets",
+    "doc" : "* An array of possible campaign targets",
+    "fields" : [ {
+      "name" : "campaignTargets",
+      "type" : {
+        "type" : "array",
+        "items" : "MarketingCampaignTarget"
+      }
+    } ],
+    "topics" : "/marketing/campaignTarget/find/success"
+  }, {
+    "type" : "enum",
+    "name" : "Period",
+    "symbols" : [ "DAY", "MONTH", "YEAR" ]
+  }, {
+    "type" : "record",
+    "name" : "FindMarketingMetrics",
+    "doc" : "* A message to retrieve overview report data",
+    "fields" : [ {
+      "name" : "campaignTarget",
+      "type" : "MarketingCampaignTarget"
+    }, {
+      "name" : "period",
+      "type" : "Period"
+    }, {
+      "name" : "campaignIds",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    }, {
+      "name" : "fromDate",
+      "type" : "long"
+    }, {
+      "name" : "toDate",
+      "type" : "long"
+    }, {
+      "name" : "graphMetrics",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/metrics/find"
+  }, {
+    "type" : "record",
+    "name" : "Point",
+    "fields" : [ {
+      "name" : "x",
+      "type" : "float"
+    }, {
+      "name" : "y",
+      "type" : "float"
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "MetricDataType",
+    "symbols" : [ "NUMBER", "CURRENCY", "PERCENT" ]
+  }, {
+    "type" : "record",
+    "name" : "Metric",
+    "doc" : "* A metric object (metric has a name like clicks, conversions etc. and a data type which indicates how\r\n     * to display the metric)",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "dataType",
+      "type" : "MetricDataType"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MetricValue",
+    "doc" : "* A metric value",
+    "fields" : [ {
+      "name" : "metric",
+      "type" : "Metric"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "FindMarketingProductMetrics",
+    "doc" : "* A message to retrieve overview report data",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    }, {
+      "name" : "period",
+      "type" : "Period"
+    }, {
+      "name" : "fromDate",
+      "type" : "long"
+    }, {
+      "name" : "toDate",
+      "type" : "long"
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/productMetrics/find"
+  }, {
+    "type" : "record",
+    "name" : "MarketingProductMetrics",
+    "doc" : "* An object representing a single product performance data",
+    "fields" : [ {
+      "name" : "productName",
+      "type" : "string"
+    }, {
+      "name" : "sku",
+      "type" : "string"
+    }, {
+      "name" : "campaignName",
+      "type" : "string"
+    }, {
+      "name" : "metricValues",
+      "type" : {
+        "type" : "array",
+        "items" : "MetricValue"
+      }
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/productMetrics/find/success"
+  }, {
+    "type" : "record",
+    "name" : "Header",
+    "doc" : "* A header object",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingProductsMetrics",
+    "doc" : "* An object holding product performance report data",
+    "fields" : [ {
+      "name" : "rows",
+      "type" : {
+        "type" : "array",
+        "items" : "MarketingProductMetrics"
+      }
+    }, {
+      "name" : "productHeader",
+      "type" : "Header"
+    }, {
+      "name" : "campaignHeader",
+      "type" : "Header"
+    }, {
+      "name" : "skuHeader",
+      "type" : "Header"
+    }, {
+      "name" : "metricHeaders",
+      "type" : {
+        "type" : "map",
+        "values" : "Header"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MetricPerformance",
+    "doc" : "* Represents a single metric's performance data (possibly aggregated over a period of time) and its\r\n     * set of (x,y) data points (where x is a date, y is metric's value on x)",
+    "fields" : [ {
+      "name" : "metricValue",
+      "type" : "MetricValue"
+    }, {
+      "name" : "points",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Point"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MarketingMetrics",
+    "doc" : "* An object holding overview report data (note this holds graph data\r\n     * for all the metrics participating in the report)",
+    "fields" : [ {
+      "name" : "metricPerformances",
+      "type" : {
+        "type" : "array",
+        "items" : "MetricPerformance"
+      }
+    }, {
+      "name" : "searchId",
+      "type" : "string"
+    } ],
+    "topics" : "/marketing/metrics/find/success"
+  } ],
+  "messages" : {
+  }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" syntaxCheck="true" bootstrap="bootstrap.php">
+
+    <testsuite name="Magento Full Test">
+        <directory>ut</directory>
+        <directory>integration</directory>
+        <directory>testsuit/Core/Xcom</directory>
+    </testsuite>
+    <filter>
+        <whitelist>
+            <directory>../app/code/core/Xcom</directory>
+            <exclude>
+                <directory prefix="data-upgrade">../app/code/core/Xcom</directory>
+                <directory prefix="mysql4-">../app/code/core/Xcom</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="../tools/reports/logs/coverage.xml"/>
+    </logging>
+    <!-- <logging>
+  <log type="coverage-html" target="/home/www/xcom-ce-1.5.1/var/report" charset="UTF-8"
+       yui="true" highlight="false"
+       lowUpperBound="35" highLowerBound="70"/>
+</logging> -->
+</phpunit>

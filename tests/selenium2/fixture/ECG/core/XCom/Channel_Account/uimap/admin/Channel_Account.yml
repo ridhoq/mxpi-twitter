@@ -1,0 +1,127 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+
+#eBay ACCOUNT page
+account_channels:
+    mca: account/
+    click_xpath: 
+    title: Magento Admin
+    uimap:
+        form: &accountform
+            tabs: &ebay_tabs
+                -
+                    ebay:
+                        xpath: //a[@title='eBay']
+                        fieldsets:
+                            -
+                                ebay_account_grid:
+                                    xpath: //*[@id='content']
+                                    buttons:
+                                        search: //button[span='Search']
+                                        reset_filter: //button[span='Reset Filter']
+                                        submit: //button[span='Submit']
+                                    fields:
+                                        ebay_user_id: //input[@name='user_id']
+                                        validate_from: //input[@name='validated_at[from]']
+                                        validate_to: //input[@name='validated_at[to]']
+                                    dropdowns:
+                                        view_per_page: //select[@name='limit']
+                                        filter_environment: //a[@name='environment']
+                                        massaction: //*[@name='massaction']
+                                        filter_status: //*[@id='filter_status']
+                                        actions: //*[@class='required-entry select absolute-advice local-validation']
+                                    links:
+                                        edit_ebay_account: //tr[td[contains(text(), 'testuser_xcommerce')] and td[contains(text(), 'Sandbox')]]//a[text()='Edit']
+                                    checkboxes:
+                                        chbx: //tr[td[contains(text(), 'testuser_xcommerce')] and td[contains(text(), 'Sandbox')]]//input[@class='massaction-checkbox']
+                -
+                    google:
+                        xpath: //a[@title='Google Product Search']
+                        fieldsets:
+                            -
+                                google_account_grid:
+                                    xpath:
+        buttons: &accountButtons
+            add_account: //*[@class='scalable add']
+        messages: &accountMessages
+            success_account_saved: //li[@class='success-msg']//li[text()='The account has been saved.']
+            success_account_disabled: //li[@class='success-msg']//li[span='Total of 1 account(s) were disabled.']
+            success_account_enabled: //li[@class='success-msg']//li[span='Total of 1 account(s) were enabled.']
+            confirmation_for_enable: Are you sure you want to enable these accounts?
+            confirmation_for_disable: Are you sure you want to disable these accounts?
+            confirmation_for_disable_with_channel: "You have one or more Channel(s) associated with this Account.\nAre you sure you want to disable these accounts?"
+
+#New eBay Account page
+new_account:
+    mca: ebay_account/new/
+    title: Authorization / Magento Admin
+    uimap:
+        form: &newaccount
+                -
+                    fieldsets:
+                        -
+                            authorization:
+                                xpath: //*[@class='entry-edit']
+                                fields:
+                                    ebay_user_id: //*[@id='user_id_text']
+                                dropdowns:
+                                    environment: //*[@id='environment']
+                                buttons:
+                                    authorize_ebay: //*[@id='authorize_button']
+                                messages:
+                                    not_complete: //*[@id='error_message']
+
+        buttons: &newaccountButtons
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save: //button[span='Save']
+        messages: *accountMessages
+
+#eBay aCCOUNT tab page
+ebay_accounts:
+    mca: account/index/type/ebay/
+    title: Magento Admin
+    uimap:
+        form: *accountform
+        tabs: *ebay_tabs
+        buttons: *accountButtons
+        messages: *accountMessages
+
+#Edit eBay ACCOUNT
+edit_ebay_account:
+    mca: %urlaccount%
+    title: Authorization / Magento Admin
+    uimap:
+        form: *newaccount
+        buttons: *newaccountButtons
+        messages: *accountMessages
+
+
+
+
+

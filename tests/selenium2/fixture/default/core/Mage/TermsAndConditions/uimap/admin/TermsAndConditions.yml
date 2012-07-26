@@ -1,0 +1,81 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Sales Terms and Conditions page
+manage_sales_checkout_terms_conditions:
+    mca: checkout_agreement/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'checkout_agreement/')]
+    title: Terms and Conditions / Sales / Magento Admin
+    uimap:
+        form: &salesCheckoutTermsConditions
+            fieldsets:
+                -
+                    sales_checkout_terms_and_conditions_grid:
+                        xpath: //div[@id='agreementGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_store_view: //select[@name='store_id']
+                            filter_is_active: //select[@name='is_active']
+                        fields:
+                            page: //input[@name='page']
+                            filter_agreement_id: //input[@name='agreement_id']
+                            filter_condition_name: //input[@name='name']
+        buttons:
+            create_new_checkout_agreement: //button[span='Add New']
+        messages:
+            condition_saved: //li[normalize-space(@class)='success-msg' and contains(.,'The condition has been saved.')]
+
+# Create new condition agreement
+create_condition:
+    mca: checkout_agreement/new/
+    title: New Condition / Terms and Conditions / Sales / Magento Admin
+    uimap:
+        form: &salesNewCondition
+            fieldsets:
+                -
+                    sales_new_condition:
+                        xpath: //div[@class='entry-edit'][./form/div/h4='Terms and Conditions Information']
+                        fields:
+                            condition_name: //input[@name='name']
+                            checkbox_text: //textarea[@name='checkbox_text']
+                            content: //textarea[@name='content']
+                            content_height: //input[@name='content_height']
+                        dropdowns:
+                            status: //select[@name='is_active']
+                            show_content_as: //select[@name='is_html']
+                        multiselect:
+                            store_view: //select[@name='stores[]']
+                        required: [condition_name, status, show_content_as, store_view, checkbox_text, content]
+
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            reset: //p[@class='form-buttons']//button[span='Reset']
+            save_condition: //p[@class='form-buttons']//button[span='Save Condition']
+        messages:
+            empty_required_field: "%fieldXpath%/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"

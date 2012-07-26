@@ -1,0 +1,55 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Sales Transactions page
+manage_sales_transactions:
+    mca: sales_transactions/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'sales_transactions/')]
+    title: Transactions / Sales / Magento Admin
+    uimap:
+        form: &salesTransactions
+            fieldsets:
+                -
+                    sales_transaction_grid:
+                        xpath: //div[@id='order_transactions']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_payment_method_name: //select[@id='filter_method']
+                            filter_transaction_type: //select[@id='filter_txn_type']
+                            filter_is_closed: //select[@id='filter_is_closed']
+                        fields:
+                            page: //input[@name='page']
+                            filter_transaction_id_from: //input[@name='transaction_id[from]']
+                            filter_transaction_id_to: //input[@name='transaction_id[to]']
+                            filter_order_id: //input[@name='increment_id']
+                            filter_transaction_id: //input[@name='txn_id']
+                            filter_parent_transaction_id: //input[@name='parent_txn_id']
+                            filter_created_from: //input[@name='created_at[from]']
+                            filter_created_to: //input[@name='created_at[to]']
+

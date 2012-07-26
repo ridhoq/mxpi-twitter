@@ -1,0 +1,291 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#
+product_page:
+    mca: %productUrl%.html
+    title: %productTitle%
+    uimap:
+        form:   &productPage
+            fieldsets:
+                -
+                    product_info: &productInfo
+                        xpath: //div[@class='product-essential']
+                        buttons:
+                            add_to_cart: //button[span='Add to Cart']
+                        fields:
+                            product_qty: //input[@id='qty']
+                            grouped_subproduct_qty: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//input[@title='Qty']
+                        links:
+                            downloadable_sample: //dl[@class='item-options']/dd/a[normalize-space(text())='%samplesTitle%']
+                            add_to_wishlist: //div[@class='product-essential']//a[text()='Add to Wishlist']
+                            add_to_compare: //a[text()='Add to Compare']
+                            email_to_friend: //a[text()='Email to a Friend']
+                            first_review: //a[text()='Be the first to review this product']
+                            add_your_review: //a[text()='Add Your Review']
+                            reviews: //a[contains(text(),'Review(s)')]
+                        pageelements:
+                            product_name: //div[@class='product-name']/h1
+                            product_name_header: //div[@class='product-name']/h1[text()='%productName%']
+                            samples_title: //dl[@class='item-options']/dt[normalize-space(text())='%samplesTitle%']
+                            price_regular: //div[@class='product-shop']//span[@class='regular-price']/span[normalize-space(text())='%price%']
+                            price_excluding_tax: //div[@class='product-shop' and not(*/p[@class='special-price'])]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            price_including_tax: //div[@class='product-shop' and not(*/p[@class='special-price'])]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            price_old: //div[@class='product-shop']//p[@class='old-price']/span[normalize-space(text())='%price%']
+                            price_special: //div[@class='product-shop']//p[@class='special-price']/span[normalize-space(text())='%price%']
+                            price_special_excluding_tax: //div[@class='product-shop']//p[@class='special-price']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            price_special_inlcuding_tax: //div[@class='product-shop']//p[@class='special-price']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            # Bundle product prices
+                            price_from: //div[@class='price-box-bundle']//p[@class='price-from']//span[@class='price' and normalize-space(text())='%price%']
+                            price_from_excluding_tax: //div[@class='price-box-bundle']//p[@class='price-from']//span[@class='price-including-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_from_inlcuding_tax: //div[@class='price-box-bundle']//p[@class='price-from']//span[@class='price-including-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_to: //div[@class='price-box-bundle']//p[@class='price-to']//span[@class='price' and normalize-space(text())='%price%']
+                            price_to_excluding_tax: //div[@class='price-box-bundle']//p[@class='price-to']//span[@class='price-excluding-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_to_inlcuding_tax: //div[@class='price-box-bundle']//p[@class='price-to']//span[@class='price-including-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_as_configured: //div[@class='product-shop']//p[@class='price-as-configured']//span[@class='price' and normalize-space(text())='%price%']
+                            price_as_configured_excluding_tax: //div[@class='product-shop']//p[@class='price-as-configured']//span[@class='price-excluding-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            price_as_configured_inlcuding_tax: //div[@class='product-shop']//p[@class='price-as-configured']//span[@class='price-including-tax']/span[@class='price' and normalize-space(text())='%price%']
+                            # Grouped product prices
+                            grouped_subproduct_name: //table[@id='super-product-table']//td[text()='%subproductName%']
+                            grouped_subproduct_price_regular: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//span[@class='regular-price']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_excluding_tax: //table[@id='super-product-table']//tr[./td[text()='%subproductName%'] and not(.//p[@class='special-price'])]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_inlcuding_tax: //table[@id='super-product-table']//tr[./td[text()='%subproductName%'] and not(.//p[@class='special-price'])]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_old: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//p[@class='old-price']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_special: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//p[@class='special-price']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_special_excluding_tax: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            grouped_subproduct_price_special_inlcuding_tax: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            as_low_as: //div[@class='product-shop']//p[@class='minimal-price']/span[normalize-space(text())='%price%']
+                            qty: //input[@class='input-text qty'][@value='%price%']
+                            availability: //p[contains(text(), 'Availability:')]/span
+                            availability_param: //p[contains(text(), 'Availability:')]/span[text()='%avail%']
+                            short_description: //div[@class='short-description']//div[@class='std' and text()='%shortDescription%']
+                            ex_qty: //input[@class='input-text qty']
+                            ex_price_regular: //div[@class='product-shop']//span[@class='regular-price']
+                            ex_price_excluding_tax: //div[@class='product-shop' and not(*/p[@class='special-price'])]//div[@class='price-box']/span[@class='price-excluding-tax']/span[@class='price']
+                            ex_price_including_tax: //div[@class='product-shop' and not(*/p[@class='special-price'])]//div[@class='price-box']/span[@class='price-including-tax']/span[@class='price']
+                            ex_price_old: //div[@class='product-shop']//p[@class='old-price']
+                            ex_price_special: //div[@class='product-shop']//p[@class='special-price']/span[@class='price']
+                            ex_price_special_excluding_tax: //div[@class='product-shop']//p[@class='special-price']/span[@class='price-excluding-tax']/span[@class='price']
+                            ex_price_special_inlcuding_tax: //div[@class='product-shop']//p[@class='special-price']/span[@class='price-including-tax']/span[@class='price']
+                            ex_as_low_as: //div[@class='product-shop']//a[@class='minimal-price-link']/span[@class='price']
+                -
+                    product_custom_option_head: &productCustomOptionsHead
+                        xpath: //dt[contains(label,'%title%')]
+                        pageelements:
+                            custom_option_non_select: //span[normalize-space(text())='%price%']
+                -
+                    product_custom_option_body: &productCustomOptionsBody
+                        xpath: //dt[contains(label,'%title%')]/following-sibling::dd[1]
+                        buttons:
+                            custom_option_file: //input[@type='file']
+                        checkboxes:
+                            custom_option_check_attribute: //input
+                            custom_option_checkbox: //input[@type='checkbox']
+                        dropdowns:
+                            custom_option_select_attribute: //select
+                            custom_option_dropdown: //select
+                            custom_option_day: //select[contains(@name,'[day]')]
+                            custom_option_month: //select[contains(@id,'month')]
+                            custom_option_year: //select[contains(@id,'year')]
+                            custom_option_hour: //select[contains(@id,'hour')]
+                            custom_option_minute: //select[contains(@id,'minute')]
+                            custom_option_day_part: //select[contains(@id,'day_part')]
+                        fields:
+                            custom_option_field: //input[@type='text']
+                            custom_option_area: //textarea
+                            bundle_item_qty: /span[@class='qty-holder']/input
+                        links:
+                            downloadable_link: //a[text()='%linkTitle%']
+                        multiselects:
+                            custom_option_multiselect: //select[@multiple='multiple']
+                        radiobuttons:
+                            custom_option_radiobutton: //input[@type='radio']
+                        pageelements:
+                            custom_option_price: //span[@class='price' and normalize-space(text())='%price%']
+                            custom_option_select: //option[contains(text(),'%optionTitle% +%optionPrice%')]
+                            custom_option_check: //span[contains(text(),'+')]/span[@class='price' and contains(text(),'%optionPrice%')]
+                            #Elements relative to the control title
+                            custom_option_max_chars: //p[strong='%maxChars%']
+                            custom_option_file_ext: //p[contains(text(),'Allowed file extensions to upload') and strong='%fileExt%']
+                            custom_option_file_max_width: //p[contains(text(),'Maximum image width') and strong='%fileWidth% px.']
+                            custom_option_file_max_height: //p[contains(text(),'Maximum image height') and strong='%fileHeight% px.']
+                            #TODO verify if need xpath
+                            #custom_option_select_price: //li[.//label[normalize-space(text())='%optionTitle%']]//span[@class='price' and normalize-space(text())='%price%']
+                            #custom_option_non_select_wo_price: //dt[./label[contains(text(),'%title%')]]
+                            #custom_option_select_wo_price: //option[contains(text(),'%optionTitle%')]
+                            #custom_option_check_wo_price: //label[contains(text(),'%optionTitle%')]
+                -
+                    details: &details
+                        xpath: //div[h2[text()='Details']]
+                        pageelements:
+                            descriprion: //div[@class='std' and normalize-space(text())='%longDescription%']
+                -
+                    additional_info: &additionalInfo
+                        xpath: //div[h2[text()='Additional Information']]
+                -
+                    add_tag: &addTag
+                        xpath: //div[label[text()='Add Your Tags:']]
+                        buttons:
+                            add_tags: //button[@title='Add Tags']
+                        fields:
+                            input_new_tags: //input[@id='productTagName']
+                -
+                    related_products: &relatedProducts
+                        xpath: //div[@class='block block-related']//ol[@id='block-related']
+                        links:
+                            related_select_all: //a[text()='select all']
+                            related_product: //a[text()='%productName%']
+                            related_add_to_wishlist: /li[*//a[text()='%productName%']]//a[@class='link-wishlist']
+                        checkboxes:
+                            select_related_product: //li[*//a[text()='%productName%']]/input[@name='related_products[]']
+                        pageelements:
+                            related_price_regular: /li[*//a[text()='%productName%']]//span[@class='regular-price']/span[normalize-space(text())='%price%']
+                            related_price_old: /li[*//a[text()='%productName%']]//p[@class='old-price']//span[normalize-space(text())='%price%']
+                            related_price_special: /li[*//a[text()='%productName%']]//p[@class='special-price']//span[normalize-space(text())='%price%']
+                            related_price_excluding_tax: /li[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            related_price_including_tax: /li[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            related_price_special_excluding_tax: /li[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            related_price_special_inlcuding_tax: /li[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            related_as_low_as: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[normalize-space(text())='%price%']
+                            related_as_low_as_excl_tax: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            related_as_low_as_incl_tax: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            ex_related_price_regular: /li[*//a[text()='%productName%']]//span[@class='regular-price']
+                            ex_related_price_old: /li[*//a[text()='%productName%']]//p[@class='old-price']
+                            ex_related_price_special: /li[*//a[text()='%productName%']]//p[@class='special-price']
+                            ex_related_price_excluding_tax: /li[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']
+                            ex_related_price_including_tax: /li[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-including-tax']
+                            ex_related_price_special_excluding_tax: /li[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-excluding-tax']
+                            ex_related_price_special_inlcuding_tax: /li[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-including-tax']
+                            ex_related_as_low_as: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']
+                            ex_related_as_low_as_excl_tax: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-excluding-tax']
+                            ex_related_as_low_as_incl_tax: /li[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-including-tax']
+                -
+                    upsells: &upsells
+                        xpath: //div[@class='box-collateral box-up-sell']//table[@id='upsell-product-table']
+                        links:
+                            upsell_product: //a[text()='%productName%']
+                        pageelements:
+                            upsell_price_regular: //td[*//a[text()='%productName%']]//span[@class='regular-price']/span[normalize-space(text())='%price%']
+                            upsell_price_old: //td[*//a[text()='%productName%']]//p[@class='old-price']//span[normalize-space(text())='%price%']
+                            upsell_price_special: //td[*//a[text()='%productName%']]//p[@class='special-price']//span[normalize-space(text())='%price%']
+                            upsell_price_excluding_tax: //td[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            upsell_price_including_tax: //td[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            upsell_price_special_excluding_tax: //td[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            upsell_price_special_inlcuding_tax: //td[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            upsell_as_low_as: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[normalize-space(text())='%price%']
+                            upsell_as_low_as_excl_tax: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            upsell_as_low_as_incl_tax: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            ex_upsell_price_regular: //td[*//a[text()='%productName%']]//span[@class='regular-price']
+                            ex_upsell_price_old: //td[*//a[text()='%productName%']]//p[@class='old-price']
+                            ex_upsell_price_special: //td[*//a[text()='%productName%']]//p[@class='special-price']
+                            ex_upsell_price_excluding_tax: //td[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']
+                            ex_upsell_price_including_tax: //td[*//a[text()='%productName%'] and not(*//p[@class='special-price'])]//span[@class='price-including-tax']
+                            ex_upsell_price_special_excluding_tax: //td[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-excluding-tax']
+                            ex_upsell_price_special_inlcuding_tax: //td[*//a[text()='%productName%']]//p[@class='special-price']/span[@class='price-including-tax']
+                            ex_upsell_as_low_as: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']
+                            ex_upsell_as_low_as_excl_tax: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-excluding-tax']
+                            ex_upsell_as_low_as_incl_tax: //td[*//a[text()='%productName%']]//a[@class='minimal-price-link']/span[@class='price-including-tax']
+                -
+                    compare_products: &compareProducts
+                        xpath: //div[contains(div/strong/span,'Compare Products')]
+                        links:
+                          compare_clear_all: //a[text()='Clear All']
+                          compare_delete_product: //li[p='%productName%']/a
+                          compare_product_link: //ol[@id='compare-items']//a[text()='%productName%']
+                        buttons:
+                          compare: //button[@title='Compare']
+                        pageelements:
+                          compare_block_empty: //p[text()='You have no items to compare.']
+                          compare_block_title: //div[@class='block-title' and contains(. /strong/span, 'Compare Products')]
+
+        messages: &productMessages
+            tag_accepted_success: //li[normalize-space(@class)='success-msg' and contains(.,'%tagQty% tag(s) have been accepted for moderation.')]
+            tag_added_to_product: //li[normalize-space(@class)='success-msg' and contains(.,'Tag "%tagName%" has been added to the product.')]
+            product_added_to_comparison: //li[normalize-space(@class)='success-msg' and contains(.,'The product %productName% has been added to comparison list.')]
+            confirmation_for_removing_product_from_compare: Are you sure you would like to remove this item from the compare products?
+            confirmation_clear_all_from_compare: Are you sure you would like to remove all products from your comparison?
+            compare_list_cleared: //li[normalize-space(@class)='success-msg' and contains(.//span,'The comparison list was cleared.')]
+            product_removed_from_comparison: //li[normalize-space(@class)='success-msg' and contains(.//span,'The product %productName% has been removed from comparison list.')]
+            accepted_review: //li[normalize-space(@class)='success-msg' and contains(.//span,'Your review has been accepted for moderation.')]
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+
+product_review:
+    mca: review/product/list/id/%id%/
+    title: %productTitle%
+    uimap: &productReview
+        form:
+            fieldsets:
+                -
+                    product_info: *productInfo
+                -
+                    product_custom_option_head: *productCustomOptionsHead
+                -
+                    product_custom_option_body: *productCustomOptionsBody
+                -
+                    details: *details
+                -
+                    additional_info: *additionalInfo
+                -
+                    add_tag: *addTag
+                -
+                    related_products: *relatedProducts
+                -
+                    upsells: *upsells
+                -
+                    compare_products: *compareProducts
+                -
+                    customer_reviews:
+                        xpath: //div[@id = 'customer-reviews']
+                        dropdowns:
+                            show_per_page: //div[@class='limiter']/select
+                        fields:
+                            nickname: //input[@id='nickname_field']
+                            summary_of_review: //input[@id='summary_field']
+                            review: //textarea[@id='review_field']
+                        links:
+                            review_summary: //dt[span='%reviewerName%']/a
+                        pageelements:
+                            review_details: //dt[span='%reviewerName%']/following-sibling::dd[1]
+                            review_rate_name: //dt[span='%reviewerName%']/following-sibling::dd[1]//th[text()='%rateName%']
+                            review_rate_value: //dt[span='%reviewerName%']/following-sibling::dd[1]//tr[th='%rateName%']//div[@class='rating']
+                            review_table_rate_name: //table[@id='product-review-table']//th[text()='%rateName%']
+                            review_reviwer_name: //span[text()='%reviewerName%']
+                        buttons:
+                            submit_review: //button[span='Submit Review']
+                        radiobuttons:
+                            select_rate:  //input[@id='%rateName%_%rateId%']
+        messages: *productMessages
+
+product_review_index:
+    mca: review/product/list/id/%id%/#review-form/
+    title: %productTitle%
+    uimap: *productReview
+
+product_review_category:
+    mca: review/product/list/id/%id%/category/%categoryId%/#review-form/
+    title: %productTitle%
+    uimap: *productReview

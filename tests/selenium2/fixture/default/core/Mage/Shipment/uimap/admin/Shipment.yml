@@ -1,0 +1,122 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Manage Sales Orders and related pages
+
+# Sales Shipments page
+manage_sales_shipments:
+    mca: sales_shipment/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'sales_invoice/')]
+    title: Shipments / Sales / Magento Admin
+    uimap:
+        form: &salesShipments
+            fieldsets:
+                -
+                    sales_shipment_grid:
+                        xpath: //div[@id='sales_shipment_grid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            export: //button[span='Export']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            export_to: //select[@id='sales_shipment_grid_export']
+                            actions: //select[@id='sales_shipment_grid_massaction-select']
+                            filter_massaction: //select[@id='filter_massaction']
+                            view_per_page: //select[@name='limit']
+                        fields:
+                            page: //input[@name='page']
+                            filter_shipment_id: //input[@id='filter_increment_id']
+                            filter_shipment_created_from: //input[@name='created_at[from]']
+                            filter_shipment_created_to: //input[@name='created_at[to]']
+                            filter_order_id: //input[@name='order_increment_id']
+                            filter_order_created_from: //input[@name='order_created_at[from]']
+                            filter_order_created_to: //input[@name='order_created_at[to]']
+                            filter_shipping_name: //input[@name='shipping_name']
+                            filter_qty_from: //input[@name='total_qty[from]']
+                            filter_qty_to: //input[@name='total_qty[to]']
+
+
+create_shipment:
+    mca: sales_order_shipment/new/order_id/%id%/
+    title: New Shipment / Shipments / Sales / Magento Admin
+    uimap:
+        form: &orderShipment
+            fieldsets:
+                -
+                    order_number:
+                        xpath: //div[@class='entry-edit'][./div/a[contains(.,'Order #')]]
+                -
+                    account_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Account Information']
+                -
+                    billing_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Billing Address']
+                -
+                    shipping_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Address']
+                -
+                    payment_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Payment Information']
+                -
+                    shipping_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Information']
+                        buttons:
+                            add_tracking_number: //button[span='Add Tracking Number']
+                        dropdowns:
+                            carrier: //select[@name='tracking[%id%][carrier_code]']
+                        fields:
+                            title: //input[@name='tracking[%id%][title]']
+                            number: //input[@id='trackingN%id%']
+                        links:
+                            action: //tbody[@id='track_row_container']//tr[not(@id)][%id%]//a
+                -
+                    items_to_ship:
+                        xpath: //div[@class='grid np']
+                        fields:
+                            qty_to_ship: "//tr[contains(.,'%sku%')]//input[contains(@name,'shipment[items]')]"
+                -
+                    product_line_to_ship:
+                        xpath: //div[@class='grid np']//tbody[@class]
+                        fields:
+                            product_sku: "[%productNumber%]//tr[contains(.//@name,'shipment[items')]//*[strong='SKU:' or @class='option-value']"
+                            product_qty: "[%productNumber%]//tr[contains(.//@name,'shipment[items')]//input[contains(@name,'shipment[items]')]"
+                -
+                    shipment_comments:
+                        xpath: //div[@class='box-left entry-edit'][./div/h4='Shipment Comments']
+                        fields:
+                            shipment_comments: //textarea[@name='shipment[comment_text]']
+                -
+                    shipment_totals:
+                        xpath: //div[@class='box-right entry-edit']
+                        checkboxes:
+                            append_comments: //input[@type='checkbox' and @name='shipment[comment_customer_notify]']
+                            email_copy_of_shipment: //input[@type='checkbox' and @name='shipment[send_email]']
+                        buttons:
+                            submit_shipment: //button[span='Submit Shipment']
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            reset: //p[@class='form-buttons']//button[span='Reset']

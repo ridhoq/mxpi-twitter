@@ -1,0 +1,410 @@
+{
+  "protocol" : "ProductTaxonomyService",
+  "namespace" : "com.x.producttaxonomy.v1",
+  "types" : [ {
+    "type" : "record",
+    "name" : "Locale",
+    "doc" : "* Locale contains a combination of ISO language code, country code and optional variant",
+    "fields" : [ {
+      "name" : "language",
+      "type" : "string"
+    }, {
+      "name" : "country",
+      "type" : "string"
+    }, {
+      "name" : "variant",
+      "type" : [ "null", "string" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Error",
+    "fields" : [ {
+      "name" : "code",
+      "type" : "int"
+    }, {
+      "name" : "message",
+      "type" : "string"
+    }, {
+      "name" : "parameters",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Filter",
+    "fields" : [ {
+      "name" : "detailLevel",
+      "type" : [ "null", "int" ]
+    }, {
+      "name" : "channelIds",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ChannelValueDecoration",
+    "fields" : [ {
+      "name" : "channelId",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringAttributeValue",
+    "fields" : [ {
+      "name" : "valueId",
+      "type" : "string"
+    }, {
+      "name" : "localizedValue",
+      "type" : "string"
+    }, {
+      "name" : "channelValueDecorations",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ChannelValueDecoration"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "SearchQuery",
+    "fields" : [ {
+      "name" : "productClassId",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ChannelAttributeDecoration",
+    "fields" : [ {
+      "name" : "channelId",
+      "type" : "string"
+    }, {
+      "name" : "required",
+      "type" : [ "null", "boolean" ]
+    }, {
+      "name" : "supportsVariation",
+      "type" : [ "null", "boolean" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringEnumerator",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "channelValueDecorations",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ChannelValueDecoration"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringEnumerationAttribute",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "channelAttributeDecorations",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ChannelAttributeDecoration"
+      } ]
+    }, {
+      "name" : "description",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "defaultValue",
+      "type" : [ "null", "string", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    }, {
+      "name" : "enumerators",
+      "type" : {
+        "type" : "array",
+        "items" : "StringEnumerator"
+      }
+    }, {
+      "name" : "allowMultipleValues",
+      "type" : "boolean"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "BooleanAttribute",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "channelAttributeDecorations",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ChannelAttributeDecoration"
+      } ]
+    }, {
+      "name" : "description",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "defaultValue",
+      "type" : [ "null", "boolean" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringAttribute",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "channelAttributeDecorations",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ChannelAttributeDecoration"
+      } ]
+    }, {
+      "name" : "description",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "minLength",
+      "type" : [ "null", "int" ]
+    }, {
+      "name" : "maxLength",
+      "type" : [ "null", "int" ]
+    }, {
+      "name" : "defaultValue",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "recommendedValues",
+      "type" : {
+        "type" : "array",
+        "items" : "StringAttributeValue"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductTypeIdVersion",
+    "fields" : [ {
+      "name" : "productTypeId",
+      "type" : "string"
+    }, {
+      "name" : "version",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductClass",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "subClasses",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ProductClass"
+      } ]
+    }, {
+      "name" : "productTypeIdVersions",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ProductTypeIdVersion"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductType",
+    "fields" : [ {
+      "name" : "id",
+      "type" : "string"
+    }, {
+      "name" : "version",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "name",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "description",
+      "type" : [ "null", "string" ]
+    }, {
+      "name" : "productClassIds",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    }, {
+      "name" : "attributes",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : [ "StringAttribute", "StringEnumerationAttribute", "BooleanAttribute" ]
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductTaxonomy",
+    "fields" : [ {
+      "name" : "productClasses",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductClass"
+      }
+    }, {
+      "name" : "version",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "SearchProductType",
+    "fields" : [ {
+      "name" : "criteria",
+      "type" : "SearchQuery"
+    }, {
+      "name" : "locale",
+      "type" : [ "null", "Locale" ]
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "Filter" ]
+    } ],
+    "topic" : "/productTaxonomy/productType/search",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchProductTypeSucceeded",
+    "fields" : [ {
+      "name" : "productTypes",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductType"
+      }
+    }, {
+      "name" : "criteria",
+      "type" : "SearchQuery"
+    }, {
+      "name" : "locale",
+      "type" : "Locale"
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "Filter" ]
+    } ],
+    "topic" : "/productTaxonomy/productType/searchSucceeded",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchProductTypeFailed",
+    "fields" : [ {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "Error"
+      }
+    } ],
+    "topic" : "/productTaxonomy/productType/searchFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductTaxonomy",
+    "fields" : [ {
+      "name" : "locale",
+      "type" : [ "null", "Locale" ]
+    } ],
+    "topic" : "/productTaxonomy/get",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductTaxonomySucceeded",
+    "fields" : [ {
+      "name" : "productTaxonomy",
+      "type" : "ProductTaxonomy"
+    }, {
+      "name" : "locale",
+      "type" : "Locale"
+    } ],
+    "topic" : "/productTaxonomy/getSucceeded",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductTaxonomyFailed",
+    "fields" : [ {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "Error"
+      }
+    } ],
+    "topic" : "/productTaxonomy/getFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "ProductTaxonomyUpdated",
+    "fields" : [ {
+      "name" : "version",
+      "type" : "string"
+    } ],
+    "topic" : "/productTaxonomy/updated",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductType",
+    "fields" : [ {
+      "name" : "productTypeIds",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ]
+    }, {
+      "name" : "locale",
+      "type" : [ "null", "Locale" ]
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "Filter" ]
+    } ],
+    "topic" : "/productTaxonomy/productType/get",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductTypeSucceeded",
+    "fields" : [ {
+      "name" : "productTypes",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductType"
+      }
+    }, {
+      "name" : "locale",
+      "type" : "Locale"
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "Filter" ]
+    } ],
+    "topic" : "/productTaxonomy/productType/getSucceeded",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductTypeFailed",
+    "fields" : [ {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "Error"
+      }
+    } ],
+    "topic" : "/productTaxonomy/productType/getFailed",
+    "version" : "1.0.0"
+  } ],
+  "messages" : {
+  }
+}

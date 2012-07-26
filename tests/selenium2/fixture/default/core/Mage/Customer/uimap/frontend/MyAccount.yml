@@ -1,0 +1,197 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#
+my_orders_history:
+    mca: sales/order/history/
+    title: My Orders
+    uimap:
+        form: &orderHistory
+            fieldsets:
+                -
+                    orders:
+                        xpath: //div[@class='my-account']
+                        links:
+                            back: //p[@class='back-link']/a
+                            view_order: //tr[td='%orderId%']/td/span/a[text()='View Order']
+                            reorder: //tr[td='%orderId%']/td/span/a[text()='Reorder']
+                            next_page: //a[@title='Next']
+                        dropdowns:
+                            show_per_page: //div[@class='limiter']/select
+                        pageelements:
+                            order_total: //tr[td='%orderId%']/td[span='%orderTotal%']
+
+my_orders_history_index:
+    mca: sales/order/history/%orderHistoryParam%/
+    title: My Orders
+    uimap:
+        form: *orderHistory
+
+view_order:
+    mca: sales/order/view/order_id/%id%/
+    title: Order %orderId%
+    uimap:
+        form:
+            fieldsets:
+                -
+                    order:
+                        xpath: //div[@class='my-account']
+                        links:
+                            reorder: //a[text()='Reorder']
+                            print_order: //a[text()='Print Order']
+                            back_to_my_orders: //p[@class='back-link']/a
+                        pageelements:
+                            product_table_head: //table[@id='my-orders-table']/thead
+                            price_totals: //table[@id='my-orders-table']/tfoot
+                            product_line:  //table[@id='my-orders-table']/tbody
+
+customer_account:
+    mca: customer/account/
+    title: My Account
+    uimap:
+        form:
+            fieldsets:
+                -
+                    my_recent_tags:
+                        xpath: //div[@class='box-account box-tags']
+                        links:
+                            tag: //div[*/a[text()='%productName%']]//a[text()='%tagName%']
+                            view_all_tags: //a[text()='View All Tags']
+                -
+                    my_recent_reviews:
+                        xpath: //div[@class='box-account box-reviews']
+                        links:
+                            product_name: //ol[@id='my_recent_reviews']//a[text()='%productName%']
+                            view_all_reviews: //a[text()='View All Reviews']
+                        pageelements:
+                            product_review_rating: //div[h3='%productName%']//div[@class='rating']
+
+        messages:
+            success_registration: //li[normalize-space(@class)='success-msg' and contains(.,'Thank you for registering with')]
+            success_saved: //li[normalize-space(@class)='success-msg' and contains(.,'The account information has been saved.')]
+
+my_account_view_tag:
+    mca: tag/customer/view/tagId/%id%/
+    title: My Tags
+    uimap:
+        form:
+            fieldsets:
+                -
+                    my_tags:
+                        xpath: //div[@class='my-account']
+                        buttons:
+                            add_to_cart: //tr[*//a='%productName%']//button[span='Add to Cart']
+                            delete_tag: //p[@class='my-tag-edit']/a[span='Delete']
+                        dropdowns:
+                            show_per_page: //div[@class='pager']/div[@class='limiter']/select
+                        links:
+                            delete_tag: //p[@class='my-tag-edit']/a[span='Delete']
+                            add_to_wishlist: //tr[*//a='%productName%']//a[text()='Add to Wishlist']
+                            product_name: //h2[a='%productName%']
+                            back_to_tags_list: //p[@class='back-link']/a[@href]
+                        pageelements:
+                            tag_name_box: //p[@class='my-tag-edit' and contains(., '%tagName%')]
+        messages:
+            confirmation_for_delete: Are you sure you want to delete this tag?
+
+my_account_my_tags:
+    mca: tag/customer/
+    title: My Tags
+    uimap:
+        form: &my_tags
+            fieldsets:
+                -
+                    tags:
+                        xpath: //div[@class='my-account']
+                        links:
+                            tag_name: //a[text()='%tagName%']
+                            back_to_tags_list: //p[@class='back-link']/a[@href]
+        messages:
+            success_deleted_tag: //li[normalize-space(@class)='success-msg' and contains(.,'The tag has been deleted.')]
+
+my_account_my_tags_after_delete:
+    mca: tag/customer/index/uenc/%uenc%/
+    title: My Tags
+    uimap:
+        form: *my_tags
+        messages:
+            success_deleted_tag: //li[normalize-space(@class)='success-msg' and contains(.,'The tag has been deleted.')]
+
+my_product_reviews:
+    mca: review/customer/
+    title: My Product Reviews
+    uimap:
+        form: &productReviews
+            fieldsets:
+                -
+                    reviews:
+                        xpath: //div[@class='my-account']
+                        links:
+                            product_name: //a[text()='%productName%']
+                            view_details: //tr[//a='%productName%'']//a[text()='View Details']
+                            add_your_review: //a[text()='Add Your Review']
+                            reviews: //a[contains(text(),'Review(s)')]
+                            back: //p[@class='back-link']/a
+                        pageelements:
+                            review_details: //td[h2 = '%productName%']/following-sibling::td[2]
+                            review_date: //td[h2 = %productName%']/preceding-sibling::td
+                        dropdowns:
+                            show_per_page: //div[@class='limiter']/select
+
+my_product_reviews_details:
+    mca: review/customer/view/id/%id%/
+    title: Review Details
+    uimap:
+        form: &productReviewDetails
+            fieldsets:
+                -
+                    review_details:
+                        xpath: //div[@class='my-account']
+                        links:
+                            back_to_my_reviews: //p[@class='back-link']/a[@href]
+                        pageelements:
+                            product_name: //h2[@class='product-name']
+                            review_details: //div[@class='product-details']/dl/dd
+                            review_rate_value: //tr[th='%rateName%']//div[@class='rating']
+                            average_customer_rating: //div[@class='ratings']//div[@class='rating']
+
+product_review_details:
+    mca: review/product/view/id/%id%/
+    title: Magento Commerce
+    uimap:
+        form: &productReviewDetails
+            fieldsets:
+                -
+                    review_details:
+                        xpath: //div[@class='product-review']
+                        links:
+                            back_to_my_reviews: //p[@class='back-link']/a[@href]
+                        pageelements:
+                            product_name: //h2[@class='product-name']
+                            review_details: //div[@class='product-details']/dl/dd
+                            review_rate_value: //tr[th='%rateName%']//div[@class='rating']
+                            average_customer_rating: //div[@class='ratings']//div[@class='rating']

@@ -1,0 +1,126 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Poll Manager page
+poll_manager:
+    mca: poll/
+    click_xpath: //div[@class='nav-bar']//a[span='Polls']
+    title: Polls / CMS / Magento Admin
+    uimap:
+        form: &searchPoll
+            fieldsets:
+                -
+                    poll_grid:
+                        xpath: //div[@id='pollGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            filter_visible_in: //select[@name='visible_in']
+                            filter_status: //select[@name='closed']
+                        fields:
+                            filter_id: //input[@name='poll_id']
+                            filter_question: //input[@name='poll_title']
+                            filter_number_of_responses_from: //input[@name='votes_count[from]']
+                            filter_umber_of_responses_to: //input[@name='votes_count[to]']
+                            filter_date_posted_from: //input[@name='date_posted[from]']
+                            filter_date_posted_to: //input[@name='date_posted[to]']
+                            filter_date_closed_from: //input[@name='date_closed[from]']
+                            filter_date_closed_to: //input[@name='date_closed[to]']
+                        pageelements:
+                            poll_grid_head: //*[@id='pollGrid_table']/thead/tr[@class='headings']
+        buttons:
+            add_new_poll: //button[span='Add New Poll']
+        messages: &pollMesssages
+            success_saved_poll: //li[normalize-space(@class)='success-msg' and contains(.,'The poll has been saved.')]
+            success_deleted_poll: //li[normalize-space(@class)='success-msg' and contains(.,'The poll has been deleted.')]
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+            existing_poll: //li[normalize-space(@class)='error-msg' and contains(.,'Poll with the same question already exists.')]
+            dublicate_poll_answer: //li[normalize-space(@class)='error-msg' and contains(.,'Your answers contain duplicates.')]
+            add_answers: //li[normalize-space(@class)='error-msg' and contains(.,'Please, add some answers to this poll first.')]
+            confirmation_for_delete: Are you sure you want to do this?
+
+# Add New Poll page
+new_poll:
+    mca: poll/new/
+    title: New Poll / Polls / CMS / Magento Admin
+    uimap:
+        form: &newPollCreationForm
+            tabs:
+                -
+                    poll_information: &pollInformationTab
+                        xpath: //a[@title='Poll Information']/span
+                        fieldsets:
+                            -
+                                information:
+                                    xpath: //div[contains(div/div/h4,'Poll information')]
+                                    dropdowns:
+                                        poll_status: //select[@id='closed']
+                                    fields:
+                                        poll_question: //input[@id='poll_title']
+                                    multiselects:
+                                        visible_in: //select[@name='store_ids[]']
+                -
+                    poll_answers: &pollAnswersTab
+                        xpath: //a[@title='Poll Answers']/span
+                        fieldsets:
+                            -
+                                assigned_answers:
+                                    xpath: //div[contains(div/div/h4,'Assigned Answers')]
+                                    buttons:
+                                        add_new_answer: //button[span='Add New Answer']
+                            -
+                                assigned_answers_set:
+                                    xpath: //div[@class='fieldset fieldset-wide']
+                                    fields:
+                                        answer_title: //input[@id='answer_%answerId%']
+                                        votes_count: //input[@id='answer_votes_%answerId%']
+                                    buttons:
+                                        delete: //div[@id='poll_answer_fieldset_%answerId%']//button[span='Delete']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_poll: //button[span='Save Poll']
+        messages: *pollMesssages
+
+# Edit Poll page
+edit_poll:
+    mca: poll/edit/id/%id%/
+    title: %pollName% / Polls / CMS / Magento Admin
+    uimap:
+        form:
+            tabs:
+                -
+                    poll_information: *pollInformationTab
+                -
+                    poll_answers: *pollAnswersTab
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_poll: //button[span='Delete Poll']
+            save_poll: //button[span='Save Poll']
+        messages: *pollMesssages

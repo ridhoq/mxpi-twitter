@@ -1,0 +1,167 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Reviews and Ratings
+########################################################################################################################
+#                                                 Backend                                                              #
+########################################################################################################################
+#<----------------------------------------------------Ratings---------------------------------------------------------->
+search_rating:
+    filter_id: %noValue%
+    filter_rating_name: %noValue%
+
+rating_long_values:
+    default_value: %longValue64%
+    store_view_titles:
+        store_view_1:
+            store_view_name: Default Store View
+            store_view_title: %longValue255%
+    visible_in: %noValue%
+
+rating_special_symbols:
+    default_value: %specialValue32%
+    store_view_titles:
+        store_view_1:
+            store_view_name: Default Store View
+            store_view_title: %specialValue32%
+    visible_in: %noValue%
+
+default_rating:
+    default_value: test_rating_title_%randomize%
+    store_view_titles:
+        store_view_1:
+            store_view_name: Default Store View
+            store_view_title: Default Store View Title(%randomize%)
+        store_view_2: %noValue%
+    visible_in: %noValue%
+
+rating_required_fields:
+    default_value: test_rating_title_%randomize%
+
+#<----------------------------------------------------Reviews---------------------------------------------------------->
+search_fields: &searchReview
+    filter_id: %noValue%
+    filter_created_on_from: %noValue%
+    filter_created_on_to: %noValue%
+    filter_status: %noValue%
+    filter_title: %noValue%
+    filter_nickname: %noValue%
+    filter_review: %noValue%
+    filter_visible_in: %noValue%
+    filter_product_name: %noValue%
+    filter_product_sku: %noValue%
+
+search_review_guest:
+    <<: *searchReview
+    filter_type: Guest
+
+search_review_customer:
+    <<: *searchReview
+    filter_type: Customer
+
+search_review_admin:
+    <<: *searchReview
+    filter_type: Administrator
+
+product_to_search: &productToSearch
+    filter_id: %noValue%
+    filter_name: %noValue%
+    filter_sku: %noValue%
+    filter_price_from: %noValue%
+    filter_price_to: %noValue%
+    filter_qty_from: %noValue%
+    filter_qty_to: %noValue%
+    filter_status: %noValue%
+    filter_websites: %noValue%
+
+review_required_without_rating:
+    product_to_review: *productToSearch
+    product_rating: %noValue%
+    status: Approved
+    visible_in: Default Store View
+    nickname: test_nickname_%randomize%
+    summary_of_review: %randomize% test summary for review
+    review: %randomize% some test review
+
+review_required_with_rating:
+    product_to_review: *productToSearch
+    product_rating:
+        rating_1:
+            rating_name:  %noValue%
+            stars: 3
+    status: Approved
+    visible_in: Default Store View
+    nickname: test_nickname_%randomize%
+    summary_of_review: %randomize% test summary for review
+    review: %randomize% some test review
+
+admin_review_long_values:
+    product_to_review: *productToSearch
+    product_rating: %noValue%
+    status: Approved
+    visible_in: Default Store View
+    nickname: %longValue50%
+    summary_of_review: %longValue255%
+    review: %longValue255%
+
+admin_review_special_symbols:
+    product_to_review: *productToSearch
+    product_rating: %noValue%
+    status: Approved
+    visible_in: Default Store View
+    nickname: %specialValue32%
+    summary_of_review: %specialValue32%
+    review: %specialValue32%
+########################################################################################################################
+#                                                  Frontend                                                            #
+########################################################################################################################
+review_with_rating:
+    nickname: %randomize% Nickname
+    summary_of_review: %randomize% Review Summary
+    review: %randomize% Review Text
+    ratings:
+        rating_1:
+            rating_name: %noValue%
+            stars: 3
+
+frontend_review:
+    nickname: %randomize% Test Nickname
+    summary_of_review: %randomize% Test Review Summary
+    review: %randomize% Test Review Text
+    ratings: %noValue%
+
+review_long_values:
+    nickname: %longValue50%
+    summary_of_review: %longValue255%
+    review: %longValue255%
+    ratings: %noValue%
+
+review_special_symbols:
+    nickname: %specialValue32%
+    summary_of_review: %specialValue32%
+    review: %specialValue32%
+    ratings: %noValue%

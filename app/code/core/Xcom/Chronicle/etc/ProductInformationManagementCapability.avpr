@@ -1,0 +1,851 @@
+{
+  "protocol" : "ProductInformationManagementCapability",
+  "namespace" : "com.x.pim.v1",
+  "types" : [ {
+    "type" : "record",
+    "name" : "CurrencyAmount",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "amount",
+      "type" : "string"
+    }, {
+      "name" : "code",
+      "type" : "string",
+      "doc" : "Three letter currency code/ISO 4217"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Error",
+    "namespace" : "com.x.ocl",
+    "doc" : "This record is used to return error information",
+    "fields" : [ {
+      "name" : "code",
+      "type" : "string",
+      "doc" : "Numeric value that indicates the type of error"
+    }, {
+      "name" : "message",
+      "type" : [ "null", "string" ],
+      "doc" : "Key whose value is a human displayable version of this error",
+      "default" : null
+    }, {
+      "name" : "parameters",
+      "type" : [ "null", {
+        "type" : "map",
+        "values" : "string"
+      } ],
+      "doc" : "* Parameters for the message. Parameter place holders identified \n\t\t * using the format in java.text.MessageFormat. The key of the map is\n\t\t * the placeholder string, and the value is the string that replaces it.",
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "Operator",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Operator",
+    "symbols" : [ "EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_EQUALS", "LESS_THAN", "LESS_THAN_EQUALS" ]
+  }, {
+    "type" : "record",
+    "name" : "Predicate",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Predicate",
+    "fields" : [ {
+      "name" : "field",
+      "type" : "string"
+    }, {
+      "name" : "operator",
+      "type" : "Operator"
+    }, {
+      "name" : "values",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "SortOrder",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Sort order",
+    "symbols" : [ "ASCENDING", "DESCENDING" ]
+  }, {
+    "type" : "record",
+    "name" : "OrderBy",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Order by",
+    "fields" : [ {
+      "name" : "field",
+      "type" : "string"
+    }, {
+      "name" : "sortOrder",
+      "type" : "SortOrder"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Query",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Query that corresponds to the report",
+    "fields" : [ {
+      "name" : "fields",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ],
+      "doc" : "* Fields to be selected. These will be 'columns' in the report.\r\n\t\t * When not specified, the entire object should be returned.",
+      "default" : null
+    }, {
+      "name" : "predicates",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Predicate"
+      } ],
+      "doc" : "* Specifies how an entity should be filtered. Essentially, the WHERE\r\n\t\t * clause.  Don't specify any predicate if the query is for all.",
+      "default" : null
+    }, {
+      "name" : "ordering",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "OrderBy"
+      } ],
+      "doc" : "* Fields on which the report should be sorted. The order is significant -\r\n\t\t * first field determines primary sort order, the next determines\r\n\t\t * secondary sort order, etc.",
+      "default" : null
+    }, {
+      "name" : "numberItems",
+      "type" : [ "null", "long" ],
+      "doc" : "* Restrict the number of items return to this many or less.\r\n\t\t * When null, it is assumed there is no restriction",
+      "default" : null
+    }, {
+      "name" : "startItemIndex",
+      "type" : [ "null", "long" ],
+      "doc" : "* Return the results starting from this zero-based index.\r\n\t\t * When null, items will be returned started from the first item",
+      "default" : null
+    }, {
+      "name" : "numberItemsFound",
+      "type" : [ "null", "long" ],
+      "doc" : "* The total number of items found by the data provider.\r\n\t\t * This field will be filled in by the result provider when supported.\r\n\t\t * Requester should not fill this out.",
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "GenericItem",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "value",
+      "type" : [ "null", "boolean", "int", "long", "float", "double", "string", "bytes", {
+        "type" : "array",
+        "items" : "GenericItem"
+      }, {
+        "type" : "map",
+        "values" : "GenericItem"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "QueryResultItem",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "fields",
+      "type" : {
+        "type" : "array",
+        "items" : "GenericItem"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "QueryResult",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Query Result\r\n\t * The result of a query can be null, in which case the Error structure\r\n\t * will indicate the error.\r\n\t * In the successful case, the result is zero or more rows, each containing\r\n\t * one or more columns. The order of the columns would correspond to the\r\n\t * order of the fields in the Query record.\r\n\t * While the type of column supported is a string now, this can be enhanced\r\n\t * by adding additional types to the inner union.",
+    "fields" : [ {
+      "name" : "data",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "QueryResultItem"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Locale",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "language",
+      "type" : "string"
+    }, {
+      "name" : "country",
+      "type" : "string"
+    }, {
+      "name" : "variant",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "FilterType",
+    "symbols" : [ "SUMMARY", "FULL_DETAILS" ]
+  }, {
+    "type" : "record",
+    "name" : "LocalizedMeasurement",
+    "fields" : [ {
+      "name" : "locale",
+      "type" : [ "null", "com.x.ocl.Locale" ],
+      "default" : null
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "unit",
+      "type" : "string"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "LocalizedNameValue",
+    "fields" : [ {
+      "name" : "locale",
+      "type" : [ "null", "com.x.ocl.Locale" ],
+      "default" : null
+    }, {
+      "name" : "name",
+      "type" : "string"
+    }, {
+      "name" : "value",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "LocalizedString",
+    "fields" : [ {
+      "name" : "locale",
+      "type" : [ "null", "com.x.ocl.Locale" ],
+      "default" : null
+    }, {
+      "name" : "stringValue",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "BooleanAttributeValue",
+    "fields" : [ {
+      "name" : "value",
+      "type" : "boolean"
+    }, {
+      "name" : "attributeName",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "LocalizedString"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringAttributeValue",
+    "fields" : [ {
+      "name" : "attributeNameValue",
+      "type" : {
+        "type" : "array",
+        "items" : "LocalizedNameValue"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "MeasurementAttributeValue",
+    "fields" : [ {
+      "name" : "localizedMeasurementValue",
+      "type" : {
+        "type" : "array",
+        "items" : "LocalizedMeasurement"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "StringEnumerationAttributeValue",
+    "fields" : [ {
+      "name" : "valueId",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    }, {
+      "name" : "attributeValues",
+      "type" : [ "null", {
+        "type" : "map",
+        "values" : "StringAttributeValue"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductTypeStringAttributeValue",
+    "fields" : [ {
+      "name" : "valueId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "attributeValue",
+      "type" : [ "null", "StringAttributeValue" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "CustomAttributeValue",
+    "fields" : [ {
+      "name" : "value",
+      "type" : [ "null", "BooleanAttributeValue", "StringAttributeValue", "MeasurementAttributeValue" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductTypeAttributeValue",
+    "fields" : [ {
+      "name" : "value",
+      "type" : [ "ProductTypeStringAttributeValue", "StringEnumerationAttributeValue", "BooleanAttributeValue" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ProductAttributeValue",
+    "fields" : [ {
+      "name" : "attributeId",
+      "type" : "string"
+    }, {
+      "name" : "attributeValue",
+      "type" : [ "ProductTypeAttributeValue", "CustomAttributeValue" ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Image",
+    "fields" : [ {
+      "name" : "url",
+      "type" : "string"
+    }, {
+      "name" : "height",
+      "type" : [ "null", "int" ],
+      "default" : null
+    }, {
+      "name" : "width",
+      "type" : [ "null", "int" ],
+      "default" : null
+    }, {
+      "name" : "label",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "altText",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "SKU",
+    "fields" : [ {
+      "name" : "sku",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "productId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "MSRP",
+      "type" : [ "null", "com.x.ocl.CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "MAP",
+      "type" : [ "null", "com.x.ocl.CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "variationAttributeValues",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ProductAttributeValue"
+      } ],
+      "default" : null
+    }, {
+      "name" : "images",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Image"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Product",
+    "fields" : [ {
+      "name" : "id",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "productTypeId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "name",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "shortDescription",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "description",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "GTIN",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "brand",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "manufacturer",
+      "type" : [ "null", "LocalizedString" ],
+      "default" : null
+    }, {
+      "name" : "MPN",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "MSRP",
+      "type" : [ "null", "com.x.ocl.CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "MAP",
+      "type" : [ "null", "com.x.ocl.CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "images",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Image"
+      } ],
+      "default" : null
+    }, {
+      "name" : "attributes",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "ProductAttributeValue"
+      } ],
+      "default" : null
+    }, {
+      "name" : "variationFactors",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ],
+      "default" : null
+    }, {
+      "name" : "skuList",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "SKU"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "ProductIdType",
+    "symbols" : [ "PRODUCT_ID", "SKU" ]
+  }, {
+    "type" : "record",
+    "name" : "ProductIdentifier",
+    "fields" : [ {
+      "name" : "value",
+      "type" : "string"
+    }, {
+      "name" : "type",
+      "type" : "ProductIdType"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "CreateProduct",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/create",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "ProductCreated",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/created",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CreateProductFailed",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/product/createFailed",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CreateSKU",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/create",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SKUCreated",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/created",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CreateSKUFailed",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/sku/createFailed",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProduct",
+    "fields" : [ {
+      "name" : "ids",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductIdentifier"
+      }
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "FilterType" ],
+      "default" : null
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    } ],
+    "topic" : "/pim/product/get",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductSucceeded",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "FilterType" ],
+      "default" : null
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    } ],
+    "topic" : "/pim/product/getSucceeded",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "GetProductFailed",
+    "fields" : [ {
+      "name" : "ids",
+      "type" : {
+        "type" : "array",
+        "items" : "ProductIdentifier"
+      }
+    }, {
+      "name" : "filter",
+      "type" : [ "null", "FilterType" ],
+      "default" : null
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/product/getFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchProduct",
+    "fields" : [ {
+      "name" : "query",
+      "type" : "com.x.ocl.Query",
+      "queryType" : "com.x.pim.v1.Product"
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    } ],
+    "topic" : "/pim/product/search",
+    "version" : "1.0.1"
+  }, {
+    "type" : "record",
+    "name" : "SearchProductSucceeded",
+    "fields" : [ {
+      "name" : "query",
+      "type" : "com.x.ocl.Query"
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    }, {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/searchSucceeded",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchProductFailed",
+    "fields" : [ {
+      "name" : "query",
+      "type" : "com.x.ocl.Query"
+    }, {
+      "name" : "locales",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "com.x.ocl.Locale"
+      } ],
+      "default" : null
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/product/searchFailed",
+    "version" : "1.0.1"
+  }, {
+    "type" : "record",
+    "name" : "UpdateProduct",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/update",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "ProductUpdated",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/updated",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "UpdateProductFailed",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/product/updateFailed",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "UpdateSKU",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/update",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SKUUpdated",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/updated",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "UpdateSKUFailed",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/sku/updateFailed",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "DeleteProduct",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/delete",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "ProductDeleted",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    } ],
+    "topic" : "/pim/product/deleted",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "DeleteProductFailed",
+    "fields" : [ {
+      "name" : "products",
+      "type" : {
+        "type" : "array",
+        "items" : "Product"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/product/deleteFailed",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "DeleteSKU",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/delete",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SKUDeleted",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    } ],
+    "topic" : "/pim/sku/deleted",
+    "version" : "2.0.0"
+  }, {
+    "type" : "record",
+    "name" : "DeleteSKUFailed",
+    "fields" : [ {
+      "name" : "skus",
+      "type" : {
+        "type" : "array",
+        "items" : "SKU"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/pim/sku/deleteFailed",
+    "version" : "2.0.0"
+  } ],
+  "messages" : {
+  }
+}

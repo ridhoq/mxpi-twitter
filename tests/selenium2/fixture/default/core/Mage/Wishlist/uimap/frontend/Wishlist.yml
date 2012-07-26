@@ -1,0 +1,180 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#
+my_wishlist:
+    mca: wishlist/
+    click_xpath: //ul[@class='links']//a[contains(text(),'My Wishlist')]
+    title: My Wishlist
+    uimap: &myWishlist
+        form:
+            fieldsets:
+                -
+                    wishlist:
+                        xpath: //div[@class='my-wishlist']
+                        buttons:
+                            add_to_cart: //table[@id='wishlist-table']//tr[contains(.,'%productName%')]//button[span='Add to Cart']
+                            share_wishlist: //button[span='Share Wishlist']
+                            add_all_to_cart: //button[span='Add All to Cart']
+                            update_wishlist: //button[span='Update Wishlist']
+                        fields:
+                            comment: //tr[contains(.,'%productName%')]//textarea[@title='Comment']
+                            qty: //tr[contains(.,'%productName%')]//input[@class='input-text qty']
+                        links:
+                            product_name: //table[@id='wishlist-table']//a[text()='%productName%']
+                            view_details: //tr[contains(.,'%productName%')]//a[@class='details']
+                            edit: //tr[contains(.,'%productName%')]//a[text()='Edit']
+                            remove_item: //tr[contains(.,'%productName%')]//a[@title='Remove Item']
+                            remove_item_generic: //a[@title='Remove Item']
+                        pageelements:
+                            product_table_head: //table[@id='wishlist-table']/thead
+                            no_items: /p[normalize-space(text())='You have no items in your wishlist.']
+                            price_regular: //tr[contains(.,'%productName%')]//span[@class='regular-price']/span[@class='price' and normalize-space(text())='%price%']
+                            price_old: //tr[contains(.,'%productName%')]//p[@class='old-price']/span[@class='price']
+                            price_special: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price']
+                            price_excluding_tax: //tr[contains(.,'%productName%') and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            price_including_tax: //tr[contains(.,'%productName%') and not(*//p[@class='special-price'])]//span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            price_special_excluding_tax: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price-excluding-tax']/span[normalize-space(text())='%price%']
+                            price_special_inlcuding_tax: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price-including-tax']/span[normalize-space(text())='%price%']
+                            #price_as_low_as:  TODO - cannot add because of the current bug MAGE-4112
+                            ex_price_regular: //tr[contains(.,'%productName%')]//span[@class='regular-price']/span[@class='price']
+                            ex_price_old: //tr[contains(.,'%productName%')]//p[@class='old-price']/span[@class='price']
+                            ex_price_special: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price']
+                            ex_price_excluding_tax: //tr[contains(.,'%productName%') and not(*//p[@class='special-price'])]//span[@class='price-excluding-tax']/span[@class='price']
+                            ex_price_including_tax: //tr[contains(.,'%productName%') and not(*//p[@class='special-price'])]//span[@class='price-including-tax']/span[@class='price']
+                            ex_price_special_excluding_tax: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price-excluding-tax']/span[@class='price']
+                            ex_price_special_inlcuding_tax: //tr[contains(.,'%productName%')]//p[@class='special-price']/span[@class='price-including-tax']/span[@class='price']
+                            #ex_price_as_low_as:  TODO - cannot add because of the current bug MAGE-4112
+                            added_on: //tr[contains(.,'%productName%')]//span[@class='nobr']
+        messages: &wishlistMessages
+            successfully_added_product: //li[normalize-space(@class)='success-msg' and contains(.,'%productName% has been added to your wishlist.')]
+            successfully_added_products: //li[normalize-space(@class)='success-msg' and contains(.,'%productQty% product(s) have been added to shopping cart:')]
+            successfully_shared_wishlist: //li[normalize-space(@class)='success-msg' and contains(.,'Your Wishlist has been shared.')]
+            specify_product_links: //li[normalize-space(@class)='error-msg' and contains(.,'Please specify product link(s) for "%productName%".')]
+            specify_product_options: //li[normalize-space(@class)='error-msg' and contains(.,' option(s) for "%productName%".')]
+            confirmation_for_delete: Are you sure you want to remove this product from your wishlist?
+            invalid_emails: //li[@class='error-msg' and contains(.,'Please input a valid email address.')]
+            invalid_emails_js: //div[@class='validation-advice' and @id='advice-validate-emails-email_address' and contains(.,'Please enter a valid email addresses, separated by commas. For example johndoe@domain.com, johnsmith@domain.com.')]
+            required_emails: //div[@class='validation-advice' and @id='advice-required-entry-email_address' and text()='This is a required field.']
+        links:
+            back: //p[@class='back-link']/a[contains(.,'Back')]
+
+my_wishlist_index:
+    mca: wishlist/index/
+    title: My Wishlist
+    uimap: *myWishlist
+
+wishlist_configure_product:
+    mca: wishlist/index/configure/id/%id%/
+    title: %productName%
+    uimap:
+        form:   &productPage
+            fieldsets:
+                -
+                    product_info: &productInfo
+                        xpath: //div[@class='product-essential']
+                        buttons:
+                            add_to_cart: //button[span='Add to Cart']
+                        fields:
+                            product_qty: //input[@id='qty']
+                            grouped_subproduct_qty: //table[@id='super-product-table']//tr[./td[text()='%subproductName%']]//input[@title='Qty']
+                        links:
+                            downloadable_sample: //dl[@class='item-options']/dd/a[normalize-space(text())='%samplesTitle%']
+                            add_to_wishlist: //div[@class='product-essential']//a[text()='Add to Wishlist']
+                            add_to_compare: //a[text()='Add to Compare']
+                            email_to_friend: //a[text()='Email to a Friend']
+                            first_review: //a[text()='Be the first to review this product']
+                            add_your_review: //a[text()='Add Your Review']
+                            reviews: //a[contains(text(),'Review(s)')]
+                        pageelements:
+                            product_name: //div[@class='product-name']/h1
+                            product_name_header: //div[@class='product-name']/h1[text()='%productName%']
+                            samples_title: //dl[@class='item-options']/dt[normalize-space(text())='%samplesTitle%']
+                            price_regular: //div[@class='product-shop']//span[@class='regular-price']/span[normalize-space(text())='%price%']
+                            qty: //input[@class='input-text qty'][@value='%price%']
+                            availability: //p[contains(text(), 'Availability:')]/span
+                            availability_param: //p[contains(text(), 'Availability:')]/span[text()='%avail%']
+                            short_description: //div[@class='short-description']//div[@class='std' and text()='%shortDescription%']
+                -
+                    product_custom_options: &productCustomOptions
+                        xpath: //div[@id='product-options-wrapper']
+                        buttons:
+                            custom_option_file: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//input[@type='file']
+                        checkboxes:
+                            custom_option_check_attribute: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//input
+                            custom_option_checkbox: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//li[.//label[contains(text(),'%optionTitle%')]]//input[@type='checkbox']
+                        dropdowns:
+                            custom_option_select_attribute:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select
+                            custom_option_day:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@name,'[day]')]
+                            custom_option_month:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@id,'month')]
+                            custom_option_year:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@id,'year')]
+                            custom_option_hour:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@id,'hour')]
+                            custom_option_minute:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@id,'minute')]
+                            custom_option_day_part:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[contains(@id,'day_part')]
+                            custom_option_dropdown:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select
+                        fields:
+                            custom_option_field: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//input[@type='text']
+                            custom_option_area: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//textarea
+                            bundle_item_qty: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]/span[@class='qty-holder']/input
+                        links:
+                            downloadable_link: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//li[.//label[contains(text(),'%optionTitle%')]]//a[text()='%linkTitle%']
+                        multiselects:
+                            custom_option_multiselect:  //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//select[@multiple='multiple']
+                        radiobuttons:
+                            custom_option_radiobutton: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//li[.//label[contains(text(),'%optionTitle%')]]//input[@type='radio']
+                        pageelements:
+                            custom_option_price: //dt[./label[contains(text(),'%title%')]]//span[@class='price' and normalize-space(text())='%price%']
+                            custom_option_select_price: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//li[.//label[normalize-space(text())='%optionTitle%']]//span[@class='price' and normalize-space(text())='%price%']
+                            custom_option_non_select: //dt[./label[contains(text(),'%title%') and //span[normalize-space(text())='%price%']]]
+                            custom_option_non_select_wo_price: //dt[./label[contains(text(),'%title%')]]
+                            custom_option_select: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//option[contains(text(),'%optionTitle% +%optionPrice%')]
+                            custom_option_select_wo_price: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//option[contains(text(),'%optionTitle%')]
+                            custom_option_check: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//label[contains(text(),'%optionTitle%')]//span[contains(text(),'+')]/span[@class='price' and contains(text(),'%optionPrice%')]
+                            custom_option_check_wo_price: //dt[./label[contains(text(),'%title%')]]/following-sibling::dd[1]//label[contains(text(),'%optionTitle%')]
+                            # elements relative to the control title
+                            custom_option_max_chars: "/following-sibling::dd[1]//p[@class='note' and //strong='%maxChars%']"
+                            custom_option_file_ext: /following-sibling::dd[1]//p[contains(text(),'Allowed file extensions to upload') and ./strong='%fileExt%']
+                            custom_option_file_max_width: /following-sibling::dd[1]//p[contains(text(),'Maximum image width') and ./strong='%fileWidth% px.']
+                            custom_option_file_max_height: /following-sibling::dd[1]//p[contains(text(),'Maximum image height') and ./strong='%fileHeight% px.']
+
+share_wishlist:
+    mca: wishlist/index/share/
+    title: Wishlist Sharing
+    uimap:
+        form:
+            fieldsets:
+                -
+                    sharing_info:
+                        xpath: //form[@id='form-validate']
+                        buttons:
+                            share_wishlist: //button[@title='Share Wishlist']
+                        fields:
+                            emails: //textarea[@name='emails']
+                            message: //textarea[@name='message']
+                        links:
+                            back: //p[@class='back-link']/a[contains(.,'Back')]
+        messages: *wishlistMessages

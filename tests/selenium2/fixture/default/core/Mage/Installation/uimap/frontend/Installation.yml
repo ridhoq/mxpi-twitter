@@ -1,0 +1,140 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+license_agreement:
+    mca: install/
+    title: Magento Installation Wizard
+    uimap:
+        form: &licenseAgreement
+            fieldsets:
+                -
+                    license_agreement:
+                        xpath: //div[@id='main']/form
+                        buttons:
+                            continue: //button[span='Continue']
+                        checkboxes:
+                            agree_conditions: //input[@id='agree']
+
+localization:
+    mca: install/wizard/locale/
+    title: Magento Installation Wizard
+    uimap:
+        form: &localization
+            fieldsets:
+                -
+                    local_settings:
+                        xpath: //fieldset[contains(@class,'group-select')]
+                        dropdowns:
+                            locale: //select[@id='locale']
+                            timezone: //select[@id='timezone']
+                            currency: //select[@id='currency']
+        buttons:
+            continue: //button[span='Continue']
+
+configuration:
+    mca: install/wizard/config/%config%
+    title: Magento Installation Wizard
+    uimap:
+        form: &localization
+            fieldsets:
+                -
+                    database_connection:
+                        xpath: //fieldset[contains(legend,'Connection')]
+                        dropdowns:
+                            database_type: //select[@name='config[db_model]']
+                        fields:
+                            host: //input[@id='host']
+                            database_name: //input[@id='dbname']
+                            user_name: //input[@id='user']
+                            user_password: //input[@id='password']
+                            tables_prefix: //input[@id='prefix']
+                -
+                    web_access_option:
+                        xpath: //fieldset[legend='Web access options']
+                        fields:
+                            base_url: //input[@id='base_url']
+                            admin_path: //input[@id='admin_frontname']
+                            secure_base_url: "//ul[@id='use_secure_options' and not(@style='display: none;')]//input[@id='secure_base_url']"
+                        checkboxes:
+                            enable_charts: //input[@id='enable_charts']
+                            skip_base_url_validation: //input[@id='skip_base_url_validation']
+                            use_rewrites: //input[@id='use_rewrites']
+                            use_secure: //input[@id='use_secure']
+                            run_admin_with_ssl: "//ul[@id='use_secure_options' and not(@style='display: none;')]//input[@id='use_secure_admin']"
+                            skip_secure_url_validation: "//ul[@id='use_secure_options' and not(@style='display: none;')]//input[@id='skip_url_validation']"
+                -
+                    session_storage_options:
+                        xpath: //fieldset[legend='Session Storage Options']
+                        dropdowns:
+                            session_save_in: //select[@id='session_save']
+        buttons:
+            continue: //button[span='Continue']
+        messages:
+            empty_required_field: "%fieldXpath%/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+            invalid_base_url: //div[@id='advice-validate-url-base_url']
+            invalid_admin_path: //div[@id='advice-validate-data-admin_frontname']
+            invalid_tables_prefix: //div[@id='advice-validate-data-prefix']
+            database_connection_error: //li[normalize-space(@class)='error-msg' and contains(.,'Database connection error.')]
+
+create_admin_account:
+    mca: install/wizard/administrator/
+    title: Magento Installation Wizard
+    uimap:
+        form: &createAdminAccount
+            fieldsets:
+                -
+                    personal_info:
+                        xpath: //fieldset[contains(legend,'Personal Information')]
+                        fields:
+                            first_name: //input[@id='firstname']
+                            last_name: //input[@id='lastname']
+                            email: //input[@id='email_address']
+                -
+                    login_info:
+                        xpath: //fieldset[legend='Login Information']
+                        fields:
+                            user_name: //input[@id='username']
+                            password: //input[@id='password']
+                            confirm_password: //input[@id='confirmation']
+                -
+                    encryption_key:
+                        xpath: //fieldset[legend='Encryption Key']
+                        fields:
+                            encryption_key: //input[@id='encryption_key']
+        buttons:
+            continue: //button[span='Continue']
+        messages:
+            empty_required_field: "%fieldXpath%/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+
+end_installation:
+    mca: install/wizard/end/
+    title: Magento Installation Wizard
+    uimap:
+        form: &finishInstallation
+        buttons:
+            go_to_frontend: //button[span='Go to Frontend']
+            go_to_backend: //button[span='Go to Backend']

@@ -1,0 +1,167 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Catalog Price Rules pages
+manage_catalog_price_rules:
+    mca: promo_catalog/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'promo_catalog/')]
+    title: Catalog Price Rules / Promotions / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    rule_search_grid:
+                        xpath: //div[@id='promo_catalog_grid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_status: //select[@name='is_active']
+                        fields:
+                            page: //input[@name='page']
+                            filter_rule_id: //input[@name='rule_id']
+                            filter_rule_name: //input[@name='name']
+                            filter_date_start_from: //input[@name='from_date[from]']
+                            filter_date_start_to: //input[@name='from_date[to]']
+                            filter_date_expired_from: //input[@name='to_date[from]']
+                            filter_date_expired_to: //input[@name='to_date[to]']
+                        pageelements:
+                            grid_head: //div[@id='promo_catalog_grid']//tr[@class='headings']
+        buttons:
+            add_new_rule: //button[span='Add New Rule']
+            apply_rules: //button[span='Apply Rules']
+        messages: &catalogPriceRuleMessages
+            success_saved_rule: //li[@class='success-msg']//span[text() = 'The rule has been saved.']
+            success_deleted_rule: //li[normalize-space(@class)='success-msg' and contains(.,'The rule has been deleted.')]
+            success_applied_rule: //li[@class='success-msg']//span[text() = 'The rules have been applied.']
+            notification_message: //li[normalize-space(@class)='notice-msg' and contains(.,'There are rules that have been changed but were not applied. Please, click Apply Rules in order to see immediate effect in the catalog.')]
+            invalid_url_key_with_numbers_only: //li[normalize-space(@class)='error-msg' and contains(.,'The page URL key cannot consist only of numbers.')]
+            invalid_rule_data: //li[normalize-space(@class)='error-msg' and contains(.,'An error occurred while saving the rule data. Please review the log and try again.')]
+            invalid_discount_amount: "//div[@id='advice-validate-not-negative-number-rule_discount_amount' and not(contains(@style,'display: none;'))]"
+            invalid_sub_discount_amount: "//div[@id='advice-validate-not-negative-number-rule_sub_discount_amount' and not(contains(@style,'display: none;'))]"
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+            confirmation_for_delete: Are you sure you want to do this?
+
+add_new_rule:
+    mca: promo_catalog/new/
+    title: New Rule / Catalog Price Rules / Promotions / Magento Admin
+    uimap:
+        form: &addNewRule
+            tabs:
+                -
+                    rule_information:
+                        xpath: //a[@title='Rule Information']/span
+                        fieldsets:
+                            -
+                                rule_information_fieldset:
+                                    xpath: //div[@id='rule_base_fieldset']
+                                    fields:
+                                        rule_name: //input[@name='name']
+                                        description: //textarea[@name='description']
+                                        from_date: //input[@id='rule_from_date']
+                                        to_date: //input[@id='rule_to_date']
+                                        priority: //input[@id='rule_sort_order']
+                                    dropdowns:
+                                        status: //select[@name='is_active']
+                                    multiselects:
+                                        customer_groups: //select[@name='customer_group_ids[]']
+                                        websites: //select[@id='rule_website_ids']
+                -
+                    rule_conditions:
+                        xpath: //a[@title='Conditions']/span
+                        fieldsets:
+                            -
+                                apply_for_rule_condition:
+                                    xpath: //*[@id='rule_conditions_fieldset']
+                                    links:
+                                        conditions_aggregator: //*[@id='rule_conditions_fieldset']/span[.//select[contains(@name,'aggregator')]]/a
+                                        conditions_value: //*[@id='rule_conditions_fieldset']/span[.//select[contains(@name,'value')]]/a
+                                    dropdowns:
+                                        select_conditions_aggregator: //select[@name='rule[conditions][1][aggregator]']
+                                        select_conditions_value: //select[@name='rule[conditions][1][value]']
+                            -
+                                rule_condition_item:
+                                    xpath: //ul[@id='conditions__%condition%__children']
+                                    links:
+                                        condition_new_child: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_add')]
+                                        condition_operator: //ul[@id='conditions__%condition%__children']/li[%key%]//span[contains(.//@name,'operator')]/a
+                                        condition_value: //ul[@id='conditions__%condition%__children']/li[%key%]/span[contains(.//@name,'value')]/a
+                                        condition_aggregator: //ul[@id='conditions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'aggregator')]]/a
+                                        condition_attribute: //ul[@id='conditions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'attribute')]]/a
+                                        open_chosser: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_chooser_trigger')]
+                                        confirm_choise: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_apply')]
+                                        root_category: //ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: //*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                                    dropdowns:
+                                        select_condition_new_child: /li[%key%]//span[contains(.//@src,'rule_component_add')]//select
+                                        select_condition_operator: /li[%key%]/span[contains(.//@name,'operator')]//select
+                                        select_condition_value: /li[%key%]/span[contains(.//@name,'value')]//select
+                                        select_condition_aggregator: /li[%key%]/span[.//select[contains(@name,'aggregator')]]//select
+                                        select_condition_attribute: /li[%key%]/span[.//select[contains(@name,'attribute')]]//select
+                                    fields:
+                                        type_condition_value: /li[%key%]/span[contains(.//@name,'value')]//input
+                                    buttons:
+                                        delete_rule_condition_item: /li[%key%]//img[contains(@src,'rule_component_remove')]
+                                    checkboxes:
+                                        category: //div[contains(a/span,'%categoryName%')]//input
+                -
+                    rule_actions:
+                        xpath: //a[@title='Actions']/span
+                        fieldsets:
+                            -
+                                actions_fieldset:
+                                    xpath: //div[@id='promo_catalog_edit_tabs_actions_section_content']
+                                    fields:
+                                        discount_amount: //input[@name='discount_amount']
+                                        sub_discount_amount: //input[@id='rule_sub_discount_amount']
+                                    dropdowns:
+                                        apply: //select[@name='simple_action']
+                                        sub_apply: //select[@id='rule_sub_simple_action']
+                                        enable_discount_to_subproducts: //select[@name='sub_is_enable']
+                                        stop_further_rules_processing: //select[@name='stop_rules_processing']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_and_apply: //button[span='Save and Apply']
+            save_rule: //button[span='Save Rule']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: *catalogPriceRuleMessages
+
+edit_rule_page:
+    mca: promo_catalog/edit/id/%id%/
+    title: %elementTitle% / Catalog Price Rules / Promotions / Magento Admin
+    uimap:
+        form: *addNewRule
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_and_apply: //button[span='Save and Apply']
+            save_rule: //button[span='Save Rule']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+            delete_rule: //button[span='Delete Rule']
+        messages: *catalogPriceRuleMessages

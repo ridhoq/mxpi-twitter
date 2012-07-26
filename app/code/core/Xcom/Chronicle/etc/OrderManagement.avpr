@@ -1,0 +1,833 @@
+{
+  "protocol" : "OrderManagement",
+  "namespace" : "com.x.ordermanagement.v1",
+  "types" : [ {
+    "type" : "record",
+    "name" : "CurrencyAmount",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "amount",
+      "type" : "string"
+    }, {
+      "name" : "code",
+      "type" : "string",
+      "doc" : "Three letter currency code/ISO 4217"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "DateRange",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "startDate",
+      "type" : "string",
+      "doc" : "Date Time Format: ISO 8601"
+    }, {
+      "name" : "endDate",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Name",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "firstName",
+      "type" : "string"
+    }, {
+      "name" : "middleName",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "lastName",
+      "type" : "string"
+    }, {
+      "name" : "prefix",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "suffix",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "EmbeddedObject",
+    "namespace" : "com.x.ocl",
+    "doc" : "This record is used to embed specific types inside another type.",
+    "fields" : [ {
+      "name" : "fullName",
+      "type" : "string"
+    }, {
+      "name" : "schemaVersion",
+      "type" : "string"
+    }, {
+      "name" : "schemaUri",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "payload",
+      "type" : "bytes"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Email",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "emailAddress",
+      "type" : "string"
+    }, {
+      "name" : "extension",
+      "type" : [ "null", "EmbeddedObject" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "PhoneType",
+    "namespace" : "com.x.ocl",
+    "symbols" : [ "HOME", "MOBILE", "WORK", "FAX" ]
+  }, {
+    "type" : "record",
+    "name" : "Phone",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "number",
+      "type" : "string"
+    }, {
+      "name" : "type",
+      "type" : "PhoneType"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Address",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "street1",
+      "type" : "string"
+    }, {
+      "name" : "street2",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "street3",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "street4",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "city",
+      "type" : "string"
+    }, {
+      "name" : "county",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "stateOrProvince",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "postalCode",
+      "type" : "string"
+    }, {
+      "name" : "country",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "CommonPaymentMethod",
+    "namespace" : "com.x.ocl",
+    "symbols" : [ "AMEX", "CASH_ON_DELIVERY", "CHECK", "CREDIT_CARD", "DINERS", "DISCOVER", "ESCROW", "INTEGRATED_MERCHANT_CREDIT_CARD", "MASTERCARD", "MONEY_ORDER", "MONEY_TRANSFER", "MONEYBOOKERS", "PAYMATE", "PAYMENT_ON_PICKUP", "PAYPAL", "PROPAY", "VISA" ]
+  }, {
+    "type" : "record",
+    "name" : "PaymentMethod",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "method",
+      "type" : [ "CommonPaymentMethod", "string" ]
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "OrderStatus",
+    "namespace" : "com.x.ocl",
+    "symbols" : [ "NEW", "ON_HOLD", "BACKORDERED", "READYTOSHIP", "SHIPPED", "PROCESSING_RETURN", "EXCHANGED", "CANCELLED", "COMPLETED" ]
+  }, {
+    "type" : "record",
+    "name" : "GiftTag",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "from",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "to",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "message",
+      "type" : "string"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "OrderCustomerInfo",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "channelAssignedCustomerId",
+      "type" : "string"
+    }, {
+      "name" : "email",
+      "type" : [ "null", "Email" ],
+      "default" : null
+    }, {
+      "name" : "name",
+      "type" : [ "null", "Name" ],
+      "default" : null
+    }, {
+      "name" : "phone",
+      "type" : [ "null", "Phone" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "OrderPaymentInfo",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "method",
+      "type" : "PaymentMethod"
+    }, {
+      "name" : "datePaid",
+      "type" : "string",
+      "doc" : "Date Time Format: ISO 8601"
+    }, {
+      "name" : "transactionId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "transactionStatus",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "PromotionalDiscount",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "code",
+      "type" : "string"
+    }, {
+      "name" : "description",
+      "type" : "string"
+    }, {
+      "name" : "amount",
+      "type" : "CurrencyAmount"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "OrderItemPriceInfo",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "cost",
+      "type" : "CurrencyAmount",
+      "doc" : "The price after all adjustments are applied"
+    }, {
+      "name" : "originalPrice",
+      "type" : "CurrencyAmount"
+    }, {
+      "name" : "insuranceCost",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "taxAmount",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "discountAmount",
+      "type" : [ "null", "CurrencyAmount" ],
+      "doc" : "Total discount amount summarized from all PromotionalDiscount.",
+      "default" : null
+    }, {
+      "name" : "discounts",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "PromotionalDiscount"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "ShipTo",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "name",
+      "type" : "Name"
+    }, {
+      "name" : "address",
+      "type" : "Address"
+    }, {
+      "name" : "giftTag",
+      "type" : [ "null", "GiftTag" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "ShippingServiceType",
+    "namespace" : "com.x.ocl",
+    "symbols" : [ "MerchantShipped", "DropShipped", "ShippingService" ]
+  }, {
+    "type" : "record",
+    "name" : "TrackingDetail",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "trackingNumber",
+      "type" : "string"
+    }, {
+      "name" : "carrier",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "service",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "serviceType",
+      "type" : [ "null", "ShippingServiceType" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Shipment",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "shipmentId",
+      "type" : "string",
+      "doc" : "only need to be unique to the order like 1, 2, 3, etc..."
+    }, {
+      "name" : "shipToAddress",
+      "type" : "Address"
+    }, {
+      "name" : "cost",
+      "type" : "CurrencyAmount"
+    }, {
+      "name" : "discountAmount",
+      "type" : [ "null", "CurrencyAmount" ],
+      "doc" : "Total discount amount summarized from all PromotionalDiscount.",
+      "default" : null
+    }, {
+      "name" : "discounts",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "PromotionalDiscount"
+      } ],
+      "default" : null
+    }, {
+      "name" : "additionalCost",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "packagingHandlingCost",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "surcharge",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "deliveryWindow",
+      "type" : [ "null", "DateRange" ],
+      "default" : null
+    }, {
+      "name" : "shippingWindow",
+      "type" : [ "null", "DateRange" ],
+      "default" : null
+    }, {
+      "name" : "trackingDetail",
+      "type" : [ "null", "TrackingDetail" ],
+      "default" : null
+    }, {
+      "name" : "recipientName",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "OrderItem",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "itemId",
+      "type" : [ "null", "string" ],
+      "doc" : "Unique identifier that is assigned by the originator of this order once created.",
+      "default" : null
+    }, {
+      "name" : "productSku",
+      "type" : "string"
+    }, {
+      "name" : "quantity",
+      "type" : "int"
+    }, {
+      "name" : "status",
+      "type" : "string"
+    }, {
+      "name" : "offerId",
+      "type" : [ "null", "string" ],
+      "doc" : "The id of the offered item on the sales channel where this order originated",
+      "default" : null
+    }, {
+      "name" : "offerUrl",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "price",
+      "type" : "OrderItemPriceInfo"
+    }, {
+      "name" : "destination",
+      "type" : [ "null", "ShipTo" ],
+      "doc" : "If specified, override the destination defined on the Order header",
+      "default" : null
+    }, {
+      "name" : "shipmentId",
+      "type" : [ "null", "string" ],
+      "doc" : "Defined once the item is shipped.",
+      "default" : null
+    }, {
+      "name" : "extension",
+      "type" : [ "null", "EmbeddedObject" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Order",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "orderNumber",
+      "type" : [ "null", "string" ],
+      "doc" : "Unique identifier that is assigned by the originator of this order once created.",
+      "default" : null
+    }, {
+      "name" : "purchaseOrder",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "dateOrdered",
+      "type" : "string",
+      "doc" : "Date Time Format: ISO 8601",
+      "Query" : "true"
+    }, {
+      "name" : "source",
+      "type" : "string",
+      "doc" : "The channel where this order originated."
+    }, {
+      "name" : "sourceId",
+      "type" : "string"
+    }, {
+      "name" : "status",
+      "type" : "OrderStatus",
+      "Query" : "true"
+    }, {
+      "name" : "customer",
+      "type" : "OrderCustomerInfo"
+    }, {
+      "name" : "billingAddress",
+      "type" : [ "null", "Address" ],
+      "default" : null
+    }, {
+      "name" : "totalAmount",
+      "type" : "CurrencyAmount",
+      "doc" : "Summary of various amounts"
+    }, {
+      "name" : "totalInsuranceCost",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "totalTaxAmount",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "totalDiscountAmount",
+      "type" : [ "null", "CurrencyAmount" ],
+      "default" : null
+    }, {
+      "name" : "paymentMethod",
+      "type" : [ "null", "OrderPaymentInfo" ],
+      "default" : null
+    }, {
+      "name" : "orderItems",
+      "type" : {
+        "type" : "array",
+        "items" : "OrderItem"
+      }
+    }, {
+      "name" : "destination",
+      "type" : [ "null", "ShipTo" ],
+      "doc" : "if not provided, use ShipTo info on OrderItem",
+      "default" : null
+    }, {
+      "name" : "shipments",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Shipment"
+      } ],
+      "default" : null
+    }, {
+      "name" : "extension",
+      "type" : [ "null", "EmbeddedObject" ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "Operator",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Operator",
+    "symbols" : [ "EQUALS", "NOT_EQUALS", "GREATER_THAN", "GREATER_THAN_EQUALS", "LESS_THAN", "LESS_THAN_EQUALS" ]
+  }, {
+    "type" : "record",
+    "name" : "Predicate",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Predicate",
+    "fields" : [ {
+      "name" : "field",
+      "type" : "string"
+    }, {
+      "name" : "operator",
+      "type" : "Operator"
+    }, {
+      "name" : "values",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "SortOrder",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Sort order",
+    "symbols" : [ "ASCENDING", "DESCENDING" ]
+  }, {
+    "type" : "record",
+    "name" : "OrderBy",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Order by",
+    "fields" : [ {
+      "name" : "field",
+      "type" : "string"
+    }, {
+      "name" : "sortOrder",
+      "type" : "SortOrder"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Query",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Query that corresponds to the report",
+    "fields" : [ {
+      "name" : "fields",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "string"
+      } ],
+      "doc" : "* Fields to be selected. These will be 'columns' in the report.\r\n\t\t * When not specified, the entire object should be returned.",
+      "default" : null
+    }, {
+      "name" : "predicates",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "Predicate"
+      } ],
+      "doc" : "* Specifies how an entity should be filtered. Essentially, the WHERE\r\n\t\t * clause.  Don't specify any predicate if the query is for all.",
+      "default" : null
+    }, {
+      "name" : "ordering",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "OrderBy"
+      } ],
+      "doc" : "* Fields on which the report should be sorted. The order is significant -\r\n\t\t * first field determines primary sort order, the next determines\r\n\t\t * secondary sort order, etc.",
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "GenericItem",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "value",
+      "type" : [ "null", "boolean", "int", "long", "float", "double", "string", "bytes", {
+        "type" : "array",
+        "items" : "GenericItem"
+      }, {
+        "type" : "map",
+        "values" : "GenericItem"
+      } ]
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "QueryResultItem",
+    "namespace" : "com.x.ocl",
+    "fields" : [ {
+      "name" : "fields",
+      "type" : {
+        "type" : "array",
+        "items" : "GenericItem"
+      }
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "QueryResult",
+    "namespace" : "com.x.ocl",
+    "doc" : "* Query Result\r\n\t * The result of a query can be null, in which case the Error structure\r\n\t * will indicate the error.\r\n\t * In the successful case, the result is zero or more rows, each containing\r\n\t * one or more columns. The order of the columns would correspond to the\r\n\t * order of the fields in the Query record.\r\n\t * While the type of column supported is a string now, this can be enhanced\r\n\t * by adding additional types to the inner union.",
+    "fields" : [ {
+      "name" : "data",
+      "type" : [ "null", {
+        "type" : "array",
+        "items" : "QueryResultItem"
+      } ],
+      "default" : null
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "Error",
+    "namespace" : "com.x.ocl",
+    "doc" : "This record is used to return error information",
+    "fields" : [ {
+      "name" : "code",
+      "type" : "string",
+      "doc" : "Numeric value that indicates the type of error"
+    }, {
+      "name" : "message",
+      "type" : [ "null", "string" ],
+      "doc" : "Key whose value is a human displayable version of this error",
+      "default" : null
+    }, {
+      "name" : "parameters",
+      "type" : [ "null", {
+        "type" : "map",
+        "values" : "string"
+      } ],
+      "doc" : "* Parameters for the message. Parameter place holders identified \n\t\t * using the format in java.text.MessageFormat. The key of the map is\n\t\t * the placeholder string, and the value is the string that replaces it.",
+      "default" : null
+    } ]
+  }, {
+    "type" : "enum",
+    "name" : "TaxabilityType",
+    "symbols" : [ "TAXABLE", "NONTAXABLE", "EXEMPT", "DEFERRED" ]
+  }, {
+    "type" : "record",
+    "name" : "Tax",
+    "fields" : [ {
+      "name" : "taxability",
+      "type" : "TaxabilityType"
+    }, {
+      "name" : "taxType",
+      "type" : "string"
+    }, {
+      "name" : "taxableAmount",
+      "type" : "com.x.ocl.CurrencyAmount"
+    }, {
+      "name" : "calculatedTax",
+      "type" : "com.x.ocl.CurrencyAmount"
+    }, {
+      "name" : "effectiveRate",
+      "type" : "double"
+    } ]
+  }, {
+    "type" : "record",
+    "name" : "CreateOrder",
+    "doc" : "* Not required to be implemented if the capability only allow order creation\r\n\t * through a UI channel.",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    }, {
+      "name" : "accountId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ],
+    "topic" : "/order/create",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "OrderCreated",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    }, {
+      "name" : "accountId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    } ],
+    "topic" : "/order/created",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CreateOrderFailed",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    }, {
+      "name" : "accountId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/order/createFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CancelOrder",
+    "fields" : [ {
+      "name" : "orderNumbers",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    } ],
+    "topic" : "/order/cancel",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "OrderCancelled",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    } ],
+    "topic" : "/order/cancelled",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CancelOrderFailed",
+    "fields" : [ {
+      "name" : "orderNumbers",
+      "type" : {
+        "type" : "array",
+        "items" : "string"
+      }
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/order/cancelFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchOrders",
+    "fields" : [ {
+      "name" : "query",
+      "type" : [ "null", "com.x.ocl.Query" ],
+      "default" : null,
+      "QueryType" : "com.x.ocl.Order"
+    } ],
+    "topic" : "/order/search",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchOrdersSucceeded",
+    "fields" : [ {
+      "name" : "orders",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Order"
+      }
+    }, {
+      "name" : "query",
+      "type" : [ "null", "com.x.ocl.Query" ],
+      "default" : null
+    } ],
+    "topic" : "/order/searchSucceeded",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "SearchOrdersFailed",
+    "fields" : [ {
+      "name" : "query",
+      "type" : [ "null", "com.x.ocl.Query" ],
+      "default" : null
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "/order/searchFailed",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "OrderShipmentShipped",
+    "fields" : [ {
+      "name" : "accountId",
+      "type" : [ "null", "string" ],
+      "default" : null
+    }, {
+      "name" : "orderNumber",
+      "type" : "string"
+    }, {
+      "name" : "shipmentId",
+      "type" : "string"
+    }, {
+      "name" : "trackingDetails",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.TrackingDetail"
+      }
+    } ],
+    "topic" : "/order/shipment/shipped",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "OrderPaymentCaptured",
+    "doc" : "An Order Management capability will be listening for this event.",
+    "fields" : [ {
+      "name" : "orderNumber",
+      "type" : "string"
+    }, {
+      "name" : "paymentInfo",
+      "type" : "com.x.ocl.OrderPaymentInfo"
+    } ],
+    "topic" : "/order/payment/captured",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CalculateOrderTax",
+    "doc" : "* OPTIONAL: For external tax calculation, an OrderMgmt cap. will request a\r\n\t * 3rd party capability to calculate the tax on an order.",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    } ],
+    "topic" : "order/tax/calculate",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "OrderTaxCalculated",
+    "fields" : [ {
+      "name" : "orderNumber",
+      "type" : "string"
+    }, {
+      "name" : "tax",
+      "type" : "Tax"
+    } ],
+    "topic" : "order/tax/calculated",
+    "version" : "1.0.0"
+  }, {
+    "type" : "record",
+    "name" : "CalculateOrderTaxFailed",
+    "fields" : [ {
+      "name" : "order",
+      "type" : "com.x.ocl.Order"
+    }, {
+      "name" : "errors",
+      "type" : {
+        "type" : "array",
+        "items" : "com.x.ocl.Error"
+      }
+    } ],
+    "topic" : "order/tax/calculateFailed",
+    "version" : "1.0.0"
+  } ],
+  "messages" : {
+  }
+}

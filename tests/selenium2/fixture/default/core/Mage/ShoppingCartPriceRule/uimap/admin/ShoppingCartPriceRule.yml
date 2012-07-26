@@ -1,0 +1,219 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Promotions and related pages
+# 'Shopping Cart Price Rules' page
+manage_shopping_cart_price_rules:
+    mca: promo_quote/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'promo_quote')]
+    title: Shopping Cart Price Rules / Promotions / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    rule_search_grid:
+                        xpath: //div[@id='promo_quote_grid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        fields:
+                            filter_id: //input[@id='rule_id']
+                            filter_rule_name: //input[@name='name']
+                            filter_coupon_code: //input[@name='coupon_code']
+                            filter_date_start_from: //input[@name='from_date[from]']
+                            filter_date_start_to: //input[@name='from_date[to]']
+                            filter_date_expire_from: //input[@name='to_date[from]']
+                            filter_date_expire_to: //input[@name='to_date[to]']
+                            filter_priority: //input[@name='sort_order']
+                            page: //input[@name='page']
+                        dropdowns:
+                            filter_status: //select[@name='is_active']
+                            view_per_page: //select[@name='limit']
+                        pageelements:
+                            grid_head: //table[@id='promo_quote_grid_table']//tr[@class='headings']
+        buttons:
+            add_new_rule: //button[span='Add New Rule']
+        messages: &ruleMessages
+            success_deleted_rule: //li[normalize-space(@class)='success-msg' and contains(.,'The rule has been deleted.')]
+            success_saved_rule: //li[normalize-space(@class)='success-msg' and contains(.,'The rule has been saved.')]
+            error_coupon_code_exists: //li[normalize-space(@class)='error-msg' and contains(.,'Coupon with the same code already exists.')]
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+            enter_valid_number: "//div[@id='advice-validate-not-negative-number-%fieldId%' and not(contains(@style,'display: none;'))]"
+            confirmation_for_delete: Are you sure you want to do this?
+
+create_shopping_cart_price_rule:
+    mca: promo_quote/new/
+    title: New Rule / Magento Admin
+    uimap:
+        form: &createNewRule
+            tabs:
+                -
+                    rule_information:
+                        xpath: //a[@title='Rule Information']/span
+                        fieldsets:
+                            -
+                                general_information:
+                                    xpath: //div[@id='rule_base_fieldset']
+                                    fields:
+                                        rule_name: //input[@name='name']
+                                        description: //textarea[@name='description']
+                                        coupon_code: //input[@name='coupon_code']
+                                        uses_per_coupon: //input[@name='uses_per_coupon']
+                                        uses_per_customer: //input[@name='uses_per_customer']
+                                        from_date: //input[@name='from_date']
+                                        to_date: //input[@name='to_date']
+                                        priority: //input[@name='sort_order']
+                                    dropdowns:
+                                        status: //select[@name='is_active']
+                                        coupon: //select[@name='coupon_type']
+                                        public_in_rss_feed: //select[@name='is_rss']
+                                    multiselects:
+                                        customer_groups: //select[@name='customer_group_ids[]']
+                                        websites: //select[@id='rule_website_ids']
+                -
+                    rule_conditions:
+                        xpath: //a[@title='Conditions']/span
+                        fieldsets:
+                            -
+                                apply_for_rule_condition:
+                                    xpath: //*[@id='rule_conditions_fieldset']
+                                    links:
+                                        conditions_aggregator: //*[@id='rule_conditions_fieldset']/span[.//select[contains(@name,'aggregator')]]/a
+                                        conditions_value: //*[@id='rule_conditions_fieldset']/span[.//select[contains(@name,'value')]]/a
+                                    dropdowns:
+                                        select_conditions_aggregator: //select[@name='rule[conditions][1][aggregator]']
+                                        select_conditions_value: //select[@name='rule[conditions][1][value]']
+                            -
+                                rule_condition_item:
+                                    xpath: //ul[@id='conditions__%condition%__children']
+                                    links:
+                                        condition_new_child: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_add')]
+                                        condition_operator: //ul[@id='conditions__%condition%__children']/li[%key%]//span[contains(.//@name,'operator')]/a
+                                        condition_value: //ul[@id='conditions__%condition%__children']/li[%key%]/span[contains(.//@name,'value')]/a
+                                        condition_aggregator: //ul[@id='conditions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'aggregator')]]/a
+                                        condition_attribute: //ul[@id='conditions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'attribute')]]/a
+                                        open_chosser: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_chooser_trigger')]
+                                        confirm_choise: //ul[@id='conditions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_apply')]
+                                        root_category: //ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: //*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                                    dropdowns:
+                                        select_condition_new_child: /li[%key%]//span[contains(.//@src,'rule_component_add')]//select
+                                        select_condition_operator: /li[%key%]/span[contains(.//@name,'operator')]//select
+                                        select_condition_value: /li[%key%]/span[contains(.//@name,'value')]//select
+                                        select_condition_aggregator: /li[%key%]/span[.//select[contains(@name,'aggregator')]]//select
+                                        select_condition_attribute: /li[%key%]/span[.//select[contains(@name,'attribute')]]//select
+                                    fields:
+                                        type_condition_value: /li[%key%]/span[contains(.//@name,'value')]//input
+                                    buttons:
+                                        delete_rule_condition_item: /li[%key%]//img[contains(@src,'rule_component_remove')]
+                                    checkboxes:
+                                        category: //div[contains(a/span,'%categoryName%')]//input
+                -
+                    rule_actions:
+                        xpath: //a[@title='Actions']/span
+                        fieldsets:
+                            -
+                                update_prices_using_the_following_information:
+                                    xpath: //div[@id='rule_action_fieldset']
+                                    fields:
+                                        discount_amount: //input[@name='discount_amount']
+                                        maximum_qty_discount_is_applied_to: //input[@name='discount_qty']
+                                        discount_qty_step: //input[@name='discount_step']
+                                    dropdowns:
+                                        apply: //select[@name='simple_action']
+                                        apply_to_shipping_amount: //select[@name='apply_to_shipping']
+                                        free_shipping: //select[@name='simple_free_shipping']
+                                        stop_further_rules_processing: //select[@name='stop_rules_processing']
+                            -
+                                apply_for_rule_action:
+                                    xpath: //*[@id='rule_actions_fieldset']
+                                    links:
+                                        actions_aggregator: //*[@id='rule_actions_fieldset']/span[.//select[contains(@name,'aggregator')]]/a
+                                        actions_value: //*[@id='rule_actions_fieldset']/span[.//select[contains(@name,'value')]]/a
+                                    dropdowns:
+                                        select_actions_aggregator: //select[@name='rule[actions][1][aggregator]']
+                                        select_actions_value: //select[@name='rule[actions][1][value]']
+                            -
+                                rule_action_item:
+                                    xpath: //ul[@id='actions__%condition%__children']
+                                    links:
+                                        action_new_child: //ul[@id='actions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_add')]
+                                        action_operator: //ul[@id='actions__%condition%__children']/li[%key%]//span[contains(.//@name,'operator')]/a
+                                        action_value: //ul[@id='actions__%condition%__children']/li[%key%]/span[contains(.//@name,'value')]/a
+                                        action_aggregator: //ul[@id='actions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'aggregator')]]/a
+                                        action_attribute: //ul[@id='actions__%condition%__children']/li[%key%]/span[.//select[contains(@name,'attribute')]]/a
+                                        open_chosser: //ul[@id='actions__%condition%__children']/li[%key%]//img[contains(@src,'rule_chooser_trigger')]
+                                        confirm_choise: //ul[@id='actions__%condition%__children']/li[%key%]//img[contains(@src,'rule_component_apply')]
+                                        root_category: //ul/div/li[contains(div/a/span,'%rootName%')]
+                                        sub_category: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                                        expand_category: //*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                                    dropdowns:
+                                        select_action_new_child: /li[%key%]//span[contains(.//@src,'rule_component_add')]//select
+                                        select_action_operator: /li[%key%]/span[contains(.//@name,'operator')]//select
+                                        select_action_value: /li[%key%]/span[contains(.//@name,'value')]//select
+                                        select_action_aggregator: /li[%key%]/span[.//select[contains(@name,'aggregator')]]//select
+                                        select_action_attribute: /li[%key%]/span[.//select[contains(@name,'attribute')]]//select
+                                    fields:
+                                        type_action_value: /li[%key%]/span[contains(.//@name,'value')]//input
+                                    buttons:
+                                        delete_rule_action_item: /li[%key%]//img[contains(@src,'rule_component_remove')]
+                                    checkboxes:
+                                        category: //div[contains(a/span,'%categoryName%')]//input
+                -
+                    rule_labels:
+                        xpath: //a[@title='Labels']/span
+                        fieldsets:
+                            -
+                                default_label:
+                                    xpath: //div[@id='rule_default_label_fieldset']
+                                    fields:
+                                        default_rule_label: //input[@name='store_labels[0]']
+                            -
+                                store_view_specific_labels:
+                                    xpath: //div[@id='rule_store_labels_fieldset']
+                                    fields:
+                                        store_view_rule_label: //tr[td='%storeViewName%']//input
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_rule: //button[span='Save Rule']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: *ruleMessages
+
+edit_shopping_cart_price_rule:
+    mca: promo_quote/edit/id/%id%/
+    title: %elementTitle% / Magento Admin
+    uimap:
+        form: *createNewRule
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_rule: //button[span='Delete Rule']
+            save_rule: //button[span='Save Rule']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: *ruleMessages

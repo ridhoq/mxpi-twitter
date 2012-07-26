@@ -1,0 +1,244 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# 'Static Blocks' page
+manage_cms_static_blocks:
+    mca: cms_block/
+    click_xpath: //div[@class='nav-bar']//a[span='Static Blocks']
+    title: Static Blocks / CMS / Magento Admin
+    uimap:
+        form: &searchStaticBlocksGrid
+            fieldsets:
+                -
+                    static_blocks_grid:
+                        xpath: //div[@id='cmsBlockGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            filter_store_view: //select[@name='store_id']
+                            filter_block_status: //select[@name='is_active']
+                        fields:
+                            filter_block_title: //input[@name='title']
+                            filter_block_identifier: //input[@name='identifier']
+                            filter_block_created_from: //input[@name='creation_time[from]']
+                            filter_block_created_to: //input[@name='creation_time[to]']
+                            filter_block_modified_from: //input[@name='update_time[from]']
+                            filter_block_modified_to: //input[@name='update_time[to]']
+                        pageelements:
+                            static_block_grid_head: //*[@id='cmsBlockGrid_table']//thead/tr[@class='headings']
+        buttons:
+            add_new_block: //button[span='Add New Block']
+        messages: &staticBlockMessages
+             success_saved_block: //li[normalize-space(@class)='success-msg' and contains(.,'The block has been saved.')]
+             success_deleted_block: //li[normalize-space(@class)='success-msg' and contains(.,'The block has been deleted.')]
+             no_records_found: //td[normalize-space(@class)='empty-text a-center' and text()='No records found.']
+             confirmation_for_delete: Are you sure you want to do this?
+             empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+             specify_valid_xml_identifier: "//div[@id='advice-validate-xml-identifier-block_identifier' and not(contains(@style,'display: none'))]"
+             already_existing_identifier: "//li[@class='error-msg' and contains(.,'A block identifier with the same properties already exists in the selected store.')]"
+             widget_validation_message: //div[@id='widget_window']//div[@class='validation-advice']
+
+# 'Edit Block %blockName%' page
+edit_cms_static_block:
+    mca: cms_block/edit/block_id/%id%/
+    title: %blockName% / Static Blocks / CMS / Magento Admin
+    uimap:
+        form: &editStaticBlockForm
+            fieldsets:
+                -
+                    general_information:
+                        xpath: //div[@class='entry-edit']
+                        buttons:
+                            show_hide_editor: //button[@id='toggleblock_content']
+                        dropdowns:
+                            block_status: //select[@name='is_active']
+                        fields:
+                            block_title: //input[@name='title']
+                            block_identifier: //input[@name='identifier']
+                        multiselects:
+                            store_view: //select[@id='block_store_id']
+                -
+                    simple_editor:
+                        xpath: //div[@id='buttonsblock_content']/parent::td
+                        buttons:
+                            insert_widget: "//button[@class='scalable add-widget plugin' and not(@style='display: none;')]"
+                            insert_image: "//button[@class='scalable add-image plugin' and not(@style='display: none;')]"
+                            insert_variable: "//button[@class='scalable add-variable plugin' and not(@style='display: none;')]"
+                        fields:
+                            simple_editor_content: "//textarea[@name='content' and not(contains(@style,'display: none;'))]"
+                            simple_editor_disabled: "//textarea[@name='content' and contains(@style,'display: none;')]"
+                            rich_editor: //span[@id='block_content_parent']
+                -
+#                   TODO: add elements if needed
+                    wysiwyg_editor_buttons:
+                        xpath: //span[@id='block_content_parent']
+                        links:
+                            wysiwyg_insert_widget: //a[@id='block_content_magentowidget']/img
+                            wysiwyg_insert_variable: //a[@id='block_content_magentovariable']/img
+
+                -
+#                   TODO: add elements if needed
+                    wysiwyg_editor_content:
+                        xpath: //iframe[@id='block_content_ifr']
+
+                -
+                    widget_insertion:
+                        xpath: //div[@id='widget_window']
+                        dropdowns:
+                            widget_type: //select[@name='widget_type']
+                            template: //select[@name='parameters[template]']
+                        fields:
+                            anchor_custom_text: //input[@name='parameters[anchor_text]']
+                            anchor_custom_title: //input[@name='parameters[title]']
+                            number_of_products_to_display: //input[@name='parameters[products_count]']
+                            number_of_products_to_display_compared_and_viewed: //input[@name='parameters[page_size]']
+                            cache_lifetime: //input[@name='parameters[cache_lifetime]']
+                        buttons:
+                            submit_widget_insert: //button[span='Insert Widget']
+                            select_option: //div[div/h3='Widget Insertion']//button[contains(span,'Select')]
+                            close_widget_insertion: //div[@id='widget_window_close']
+                        pageelements:
+                            chosen_option: //label[@class='widget-option-label']
+                            chosen_option_verify: //label[@class='widget-option-label' and normalize-space(text())='%elementName%']
+                -
+                    select_page:
+                        xpath: //div[@id='widget-chooser' and //div[text()='Select Page...']]
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='chooser_id']
+                            filter_title: //input[@name='chooser_title']
+                            filter_url_key: //input[@name='chooser_identifier']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_layout: //select[@name='chooser_root_template']
+                            filter_status: //select[@name='chooser_is_active']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            close_page_insertion: //div[@id='widget-chooser_close']
+                        pageelements:
+                            product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+                -
+                    select_block:
+                        xpath: //div[@id='widget-chooser' and //div[text()='Select Block...']]
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='chooser_id']
+                            filter_title: //input[@name='chooser_title']
+                            filter_identifier: //input[@name='chooser_identifier']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_status: //select[@name='chooser_is_active']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            close_block_insertion: //div[@id='widget-chooser_close']
+                        pageelements:
+                            product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+                -
+                    select_category:
+                        xpath: //div[@id='widget-chooser' and //div[text()='Select Category...']]
+                        links:
+                            root_category: //ul/div/li[contains(div/a/span,'%rootName%')]
+                            sub_category: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                            expand_category: //*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                        buttons:
+                            close_category_insertion: //div[@id='widget-chooser_close']
+                -
+                    select_product:
+                        xpath: //div[@id='widget-chooser' and //div[text()='Select Product...']]
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='entity_id']
+                            filter_sku: //input[@name='chooser_sku']
+                            filter_product_name: //input[@name='chooser_name']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            close_product_insertion: //div[@id='widget-chooser_close']
+                        links:
+                            root_category: //ul/div/li[contains(div/a/span,'%rootName%')]
+                            sub_category: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                            expand_category: //*[@id='%parentCategoryId%']/ancestor::div/img[contains(@class,'x-tree-elbow-plus') or contains(@class,'x-tree-elbow-end-plus')]
+                        pageelements:
+                            product_table_head: //div[@id='widget-chooser_content']//table/thead/tr[@class='headings']
+                -
+                    file_insertion:
+                        xpath: //div[@id='browser_window' and //div[text()='Insert File...']]
+                        buttons:
+                            browse_files: #TODO flash
+                            template: #TODO flash
+                            create_folder: //button[span='Create Folder...']
+                            close_file_insertion: //div[@id='browser_window_close']
+                        links:
+                            collapse_all: //a[text()='Collapse All']
+                            expand_all: //a[text()='Expand All']
+                            root_storage: //li[contains(div/a/span,'%rootName%')]
+                            sub_storage: //*[@id='%parentCategoryId%']/ancestor::li/ul/li[contains(div/a/span,'%subName%') and not(div/a/span/@id='%parentCategoryId%')]
+                -
+                    variable_insertion:
+                        xpath: //div[@id='variables-chooser' and //div[text()='Insert Variable...']]
+                        links:
+                            variable: //a[text()='%variableName%']
+                        buttons:
+                            close_variable_insertion: //div[@id='variables-chooser_close']
+
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_block: //button[span='Delete Block']
+            save_block: //button[span='Save Block']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: *staticBlockMessages
+
+# Default edit page. Opens when an error happens during creating a new block.
+edit_cms_static_block_general:
+    mca: cms_block/edit/
+    title: New Block / Static Blocks / CMS / Magento Admin
+    uimap:
+        messages: *staticBlockMessages
+
+# 'New Block' page
+create_cms_static_block:
+    mca: cms_block/new/
+    title: New Block / Static Blocks / CMS / Magento Admin
+    uimap: &createStaticBlockUimap
+        form: *editStaticBlockForm
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_block: //button[span='Save Block']
+            save_and_continue_edit: //button[span='Save and Continue Edit']
+        messages: *staticBlockMessages
+
+create_cms_static_block_updated:
+    mca: cms_block/new/#
+    title: New Block / Static Blocks / CMS / Magento Admin
+    uimap: *createStaticBlockUimap

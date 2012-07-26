@@ -1,0 +1,174 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Channel Product's page
+channel_products:
+    mca: channel_product/
+    click_xpath: //div[@class='nav-bar']//a[span='Channel Products']
+    title: Magento Admin
+    uimap:
+        form: &channelProduct
+            fieldsets:
+                -
+                    manage_channel_products:
+                        xpath: //*[@id='channelProductGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            publish_massaction: //select[@id='channelProductGrid_massaction-select']
+                            filter_massaction: //select[@name='massaction']
+                            channel: //select[@name='channel_id']
+                            product_attribute_set: //select[@name='set_name']
+                            product_price_currency: //select[@name='price[currency]']
+                            channels_published_to: //select[@name='channels']
+                            channel_listing_status: //select[@name='listing']
+                        fields:
+                            product_id_from: //input[@name='entity_id[from]']
+                            product_id_to: //input[@name='entity_id[to]']
+                            product_name: //input[@name='name']
+                            product_sku: //input[@name='sku']
+                            product_price_from: //input[@name='price[from]']
+                            product_price_to: //input[@name='price[to]']
+                            product_qty_from: //input[@name='qty[from]']
+                            product_qty_to: //input[@name='qty[to]']
+                            timestamp_from: //input[@name='maxtimestamp[from]']
+                            timestamp_to: //input[@name='maxtimestamp[to]']
+                        checkboxes:
+                            product1: //input[@name='selected_products']
+                        links:
+                            published_product: //a[text()=('Pending')]
+        dropdowns: &channelProductDropdown
+            choose_store_view: //select[@id='store_switcher']
+            choose_channel_type: //div[@id='page:main-container']//select[@id='channel_switcher']
+        messages: &channelProductMessage
+            success_publish_saved: //li[@class='success-msg']//li[span='Your request has been submitted. Channel Listing Status will be updated soon. Please check back.']
+            success_remove_publish_saved: //li[@class='success-msg']//li[span='Your request to remove products from channel has been submitted. Channel Listing Status will be updated soon. Please check back.']
+            confirmation_remove: Your listings in selected channel(s) will be removed.
+#Channel Product's page for eBay
+channel_products_ebay:
+    mca: channel_product/index/type/ebay/
+    click_xpath: //div[@class='nav-bar']//a[span='Channel Products']
+    title: Magento Admin
+    uimap:
+        form: *channelProduct
+        dropdowns: *channelProductDropdown
+        messages: *channelProductMessage
+# Publish Settings page after Remove
+channel_products_remove:
+    mca: channel_product/index/
+    click_xpath: //div[@class='nav-bar']//a[span='Channel Products']
+    title: Magento Admin
+    uimap:
+        form: *channelProduct
+        dropdowns: *channelProductDropdown
+        messages: *channelProductMessage
+#Publish Settings page
+publish_settings_ebay:
+    mca: ebay_product/publish/
+    title: Manage Channel / Ebay / Channel / Magento Admin
+    uimap:
+        form: 
+            tabs:
+                -
+                    settings: &xcom_ebay_tabs
+                        xpath: //*[@id='xcom_ebay_tabs_ebay_product_settings']
+                        fieldsets:
+                            -
+                                publish_settings:
+                                    xpath: //*[@id='xcom_ebay_tabs_ebay_product_settings_content']
+                                    fields:
+                                        quantity: //input[@name='price_value']
+                                        price: //input[@name='qty_value']
+                                    dropdowns:
+                                        price_markup_discount: //select[@name='price_type']
+                                        quantity_percent: //select[@name='qty_value_type']
+                                        price_percent: //select[@name='price_value_type']
+                                        category: //select[@id='category_id']
+                                        policy: //select[@name='policy_id']
+                                    checkboxes:
+                                        turn_off_recommendation_disabled: //*[@id='hide_recommended_categories' and @disabled='disabled']
+                                        turn_off_recommendation: //*[@id='hide_recommended_categories']
+                                    links:
+                                        parent_category: //div[img[contains(@class,'x-tree-ec-icon x-tree-elbow-plus')] and a/span[contains(text(), 'Consumer')]]/img[@class='x-tree-ec-icon x-tree-elbow-plus']
+                                        category: //a/span[contains(text(), 'Other')]
+        buttons:
+            reset: //button[span='Reset']
+            publish: //button[span='Publish']
+            back: //button[span='Back']
+
+channel_products_store:
+    mca: channel_product/index/type/ebay/store/1/
+    title: Magento Admin
+    uimap:
+        form: *channelProduct
+        dropdowns: *channelProductDropdown
+        messages: *channelProductMessage
+
+channel_products_store_remove:
+    mca: channel_product/index/store/1/
+    title: Magento Admin
+    uimap:
+        form: *channelProduct
+        dropdowns: *channelProductDropdown
+        messages: *channelProductMessage
+
+channel_listing_status:
+    mca: ebay_product/history/store/%ebay_store_id%/id/%product_id%/channel/%ebay_channel_id%/
+    title: Manage Channel / Ebay / Channel / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    publish_settings:
+                        xpath: //*[@id='xcom_ebay_tabs_ebay_product_history_content']
+                        fields:
+                            category: //input[@id='filter_category']
+                            policy: //input[@id='filter_policy']
+                            publish_date_from: //input[@name='created_at[from]']
+                            publish_date_to: //input[@name='created_at[to]']
+                            product_price_from: //input[@name='price[from]']
+                            product_price_to: //input[@name='price[to]']
+                            product_qty_from: //input[@name='qty[from]']
+                            product_qty_to: //input[@name='qty[to]']
+                        dropdowns:
+                            channel: //select[@name='channel_name']
+                            action: //*[@id='filter_action']
+                            result: //*[@id='filter_response_result']
+                            price_in: //*[@id='filter_price_currency']
+                        links:
+                            sku: //span[@id='sku']
+                        pageelements:
+                            name: //td[@class='value' and contains(text(),'simple_sku.req')]
+                            listing_status: //td[@class='value' and contains(text(),'Pending')]
+                            view_listing: //td[@class='value' and contains(text(),'Not available')]
+        buttons:
+            reset: //button[span='Reset Filter']
+            search: //button[span='Search']
+            back: //button[span='Back']
+

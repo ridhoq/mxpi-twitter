@@ -1,0 +1,84 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+
+# Debug Grid
+xcommerce_debug:
+    mca: xfabric_debug/
+    click_xpath: //div[@class='nav-bar']//a[span='Debug']
+    title: Debug / Magento Admin
+    uimap:
+        form: &debugform
+            fieldsets:
+                -
+                    xcommerce_debug_grid:
+                        xpath: //*[@id='xcom_xfabric_info']
+                        buttons:
+                            search: //button[span='Search']
+                            reset_filter: //button[span='Reset Filter']                            
+                        fields:
+                            debug_id: //input[@name='debug_id']
+                            name: //*[@id='filter_name']
+                            started_from: //input[@name='started_at[from]']
+                            started_to: //input[@name='started_at[to]']
+                            completed_from: //input[@name='completed_at[from]']
+                            completed_to: //input[@name='completed_at[to]']
+                        links:
+                            marketplace_order_search: "//tr[td[contains(text(),'Send Request [STUB] marketplace/order/search')]]"
+#Debug node
+xcommerce_debug_node:
+    mca: xfabric_debug/node/debug_id/%debugid%/
+    title: Debug / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    node_info:
+                        xpath: //*[@id="page:main-container"]
+                        buttons:
+                            search: //button[span='Search']
+                            reset_filter: //button[span='Reset Filter']
+                            back: //button[span='Back']
+                        fields:
+                            node_from: //input[@name='node_id[from]']
+                            node_to: //input[@name='node_id[to]']
+                            parent_node_from: //input[@name='parent_id[from]']
+                            parent_node_to: //input[@name='parent_id[to]']
+                            topic: //input[@name='topic']
+                            headers: //input[@name='headers']
+                            body: //input[@name='body']
+                            started_from: //input[@name='started_at[from]']
+                            started_to: //input[@name='started_at[to]']
+
+xcommerce_debug_index:
+    mca: xfabric_debug/index/
+    title: Debug / Magento Admin
+    uimap:
+        form: *debugform
+
+
+

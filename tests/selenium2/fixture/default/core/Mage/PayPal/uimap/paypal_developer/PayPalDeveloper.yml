@@ -1,0 +1,181 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+paypal_developer_home:
+    mca:
+    title: PayPal Sandbox - Log In
+    uimap:
+        form:
+            fieldsets:
+                -
+                    navigation_menu:
+                        xpath: //*[@id='nav-menu']
+                        buttons:
+                            button_login: //input[@value='Log In']
+                        checkboxes:
+                            keep_logged_in: //span[label='Keep me logged in']//input
+                        fields:
+                            login_email: //input[@id='login_email']
+                            login_password: //input[@id='login_password']
+                        links:
+                            trouble_logging_in: //a[text()='Trouble Logging In?']
+
+paypal_developer_logged_in:
+    mca: cgi-bin/devscr?cmd=_login-done&login_access=0
+    title: PayPal Sandbox - Home
+    uimap: &developerForm
+        form:
+            tabs:
+                -
+                    home:
+                        xpath: //*[@id='nav-menu']//a[text()='Home']
+                        fieldsets:
+                            -
+                                home_form:
+                                    xpath: //*[@id='home_container']
+                                    links:
+                                        test_accounts: //a[text()='Test Accounts']
+                                        create_preconfigured_account: //a[text()='preconfigured account']
+                                        create_account_manually: //a[text()='manually']
+                -
+                    test_accounts:
+                        xpath: //*[@id='nav-menu']//a[text()='Test Accounts']
+                        fieldsets:
+                            -
+                                test_accounts_form:
+                                    xpath: //*[@id='content']/form[@name='pass_form']
+                                    links:
+                                        create_preconfigured_account: //a[text()=' Preconfigured']
+                                        create_account_manually: //a[text()='Create Manually']
+                                    buttons:
+                                        enter_sandbox_test_site: //input[@value='Enter Sandbox Test Site']
+                                        delete_account: //input[@name='delete_button']
+                            -
+                                test_account:
+                                    xpath: //tr[@class='detail'][contains(.,'%accountEmail%')]
+                                    checkboxes:
+                                        select_account:  //input[@type='radio']
+                                    pageelements:
+                                        email_account: //td[contains(text(),'%accountEmail%')]
+                            -
+                                account_details:
+                                    xpath: //tr[@class='detail'][contains(.,'%accountEmail%')]/following::tr[1]//table[@id='actData']
+                                    links:
+                                        view_details: //a[span='View Details']
+                                    pageelements:
+                                        country: "//tr[td='Country:']//td[3]"
+                                        business_name: "//tr[td='Business Name:']//td[3]"
+                                        credit_card: "//tr[td='Credit Card:']//td[3]"
+                                        bank_account: "//tr[td='Bank Account:']//td[3]"
+                                        balance: "//tr[td='Balance:']//td[3]"
+                                        notes: "//tr[td='Notes:']//td[3]"
+                            -
+                                create_account_form:
+                                    xpath: //*[@id='content']/form[@name='create_account']
+                                    dropdowns:
+                                        country: //select[@name='country']
+                                        add_credit_card: //select[@id='credit_card']
+                                    checkboxes:
+                                        account_type_buyer: //input[@name='account_type' and @value='buyer']
+                                        account_type_seller: //input[@name='account_type' and @value='seller']
+                                        account_type_pro: //input[@name='account_type' and @value='pro']
+                                        add_bank_account_yes: //input[@name='bank_account' and @value='Yes']
+                                        add_bank_account_no: //input[@name='bank_account' and @value='No']
+                                    fields:
+                                        first_name: //input[@id='first_name']
+                                        last_name: //input[@id='last_name']
+                                        login_email: //input[@name='login_email_text']
+                                        login_password: //input[@name='password']
+                                        account_balance: //input[@name='account_balance']
+                                        notes: //textarea[@name='account_notes']
+                                    buttons:
+                                        create_account: //input[@type='button' and @value='Create Account']
+                                        cancel: //input[@type='submit' and @value='Cancel']
+                -
+                    test_email:
+                        xpath: //*[@id='nav-menu']//a[text()='Test Email']
+                -
+                    api_credentials:
+                        xpath: //*[@id='nav-menu']//a[text()='API Credentials']
+                        fieldsets:
+                            -
+                                account_api_credentials:
+                                    xpath: //*[@id='detData']/tbody[contains(.,'%accountEmail%')]
+                                    pageelements:
+                                        api_username: "//tr[td='API Username:']//td[2]"
+                                        api_password: "//tr[td='API Password:']//td[2]"
+                                        signature: "//tr[td='Signature:']//td[2]"
+                -
+                    test_tools:
+                        xpath: //*[@id='nav-menu']//a[text()='Test Tools']
+        messages:
+            confirmation_to_delete_account: Are you sure you want to delete this test account?
+
+paypal_developer_logged_in_2:
+    mca: cgi-bin/devscr?cmd=_login-processing&login_cmd=_login-done&login_access=0
+    title: PayPal Sandbox - Processing
+    uimap: *developerForm
+
+developer_create_test_account:
+    mca: cgi-bin/devscr?cmd=_create-account-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_create_test_account_2:
+    mca: devscr?cmd=_create-account-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_create_test_account_us:
+    mca: us/cgi-bin/devscr?cmd=_create-account-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_test_account:
+    mca: cgi-bin/devscr?cmd=_sandbox-acct-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_test_account_2:
+    mca: devscr?cmd=_sandbox-acct-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_test_account_us:
+    mca: us/cgi-bin/devscr?cmd=_sandbox-acct-session
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_created_test_account_us:
+    mca: us/cgi-bin/devscr?cmd=_sandbox-acct-session&account_created=1
+    title: PayPal Sandbox - Sandbox
+    uimap: *developerForm
+
+developer_api_credentials:
+    mca: us/cgi-bin/devscr?cmd=_certs-session
+    title: PayPal Sandbox - Test Certificates
+    uimap: *developerForm

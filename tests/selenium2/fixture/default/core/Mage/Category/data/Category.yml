@@ -1,0 +1,87 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+product_1: &product1
+    category_products_search_id: %noValue%
+    category_products_search_name: %noValue%
+    category_products_search_sku: %noValue%
+    category_products_search_price_from: %noValue%
+    category_products_search_price_to: %noValue%
+    category_products_search_position_from: %noValue%
+    category_products_search_position_to: %noValue%
+    category_products_position: %noValue%
+
+root_category_required:
+    name: Root Category Required(%randomize%)
+    is_active: Yes
+    available_product_listing_config: No
+    available_product_listing: Best Value, Name, Price
+
+sub_category_required:
+    parent_category: Default Category
+    name: Sub Category Required(%randomize%)
+    is_active: Yes
+    available_product_listing_config: No
+    available_product_listing: Best Value, Name, Price
+
+root_category_all: &categoryAll
+    #General Information
+    name: Category All Data(%randomize%)
+    is_active: Yes
+    url_key: %noValue%
+    thumbnail_image: %noValue%
+    description: Subcategory Description
+    image: %noValue%
+    page_title: Subcategory Page Title
+    meta_keywords: Subcategory Meta Keywords
+    meta_description: Subcategory Meta Description
+    include_in_navigation_menu: Yes
+    #Display Settings
+    display_mode: Static block and products
+    cms_block: Footer Links
+    is_anchor: Yes
+    available_product_listing_config: No
+    available_product_listing: Name, Price
+    default_product_listing_config: No
+    default_product_listing: Name
+    layered_navigation_price_step_config: No
+    layered_navigation_price_step: 50
+    #Custom Design
+    use_parent_category_settings: No
+    apply_to_products: Yes
+    custom_design: default
+    active_from: 12/12/10
+    active_to: 12/12/12
+    page_layout: 3 columns
+    custom_layout_update: Custom Layout Update
+    #Category Products
+    category_products_data:
+        product_1: *product1
+
+sub_category_all:
+    parent_category: Default Category
+    <<: *categoryAll

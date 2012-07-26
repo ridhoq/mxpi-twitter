@@ -1,0 +1,294 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    xcom
+ * @package     default_xcom
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+ /** @var $this Xcom_Mapping_Block_Adminhtml_Attribute_Set_Edit_Tree */
+?>
+<div class="product-type-col">
+    <div class="tree-actions">
+        <?php if ($this->getProductTypeArray()): ?>
+        <a href="#" onclick="tree.collapseTree(); return false;">
+            <?php echo $this->__('Collapse All'); ?>
+        </a>
+        <span class="separator">|</span>
+        <a href="#" onclick="tree.expandTree(); return false;">
+            <?php echo $this->__('Expand All'); ?>
+        </a>
+        <?php else : ?>
+            <?php echo $this->__("Target Attribute data is not available. Please try again.");?>
+        <?php endif; ?>
+    </div>
+    <?php if ($this->getProductTypeArray()): ?>
+    <div class="tree-holder">
+        <div id="tree-div" class="product-type-tree-div"></div>
+        <input name="mapping_product_type_id" class="required-entry"
+            id="mapping_product_type_id" type="hidden" value="" />
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var tree;
+
+/**
+ * Fix ext compatibility with prototype 1.6
+ */
+Ext.lib.Event.getTarget = function(e) {
+    var ee = e.browserEvent || e;
+    return ee.target ? Event.element(ee) : null;
+};
+
+Ext.tree.TreePanel.Enhanced = function(el, config)
+{
+    Ext.tree.TreePanel.Enhanced.superclass.constructor.call(this, el, config);
+};
+
+Ext.extend(Ext.tree.TreePanel.Enhanced, Ext.tree.TreePanel, {
+
+    loadTree : function(config, firstLoad)
+    {
+        var parameters = config['parameters'];
+        var data = config['data'];
+
+        if ((typeof parameters['root_visible']) != 'undefined') {
+            this.rootVisible = parameters['root_visible'];
+        }
+
+        var root = new Ext.tree.TreeNode(parameters);
+
+        this.nodeHash = {};
+        this.setRootNode(root);
+
+        if (firstLoad) {
+            this.addListener('click', this.categoryClick);
+        }
+
+        this.loader.buildCategoryTree(root, data);
+        this.el.dom.innerHTML = '';
+        // render the tree
+        this.render();
+        if (parameters['expanded']) {
+            this.expandTree();
+        } else {
+            this.collapseTree();
+        }
+
+        var selectedNode = this.getNodeById(parameters['selected_node']);
+        if (selectedNode) {
+            this.currentNodeId = parameters['selected_node'];
+        }
+        this.selectCurrentNode();
+    },
+
+    request : function(url, params)
+    {
+        if (!params) {
+            var params = {};
+        }
+        if (!params.form_key) {
+            params.form_key = FORM_KEY;
+        }
+        var result = new Ajax.Request(
+            url + (url.match(new RegExp('\\?')) ? '&isAjax=true' : '?isAjax=true' ),
+            {
+               parameters:  params,
+               method:      'post'
+            }
+        );
+
+        return result;
+    },
+
+    selectCurrentNode : function()
+    {
+        if (this.currentNodeId) {
+            var selectedNode = this.getNodeById(this.currentNodeId);
+            this.getSelectionModel().select(selectedNode);
+        }
+    },
+
+    collapseTree : function()
+    {
+        this.collapseAll();
+        this.selectCurrentNode();
+        if (!this.collapsed) {
+            this.collapsed = true;
+        }
+    },
+
+    expandTree : function()
+    {
+        this.expandAll();
+        if (this.collapsed) {
+            this.collapsed = false;
+        }
+    },
+
+    categoryClick : function(node, e)
+    {
+        this.currentNodeId = node.id;
+        if (!this.currentNodeId.match('node-')) {
+            $('mapping_product_type_id').writeAttribute('value', this.currentNodeId);
+        } else {
+            return false;
+        }
+    }
+});
+
+function reRenderTree()
+{
+    _renderNewTree();
+}
+
+function _renderNewTree(config)
+{
+    if (!config) {
+        var config = defaultLoadTreeParams;
+    }
+    if (tree) {
+        tree.purgeListeners();
+        tree.el.dom.innerHTML = '';
+    }
+    tree = new Ext.tree.TreePanel.Enhanced('tree-div', newTreeParams);
+    tree.loadTree(config, true);
+
+    // try to select current category
+    var selectedNode = tree.getNodeById(config.parameters.selected_node);
+    if (selectedNode) {
+        tree.categoryClick(selectedNode);
+        tree.selectCurrentNode();
+        tree.expandPath(selectedNode.getPath());
+        tree.selectPath(selectedNode.getPath());
+    }
+}
+
+Ext.onReady(function()
+{
+    categoryLoader = new Ext.tree.TreeLoader({
+       //dataUrl: '<?php //echo $this->getLoadTreeUrl() ?>'
+    });
+
+    categoryLoader.createNode = function(config) {
+        var node;
+        var _node = Object.clone(config);
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+
+        return node;
+    };
+
+    categoryLoader.buildCategoryTree = function(parent, config)
+    {
+        if (!config) return null;
+
+        if (parent && config && config.length){
+            for (var i = 0; i < config.length; i++) {
+                var node;
+                var _node = Object.clone(config[i]);
+                if (_node.children && !_node.children.length) {
+                    delete(_node.children);
+                    node = new Ext.tree.AsyncTreeNode(_node);
+                } else {
+                    node = new Ext.tree.TreeNode(config[i]);
+                }
+                parent.appendChild(node);
+                node.loader = node.getOwnerTree().loader;
+                if (_node.children) {
+                    this.buildCategoryTree(node, _node.children);
+                }
+            }
+        }
+    };
+
+    categoryLoader.buildHash = function(node)
+    {
+        var hash = {};
+
+        hash = this.toArray(node.attributes);
+
+        if (node.childNodes.length>0 || (!node.loaded && !node.loading)) {
+            hash['children'] = new Array;
+
+            for (var i = 0, len = node.childNodes.length; i < len; i++) {
+                if (!hash['children']) {
+                    hash['children'] = new Array;
+                }
+                hash['children'].push(this.buildHash(node.childNodes[i]));
+            }
+        }
+
+        return hash;
+    };
+
+    categoryLoader.toArray = function(attributes) {
+        var data = {form_key: FORM_KEY};
+        for (var key in attributes) {
+            var value = attributes[key];
+            data[key] = value;
+        }
+
+        return data;
+    };
+
+    categoryLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.id = node.attributes.id;
+        treeLoader.baseParams.form_key = FORM_KEY;
+    });
+
+    categoryLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+
+    newTreeParams = {
+        animate         : false,
+        loader          : categoryLoader,
+        enableDD        : true,
+        containerScroll : true,
+        selModel        : new Ext.tree.DefaultSelectionModel(),
+        rootVisible     : false,
+        useAjax         : true,
+        currentNodeId   : <?php echo $this->getSelectedNodeId() ?>
+    };
+
+    defaultLoadTreeParams = {
+        parameters : {
+            text  : 'Test Default',
+            draggable : false,
+            allowDrop : false,
+            id : 1,
+            expanded    : <?php echo (int) $this->getIsExpanded() ?>,
+            selected_node : <?php echo (int) $this->getSelectedNodeId() ?>
+        },
+        data : <?php echo $this->getTreeJson() ?>
+    };
+
+    reRenderTree();
+});
+//]]>
+</script>
+<?php endif; ?>

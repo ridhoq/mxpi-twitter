@@ -1,0 +1,74 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#
+compare_products:
+    mca: catalog/product_compare/
+    title: Products Comparison List - Magento Commerce
+    uimap: &compare_products
+        form:
+            fieldsets:
+                -
+                    compare_products:
+                        xpath: //table[@id='product_comparison']
+                        buttons:
+                            add_to_cart: //td[h2='%productName%']//button[span='Add to Cart']
+#                            ex_add_to_cart: //tbody[3]//td[%columnIndex%]/p/button
+                        links:
+                            product_title: //a[text()='%productName%']
+                            add_to_whishlist: //td[h2='%productName%']//a[text()='Add to Wishlist']
+#                            ex_add_to_whishlist: //tbody[3]//td[%columnIndex%]//a[text()='Add to Wishlist']
+                            remove_item: //td[%columnIndex%]/a[@title='Remove This Item']
+                        pageelements:
+#                            verify_price_regular: //td[h2='%productName%']//span[@class='regular-price']
+#                            verify_product_price_as_low_as: //td[h2='%productName%']//span[@class='minimal-price-link']/span[@class='price']
+#                            verify_price_old: //td[h2='%productName%']//p[@class='old-price']/span[@class='price']
+#                            verify_price_special: //td[h2='%productName%']//p[@class='special-price']/span[@class='price']
+#                            verify_price_excluding_tax: //td[h2='%productName%' and not(*/p[@class='special-price'])]//span[@class='price-excluding-tax']/span[@class='price']
+#                            verify_price_including_tax: //td[h2='%productName%' and not(*/p[@class='special-price'])]//span[@class='price-including-tax']/span[@class='price']
+#                            verify_price_special_excluding_tax: //td[h2='%productName%']//p[@class='special-price']//span[@class='price-excluding-tax']/span[@class='price']
+#                            verify_price_special_inlcuding_tax: //td[h2='%productName%']//p[@class='special-price']//span[@class='price-including-tax']/span[@class='price']
+#                            verify_ex_price_regular: //tbody[3]//td[%columnIndex%]//span[@class='regular-price']
+#                            verify_ex_product_price_as_low_as: //tbody[3]//td[%columnIndex%]//span[@class='minimal-price-link']/span[@class='price']
+#                            verify_ex_price_old: //tbody[3]//td[%columnIndex%]//p[@class='old-price']/span[@class='price']
+#                            verify_ex_price_special: //tbody[3]//td[%columnIndex%]//p[@class='special-price']/span[@class='price']
+#                            verify_ex_price_excluding_tax: //tbody[3]//td[%columnIndex%]//div[@class='price-box' and not(p[@class='special-price'])]//span[@class='price-excluding-tax']/span[@class='price']
+#                            verify_ex_price_including_tax: //tbody[3]//td[%columnIndex%]//div[@class='price-box' and not(p[@class='special-price'])]//span[@class='price-including-tax']/span[@class='price']
+#                            verify_ex_price_special_excluding_tax: //tbody[3]//td[%columnIndex%]//p[@class='special-price']//span[@class='price-excluding-tax']/span[@class='price']
+#                            verify_ex_price_special_inlcuding_tax: //tbody[3]//td[%columnIndex%]//p[@class='special-price']//span[@class='price-including-tax']/span[@class='price']
+                            product_attribute_names: //tr[th/span/@class]
+                            product_attribute_value: /tr[th='%attrName%']/td[%columnIndex%]
+                            product_names: //td[h2[@class='product-name']]
+        buttons:
+            close_window: //button[@title='Close Window']
+        links:
+            print_this_page: //a[text()='Print This Page']
+
+compare_products_index:
+    mca: catalog/product_compare/index/#
+    title: Products Comparison List - Magento Commerce
+    uimap: *compare_products

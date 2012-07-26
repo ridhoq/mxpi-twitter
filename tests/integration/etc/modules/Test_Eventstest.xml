@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+@LICENSE@
+-->
+<config>
+    <modules>
+        <Test_Eventstest>
+            <active>true</active>
+            <codePool>core</codePool>
+        </Test_Eventstest>
+    </modules>
+</config>

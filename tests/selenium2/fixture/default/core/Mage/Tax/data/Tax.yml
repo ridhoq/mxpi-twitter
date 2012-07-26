@@ -1,0 +1,95 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Tax creating(Backend)
+#*********************************************
+#*                     Tax Rule              *
+#*********************************************
+search_tax_rule:
+    filter_name: %noValue%
+    filter_customer_tax_class: %noValue%
+    filter_product_tax_class: %noValue%
+    filter_tax_rate: %noValue%
+    filter_priority: %noValue%
+    filter_sort_order: %noValue%
+
+new_tax_rule_required:
+    name: test_tax_id_%randomize%
+    customer_tax_class: Retail Customer
+    product_tax_class: Taxable Goods
+    tax_rate: US-CA-*-Rate 1
+    priority: 10
+    sort_order: 1
+
+#*********************************************
+#*           Customer Tax Class              *
+#*********************************************
+new_customer_tax_class:
+    customer_class_name: Customer Tax Class Name %randomize%
+
+#*********************************************
+#*            Product Tax Class              *
+#*********************************************
+new_product_tax_class:
+    product_class_name: Product Tax Class Name %randomize%
+
+#*********************************************
+#*                     Tax Rate              *
+#*********************************************
+search_tax_rate:
+    filter_tax_id: %noValue%
+    filter_state_region: %noValue%
+    filter_zip_code: %noValue%
+    filter_rate_from: %noValue%
+    filter_rate_to: %noValue%
+    filter_country: %noValue%
+
+tax_rate_create_test: &taxRateCreate
+    tax_identifier: test_tax_id_%randomize%
+    country: United States
+    state: "*"
+    zip_is_range: %noValue%
+    rate_percent: 10
+
+tax_rate_create_with_custom_state:
+    <<: *taxRateCreate
+    state: Nevada
+
+tax_rate_create_test_zip_no:
+    <<: *taxRateCreate
+    zip_is_range: No
+
+tax_rate_create_test_zip_yes:
+    <<: *taxRateCreate
+    zip_is_range: Yes
+    zip_range_from: 89001
+    zip_range_to: 89883
+
+tax_rate_create_with_store_views:
+    <<: *taxRateCreate
+    tax_titles:
+        Default Store View: Store View Title %randomize%

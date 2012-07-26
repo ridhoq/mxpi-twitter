@@ -1,0 +1,92 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+################################################################################
+#                                                                              #
+#                               Catalog Price Rules                            #
+#                                                                              #
+################################################################################
+
+search_catalog_rule:
+    filter_id: %noValue%
+    filter_rule_name: %noValue%
+    filter_date_start_from: %noValue%
+    filter_date_start_to: %noValue%
+    filter_date_expire_from: %noValue%
+    filter_date_expire_to: %noValue%
+    filter_status: %noValue%
+
+test_catalog_rule:
+    info:
+        rule_name: test_catalog_rule_%randomize%
+        description: description for test catalog rule
+        status: Inactive
+        websites: Main Website
+        customer_groups: NOT LOGGED IN
+        from_date: %currentDate%
+        to_date: %currentDate%
+        priority: 10
+    conditions: %noValue%
+    actions:
+        apply: To Percentage of the Original Price
+        discount_amount: 15
+        enable_discount_to_subproducts: Yes
+        sub_apply: By Fixed Amount
+        sub_discount_amount: 15
+        stop_further_rules_processing: Yes
+
+by_percentage_of_the_original_price:
+    apply: By Percentage of the Original Price
+    discount_amount: 10
+    enable_discount_to_subproducts: No
+    sub_apply: %noValue%
+    sub_discount_amount: %noValue%
+    stop_further_rules_processing: Yes
+
+to_percentage_of_the_original_price:
+    apply: To Percentage of the Original Price
+    discount_amount: 10
+    enable_discount_to_subproducts: No
+    sub_apply: %noValue%
+    sub_discount_amount: %noValue%
+    stop_further_rules_processing: Yes
+
+by_fixed_amount:
+    apply: By Fixed Amount
+    discount_amount: 10
+    enable_discount_to_subproducts: No
+    sub_apply: %noValue%
+    sub_discount_amount: %noValue%
+    stop_further_rules_processing: Yes
+
+to_fixed_amount:
+    apply: To Fixed Amount
+    discount_amount: 10
+    enable_discount_to_subproducts: No
+    sub_apply: %noValue%
+    sub_discount_amount: %noValue%
+    stop_further_rules_processing: Yes

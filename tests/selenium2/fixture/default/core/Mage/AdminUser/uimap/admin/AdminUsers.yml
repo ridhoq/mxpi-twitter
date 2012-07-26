@@ -1,0 +1,291 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Manage Users and related pages
+
+# 'Users' page
+manage_admin_users:
+    mca: permissions_user/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'permissions_user')]
+    title: Users / Permissions / System / Magento Admin
+    uimap:
+        form: &permissionsUserForm
+            fieldsets:
+                -
+                    permissionsUserGrid:
+                        xpath: //div[@id='permissionsUserGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            status: //select[@name='is_active']
+                        fields:
+                            id: //input[@name='user_id']
+                            user_name: //input[@name='username']
+                            first_name: //input[@name='firstname']
+                            last_name: //input[@name='lastname']
+                            email: //input[@name='email']
+                        links:
+                            select_by_user_name: //table[@id="permissionsUserGrid_table"]//td[normalize-space(text())="%userName%"]
+        buttons:
+            add_new_admin_user: //button[span='Add New User' or span='Add New']
+        messages: &adminUserMessages
+            exist_name_or_email: //li[normalize-space(@class)='error-msg' and contains(.,'A user with the same user name or email aleady exists.')]
+            empty_required_field: "%fieldXpath%/following-sibling::*[text()='This is a required field.' and not(contains(@style,'display: none;'))]"
+            cannot_delete_account: //li[normalize-space(@class)='error-msg' and contains(.,'You cannot delete your own account.')]
+            success_deleted_user: //li[normalize-space(@class)='success-msg' and contains(.,'The user has been deleted.')]
+            success_saved_user: //li[normalize-space(@class)='success-msg' and contains(.,'The user has been saved.')]
+            exist_email: //li[normalize-space(@class)='error-msg' and contains(.,'Email already exists.')]
+            invalid_password: //div[@id='advice-validate-admin-password-user_password']
+            password_unmatch: //div[@id='advice-validate-cpassword-user_confirmation']
+            invalid_email: //div[@id='advice-validate-email-user_email']
+            confirmation_for_delete: Are you sure you want to do this?
+
+# 'New User' page
+new_admin_user:
+    mca: permissions_user/new/
+    title: New User / Users / Permissions / System / Magento Admin
+    uimap:
+        form: &adminUserForm
+            tabs:
+                -
+                    user_info:
+                        xpath: //a[@id='page_tabs_main_section']/span
+                        fieldsets:
+                            -
+                                account_information:
+                                    xpath: //div[@id='user_base_fieldset']
+                                    dropdowns:
+                                        this_acount_is: //select[@id='user_is_active']
+                                    fields:
+                                        user_name: //input[@id='user_username']
+                                        first_name: //input[@id='user_firstname']
+                                        last_name: //input[@id='user_lastname']
+                                        email: //input[@id='user_email']
+                                        password: //input[@id='user_password']
+                                        password_confirmation: //input[@id='user_confirmation']
+                                    required: [user_name, first_name, last_name, email, password, password_confirmation]
+                -
+                    user_role:
+                        xpath: //a[@id='page_tabs_roles_section']/span
+                        fieldsets:
+                            -
+                                permissions_user_roles:
+                                    xpath: //div[@id='permissionsUserRolesGrid']
+                                    buttons:
+                                        reset_filter: //button[span="Reset Filter"]
+                                        search: //button[span="Search"]
+                                    checkboxes:
+                                    #must be implemented
+                                    dropdowns:
+                                        assigned: //input[@name='assigned_user_role']
+                                    fields:
+                                        role_name: //input[@name='role_name']
+                                    radiobuttons:
+                                        select_by_role_name: //td[normalize-space(text())='%roleName%']/ancestor::tr//input[@class='radio']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_admin_user: //button[span='Save User']
+        messages: *adminUserMessages
+
+# 'Edit User' page
+edit_admin_user:
+    mca: permissions_user/edit/user_id/%id%/
+    title: %user_first_last_name% / Users / Permissions / System / Magento Admin
+    uimap:
+        form: *adminUserForm
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_user: //button[span='Delete User']
+            save_admin_user: //button[span='Save User']
+        messages: *adminUserMessages
+
+new_admin_user_with_error:
+    mca: permissions_user/edit/
+    title: New User / Users / Permissions / System / Magento Admin
+    uimap:
+        form: *adminUserForm
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_admin_user: //button[span='Save User']
+        messages: *adminUserMessages
+
+# 'Roles' page
+manage_roles:
+    mca: permissions_role/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'permissions_role')]
+    title: Roles / Permissions / System / Magento Admin
+    uimap:
+        form: &manageRolesForm
+            fieldsets:
+                -
+                    role_list:
+                        xpath: //div[@id='roleGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        fields:
+                            id: //input[@name='role_id']
+                            role_name: //input[@name='role_name']
+                        links:
+                            select_by_role_name: //table[@id="roleGrid_table"]//td[normalize-space(text())="%roleName%"]
+        buttons:
+            add_new_role: //button[span='Add New Role']
+        messages:
+            success_delete_role: //div[@id='messages']//li[span='The role has been deleted.']
+
+# 'New Role' page
+new_role:
+    mca: permissions_role/editrole/
+    title: New Role / Roles / Permissions / System / Magento Admin
+    uimap:
+        form: &newRoleForm
+            tabs:
+                -
+                    role_info:
+                        xpath: //a[@id='role_info_tabs_info']
+                        fieldsets:
+                            -
+                                role_information:
+                                    xpath: //div[@id='base_fieldset']
+                                    fields:
+                                        role_name: //input[@id='role_name']
+                -
+                    role_resources:
+                        xpath: //a[@id='role_info_tabs_account']
+                        fieldsets:
+                            -
+                                role_scopes:
+                                    xpath: //input[@id='role_resources']
+                                    checkboxes:
+                                        #need to implement for "custom" selection
+                                    dropdowns:
+                                        role_scopes: //select[@id='gws_is_all']
+                            -
+                                role_resources:
+                                    xpath: //fieldset[@id='role_resources']
+                                    checkboxes:
+                                        #need to implement for "custom" selection
+                                    dropdowns:
+                                        resource_access: //select[@id='all']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_role: //button[span='Save Role']
+        messages:
+            success_save_role: //div[@id='messages']//li[span='The role has been successfully saved.']
+            error_required_field_role_name: //div[@id='advice-required-entry-role_name']
+
+
+# 'Edit Role' page
+edit_role:
+    mca: permissions_role/editrole/rid/%role_id%/
+    title: %roleName% / Roles / Permissions / System / Magento Admin
+    uimap:
+        form: &editRoleForm
+            tabs:
+                -
+                    role_info:
+                        xpath: //a[@id='role_info_tabs_info']
+                        fieldsets:
+                            -
+                                role_information:
+                                    xpath: //div[@id='base_fieldset']
+                                    fields:
+                                        role_name: //input[@id='role_name']
+                -
+                    role_resources:
+                        xpath: //a[@id='role_info_tabs_account']
+                        fieldsets:
+                            -
+                                role_scopes:
+                                    xpath: //input[@id='role_resources']
+                                    checkboxes:
+                                        #need to implement for "custom" selection
+                                    dropdowns:
+                                        role_scopes: //select[@id='gws_is_all']
+                            -
+                                role_resources:
+                                    xpath: //fieldset[@id='role_resources']
+                                    checkboxes:
+                                        #need to implement for "custom" selection
+                                    dropdowns:
+                                        resource_access: //select[@id='all']
+                -
+                    role_users:
+                        xpath: //a[@id='role_info_tabs_roles']
+                        fieldsets:
+                            -
+                                role_users:
+                                    xpath: //div[@id='role_info_tabs_roles_content']
+                                    buttons:
+                                        reset_filter: //button[span='Reset Filter']
+                                        search: //button[span='Search']
+                                    checkboxes:
+                                        select_by_user_name: //td[normalize-space(text())='%userName%']/ancestor::tr//input[@class='checkbox']
+                                    dropdowns:
+                                        filter_in_role_users: //select[@name='in_role_users']
+                                        status: //select[@name='role_user_is_active']
+                                    fields:
+                                        user_id: //input[@name='role_user_id']
+                                        user_name: //input[@name='role_user_username']
+                                        first_name: //input[@name='role_user_firstname']
+                                        last_name: //input[@name='role_user_lastname']
+                                        email: //input[@name='role_user_email']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_role: //button[span='Delete Role']
+            save_role: //button[span='Save Role']
+        messages:
+            success_save_role: //div[@id='messages']//li[span='The role has been successfully saved.']
+            error_required_field_role_name: //div[@id='advice-required-entry-role_name']
+
+# 'My Account' page
+my_account:
+    mca: system_account/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'system_account')]
+    title: My Account / System / Magento Admin
+    uimap:
+        form: &myAccount
+            fieldsets:
+                -
+                    account_info:
+                        xpath: //form[@id='edit_form' and contains(.//h4,'Account Information')]
+                        fields:
+                            user_name: //input[@id='username']
+                            first_name: //input[@id='firstname']
+                            last_name: //input[@id='lastname']
+                            email: //input[@id='email']
+                            new_password: //input[@id='password']
+                            password_confirmation: //input[@id='user_confirmation']
+        buttons:
+            save_account: //button[span='Save Account']
+            reset_filter: //button[span='Reset Filter']
+        messages: *adminUserMessages

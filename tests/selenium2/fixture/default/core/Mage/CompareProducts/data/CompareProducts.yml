@@ -1,0 +1,85 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Compare Products
+compare_simple_product:
+    product_attribute_set: Default
+    general_name: Simple Product Compare(%randomize%)
+    general_description: Description for Simple Product Compare
+    general_short_description: Short Description for Simple Product Compare
+    general_sku: simple_sku_compare_%randomize%
+    general_weight: 1.13
+    general_status: Enabled
+    prices_price: 2155
+    prices_special_price: 2000
+    prices_tax_class: None
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    categories: %noValue%
+
+compare_virtual_product:
+    product_attribute_set: Default
+    general_name: Virtual Product Compare(%randomize%)
+    general_description: Description for Virtual Product Compare
+    general_short_description: Short Description for Virtual Product Compare
+    general_sku: virtual_sku_compare_%randomize%
+    general_status: Enabled
+    prices_price: 99.99
+    prices_tax_class: None
+    prices_tier_price_data:
+        prices_tier_price_1:
+            prices_tier_price_website: All Websites [USD]
+            prices_tier_price_customer_group: ALL GROUPS
+            prices_tier_price_qty: 5
+            prices_tier_price_price: 70
+    inventory_manage_stock_default: No
+    inventory_manage_stock: Yes
+    inventory_qty: 120
+    inventory_stock_availability: In Stock
+    websites: Main Website
+    categories: %noValue%
+
+verify_compare_data:
+    product_1:
+        product_name: %noValue%
+        Description: Description for Simple Product Compare
+        Short Description: Short Description for Simple Product Compare
+        SKU: %noValue%
+        product_prices:
+            regular_price: '2,155.00'
+            special_price: '2,000.00'
+    product_2:
+        product_name: %noValue%
+        Description: Description for Virtual Product Compare
+        Short Description: Short Description for Virtual Product Compare
+        SKU: %noValue%
+        product_prices:
+            price: '99.99'
+            as_low_as: '70.00'

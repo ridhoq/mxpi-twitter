@@ -1,0 +1,182 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Sales Credit Memos page
+manage_sales_creditmemos:
+    mca: sales_creditmemo/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'sales_creditmemo/')]
+    title: Credit Memos / Sales / Magento Admin
+    uimap:
+        form: &salesCreditmemos
+            fieldsets:
+                -
+                    sales_creditmemo_grid:
+                        xpath: //div[@id='sales_creditmemo_grid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            export: //button[span='Export']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            export_to: //select[@id='sales_creditmemo_grid_export']
+                            actions: //select[@id='sales_creditmemo_grid_massaction-select']
+                            filter_massaction: //select[@id='filter_massaction']
+                            filter_status: //select[@id='filter_state']
+                            view_per_page: //select[@name='limit']
+                        fields:
+                            page: //input[@name='page']
+                            filter_creditmemo_id: //input[@id='filter_increment_id']
+                            filter_creditmemo_created_from: //input[@name='created_at[from]']
+                            filter_creditmemo_created_to: //input[@name='created_at[to]']
+                            filter_order_id: //input[@name='order_increment_id']
+                            filter_order_created_from: //input[@name='order_created_at[from]']
+                            filter_order_created_to: //input[@name='order_created_at[to]']
+                            filter_billing_name: //input[@name='shipping_name']
+                            filter_refunded_from: //input[@name='grand_total[from]']
+                            filter_refunded_to: //input[@name='grand_total[to]']
+
+
+create_credit_memo:
+    mca: sales_order_creditmemo/new/order_id/%id%/
+    title: New Memo / Credit Memos / Sales / Magento Admin
+    uimap: &orderCreditmemo
+        form:
+            fieldsets:
+                -
+                    order_number:
+                        xpath: //div[@class='entry-edit'][./div/a[contains(.,'Order #')]]
+                -
+                    account_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Account Information']
+                -
+                    billing_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Billing Address']
+                -
+                    shipping_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Address']
+                -
+                    payment_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Payment Information']
+                -
+                    shipping_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Information']
+                -
+                    items_to_refund:
+                        xpath: //div[@class='grid np']
+                        buttons:
+                            update_qty: //button[span[contains(.,'Update Qty')]]
+                        checkboxes:
+                            return_to_stock: "//tr[contains(.,'%sku%')]//input[contains(@name,'[back_to_stock]')]"
+                        fields:
+                            qty_to_refund: "//tr[contains(.,'%sku%')]//input[contains(@name,'[qty]')]"
+                        pageelements:
+                            product_table_head: //table[@class='data order-tables']/thead
+                            product_line:  //table[@class='data order-tables']/tbody
+                -
+                    product_line_to_refund:
+                        xpath: //div[@class='grid np']//tbody[@class]
+                        fields:
+                            product_sku: "[%productNumber%]//tr[contains(.//@name,'creditmemo[items')]//*[strong='SKU:']"
+                            product_qty: "[%productNumber%]//tr[contains(.//@name,'creditmemo[items')]//td[5]"
+                -
+                    credit_memo_comments:
+                        xpath: //div[@class='box-left entry-edit'][./div/h4='Credit Memo Comments']
+                        fields:
+                            credit_memo_comments: //textarea[@name='creditmemo[comment_text]']
+                -
+                    refund_totals:
+                        xpath: //div[@class='box-right entry-edit'][./div/h4='Refund Totals']
+                        buttons:
+                            refund_offline: //button[span='Refund Offline']
+                            refund: //button[span='Refund']
+                        fields:
+                            refund_shipping: //input[@name='creditmemo[shipping_amount]']
+                            adjustment_refund: //input[@name='creditmemo[adjustment_positive]']
+                            adjustment_fee: //input[@name='creditmemo[adjustment_negative]']
+                        checkboxes:
+                            append_comments: //input[@name='creditmemo[comment_customer_notify]']
+                            email_copy_of_credit_memo: //input[@name='creditmemo[send_email]']
+                        pageelements:
+                            price_totals: //tbody
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            reset: //p[@class='form-buttons']//button[span='Reset']
+        messages:
+            confirmation_to_procced: This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you wish to proceed?
+            success_creating_creditmemo: //li[normalize-space(@class)='success-msg' and contains(.,'The credit memo has been created.')]
+            failed_authorize_online_refund: "//li[normalize-space(@class)='error-msg' and contains(.,'Gateway error: The referenced transaction does not meet the criteria for issuing a credit. If the invoice was created offline, try creating an offline creditmemo.')]"
+
+create_credit_memo_for_invoice:
+    mca: sales_order_creditmemo/new/order_id/%id%/invoice_id/%invoice_id%/
+    title: New Memo for %invoiceId% / Credit Memos / Sales / Magento Admin
+    uimap: *orderCreditmemo
+
+view_credit_memo:
+    mca: sales_creditmemo/view/creditmemo_id/%id%/
+    title: View Memo / Credit Memos / Sales / Magento Admin
+    uimap:
+        form: &viewCreditmemo
+            fieldsets:
+                -
+                    order_number:
+                        xpath: //div[@class='entry-edit'][./div/a[contains(.,'Order #')]]
+                -
+                    account_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Account Information']
+                -
+                    billing_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Billing Address']
+                -
+                    shipping_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Address']
+                -
+                    payment_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Payment Information']
+                -
+                    shipping_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Information']
+                -
+                    items_refunded:
+                        xpath: //div[@id='creditmemo_items_container']/div[@class='grid np']
+                        pageelements:
+                            product_table_head: //table[@class='data order-tables']/thead
+                            product_line:  //table[@class='data order-tables']/tbody
+                -
+                    credit_memo_history:
+                        xpath: //div[@class='box-left entry-edit'][./div/h4='Credit Memo History']
+                        fields:
+                            credit_memo_comments: //textarea[@name='comment[comment]']
+                        buttons:
+                            submit_comment: //button[span='Submit Comment']
+                -
+                    credit_memo_totals:
+                        xpath: //div[@class='box-right entry-edit'][./div/h4='Credit Memo Totals']
+                        pageelements:
+                            price_totals: //tbody
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            send_email: //p[@class='form-buttons']//button[span='Send Email']
+            print: //p[@class='form-buttons']//button[span='Print']

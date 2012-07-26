@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Xcom
+ * @package     Xcom_Stub
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <xcom translate="label" module="xcom_xfabric">
+            <label>X.Commerce</label>
+            <sort_order>500</sort_order>
+        </xcom>
+    </tabs>
+    <sections>
+        <dev>
+            <groups>
+                <xfabric_connection_settings translate="label">
+                    <label>X.Commerce Fabric Connection Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>120</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <adapter translate="label comment">
+                            <label>Adapter</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>xcom_xfabric/source_transport::getOptions</source_model>
+                            <config_path>xfabric/connection_settings/adapter</config_path>
+                            <comment>(Transporting System)</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </adapter>
+                        <encoding translate="label">
+                            <label>Encoding</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>xcom_xfabric/source_encoding::getOptions</source_model>
+                            <config_path>xfabric/connection_settings/encoding</config_path>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </encoding>
+                    </fields>
+                </xfabric_connection_settings>
+            </groups>
+        </dev>
+        <xcom_fabric translate="label">
+            <class>separator-top</class>
+            <label>Fabric</label>
+            <tab>xcom</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>90</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <fabric_registration translate="label">
+                    <label>Fabric Registration</label>
+                    <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_renderer_conditional</frontend_model>
+                    <conditions>
+                        <is_empty_store_front>
+                            <xpath><![CDATA[default/xfabric/connection_settings/authorizations/self/bearer_token]]></xpath>
+                            <empty/>
+                        </is_empty_store_front>
+                    </conditions>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <register_text translate="html">
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_raw</frontend_model>
+                            <html><![CDATA[To start using X.commerce capabilities, register at <a href="https://www.x.com/">x.com</a> and connect your Magento store with the X.commerce Fabric.]]></html>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </register_text>
+                        <register_button>
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_block</frontend_model>
+                            <block>xcom_xfabric/adminhtml_system_config_form_register</block>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </register_button>
+                    </fields>
+                </fabric_registration>
+                <fabric_auth_file translate="label">
+                    <label>Fabric Authorization</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <auth_file_text translate="html">
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_raw</frontend_model>
+                            <html><![CDATA[If you're registered with <a href="https://www.x.com/">x.com</a>, upload the authorization file now. The authorization file contains the credentials that enables you to connect to the Fabric and start using X.commerce capabilities.]]></html>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auth_file_text>
+                        <auth_file_upload translate="label">
+                            <frontend_type>file</frontend_type>
+                            <backend_model>xcom_xfabric/system_config_backend_authorization</backend_model>
+                            <label>Authorization file</label>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auth_file_upload>
+                    </fields>
+                </fabric_auth_file>
+                <fabric_connection translate="label">
+                    <label>Fabric Connection</label>
+                    <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_renderer_conditional</frontend_model>
+                    <conditions>
+                        <got_store_front>
+                            <xpath><![CDATA[default/xfabric/connection_settings/authorizations/self/bearer_token]]></xpath>
+                            <non_empty/>
+                        </got_store_front>
+                    </conditions>
+                    <expanded>1</expanded>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <store_front translate="label">
+                            <label>Magento Store Front</label>
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_configurable</frontend_model>
+                            <config>
+                                <disabled>disabled</disabled>
+                            </config>
+                            <config_path>xfabric/connection_settings/capability_name</config_path>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </store_front>
+                        <fabric_url translate="label">
+                            <label>Fabric URL</label>
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_configurable</frontend_model>
+                            <config>
+                                <disabled>disabled</disabled>
+                            </config>
+                            <config_path>xfabric/connection_settings/fabric_url</config_path>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </fabric_url>
+                        <test_connection_button translate="button_label">
+                            <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_element_renderer_button</frontend_model>
+                            <config translate="label">
+                                <label>Test Connection</label>
+                                <redirect>xfabric/testconnection</redirect>
+                            </config>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </test_connection_button>
+                    </fields>
+                </fabric_connection>
+                <support_message translate="html">
+                    <frontend_model>xcom_xfabric/adminhtml_system_config_form_fieldset_renderer_html</frontend_model>
+                    <html><![CDATA[For any support question, including unsubscribing from X.Commerce, please send e-mail to <a href="mailto://support@magento.com">support@magento.com</a>]]></html>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </support_message>
+            </groups>
+        </xcom_fabric>
+    </sections>
+</config>

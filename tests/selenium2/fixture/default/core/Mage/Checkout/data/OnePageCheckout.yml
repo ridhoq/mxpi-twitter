@@ -1,0 +1,772 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for One Page Checkout(Frontend)
+customer_address_for_order:
+    first_name: Steven(billing.req)
+    last_name: Stevenson(billing.req)
+    street_address_line_1: street address 1(billing.req)
+    city: Los Angeles
+    country: United States
+    state: California
+    zip_code: 90064
+    telephone: (091)019-019(billing.req)
+    default_billing_address: Yes
+    default_shipping_address: Yes
+################################################################################
+#                                                                              #
+#                                 Checkout Method                              #
+#                                                                              #
+################################################################################
+guest: &guest
+    checkout_method: guest
+
+register: &register
+    checkout_method: register
+
+login: &login
+    checkout_method: login
+    additional_data:
+        email_address: %noValue%
+        password: 123123q
+################################################################################
+#                                                                              #
+#                                 Billing Address                              #
+#                                                                              #
+################################################################################
+#<--------------SignedIn---------------->
+billing_exist_signedin_req_physical_withshipping:
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    ship_to_this_address: Yes
+
+billing_new_signedin_long_values: &newBillingSignedInLongValues
+    billing_address_choice: New Address
+    billing_first_name: %longValue255%
+    billing_last_name: %longValue255%
+    billing_company: %longValue255%
+    billing_street_address_1: %longValue255%
+    billing_street_address_2: %longValue255%
+    billing_city: %longValue255%
+    billing_country: Ukraine
+    billing_region: %longValue255%
+    billing_zip_code: %longValue255%
+    billing_telephone: %longValue255%
+    billing_fax: %longValue255%
+    billing_save_in_address_book: %noValue%
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_new_signedin_special_values: &newBillingSignedInSpecialValues
+    billing_address_choice: New Address
+    billing_first_name: %specialValue32%
+    billing_last_name: %specialValue32%
+    billing_company: %specialValue32%
+    billing_street_address_1: %specialValue32%
+    billing_street_address_2: %specialValue32%
+    billing_city: %specialValue32%
+    billing_country: Ukraine
+    billing_region: %specialValue32%
+    billing_zip_code: %specialValue32%
+    billing_telephone: %specialValue32%
+    billing_fax: %specialValue32%
+    billing_save_in_address_book: %noValue%
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_new_signedin_req_physical: &newBillingSignedInReqPhysical
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_save_in_address_book: %noValue%
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_new_signedin_req_virtual: &newBillingSignedInReqVirtual
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_save_in_address_book: %noValue%
+
+billing_new_signedin_req_physical_withshipping_usa: &newBillingSignedInReqWithShippingUsa
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_save_in_address_book: %noValue%
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+billing_new_signedin_req_physical_withshipping_france: &newBillingSignedInReqWithShippingFrance
+    billing_address_choice: New Address
+    billing_first_name: Jean
+    billing_last_name: Reno
+    billing_company: %noValue%
+    billing_street_address_1: 13, rue Jean Vilar
+    billing_street_address_2: %noValue%
+    billing_city: Bergerac
+    billing_country: France
+    billing_state: Dordogne
+    billing_region: %noValue%
+    billing_zip_code: 24100
+    billing_telephone: 06 88 07 44 27
+    billing_fax: %noValue%
+    billing_save_in_address_book: %noValue%
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+#<--------------With Registration---------------->
+billing_with_register_req_physical_withshipping: &billingWithRegisterReqWithShipping
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+billing_with_register_req_physical: &billingWithRegisterReq
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_with_register_req_virtual: &billingWithRegisterReqVirtual
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+
+billing_with_register_long_values: &billingWithRegisterLongValues
+    billing_address_choice: New Address
+    billing_first_name: %longValue255%
+    billing_last_name: %longValue255%
+    billing_company: %longValue255%
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_street_address_1: %longValue255%
+    billing_street_address_2: %longValue255%
+    billing_city: %longValue255%
+    billing_country: Ukraine
+    billing_region: %longValue255%
+    billing_zip_code: %longValue255%
+    billing_telephone: %longValue255%
+    billing_fax: %longValue255%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_with_register_long_values: &billingWithRegisterSpecialValues
+    billing_address_choice: New Address
+    billing_first_name: %specialValue32%
+    billing_last_name: %specialValue32%
+    billing_company: %specialValue32%
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_street_address_1: %specialValue32%
+    billing_street_address_2: %specialValue32%
+    billing_city: %specialValue32%
+    billing_country: Ukraine
+    billing_region: %specialValue32%
+    billing_zip_code: %specialValue32%
+    billing_telephone: %specialValue32%
+    billing_fax: %specialValue32%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: %noValue%
+    ship_to_different_address: Yes
+
+billing_with_register_withshipping_usa: &billingWithRegisterWithShippingUsa
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+billing_with_register_withshipping_france: &billingWithRegisterWithShippingFrance
+    billing_address_choice: New Address
+    billing_first_name: Jean
+    billing_last_name: Reno
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: 13, rue Jean Vilar
+    billing_street_address_2: %noValue%
+    billing_city: Bergerac
+    billing_country: France
+    billing_state: Dordogne
+    billing_region: %noValue%
+    billing_zip_code: 24100
+    billing_telephone: 06 88 07 44 27
+    billing_fax: %noValue%
+    billing_password: 123123q
+    billing_confirm_password: 123123q
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+#<--------------Guest---------------->
+billing_guest_req_virtual: &billingGuestReqVirtual
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+
+billing_guest_req_physical_withshipping: &guestBillingReqWithShipping
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+billing_guest_withshipping_usa: &guestBillingWithShippingUsa
+    billing_address_choice: New Address
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+billing_guest_withshipping_france: &guestBillingWithShippingFrance
+    billing_address_choice: New Address
+    billing_first_name: Jean
+    billing_last_name: Reno
+    billing_email: onepage_checkout_%randomize%@domain.com
+    billing_company: %noValue%
+    billing_street_address_1: 13, rue Jean Vilar
+    billing_street_address_2: %noValue%
+    billing_city: Bergerac
+    billing_country: France
+    billing_state: Dordogne
+    billing_region: %noValue%
+    billing_zip_code: 24100
+    billing_telephone: 06 88 07 44 27
+    billing_fax: %noValue%
+    ship_to_this_address: Yes
+    ship_to_different_address: %noValue%
+
+################################################################################
+#                                                                              #
+#                                Shipping Address                              #
+#                                                                              #
+################################################################################
+#<--------------SignedIn---------------->
+shipping_new_signedin_req: &newShippingSignedInReq
+    shipping_address_choice: New Address
+    shipping_first_name: Steven(shipping.req)
+    shipping_last_name: Stevenson(shipping.req)
+    shipping_company: %noValue%
+    shipping_street_address_1: street address 1(shipping.req)
+    shipping_street_address_2: %noValue%
+    shipping_city: Los Angeles
+    shipping_country: United States
+    shipping_state: California
+    shipping_region: %noValue%
+    shipping_zip_code: 90064
+    shipping_telephone: (091)019-019(shipping.req)
+    shipping_fax: %noValue%
+    billing_save_in_address_book: %noValue%
+    use_billing_address: No
+
+shipping_new_signedin_long_values: &newShippingSignedInLongValues
+    shipping_address_choice: New Address
+    shipping_first_name: %longValue255%
+    shipping_last_name: %longValue255%
+    shipping_company: %longValue255%
+    shipping_street_address_1: %longValue255%
+    shipping_street_address_2: %longValue255%
+    shipping_city: %longValue255%
+    shipping_country: Ukraine
+    shipping_region: %longValue255%
+    shipping_zip_code: %longValue255%
+    shipping_telephone: %longValue255%
+    shipping_fax: %longValue255%
+    billing_save_in_address_book: %noValue%
+    use_billing_address: No
+
+shipping_new_signedin_special_values: &newShippingSignedInSpecialValues
+    shipping_address_choice: New Address
+    shipping_first_name: %specialValue32%
+    shipping_last_name: %specialValue32%
+    shipping_company: %specialValue32%
+    shipping_street_address_1: %specialValue32%
+    shipping_street_address_2: %specialValue32%
+    shipping_city: %specialValue32%
+    shipping_country: Ukraine
+    shipping_region: %specialValue32%
+    shipping_zip_code: %specialValue32%
+    shipping_telephone: %specialValue32%
+    shipping_fax: %specialValue32%
+    billing_save_in_address_book: %noValue%
+    use_billing_address: No
+
+#<--------------With Registration---------------->
+shipping_with_register_long_values: &shippingWithRegisterLongValues
+    shipping_address_choice: New Address
+    shipping_first_name: %longValue255%
+    shipping_last_name: %longValue255%
+    shipping_company: %longValue255%
+    shipping_street_address_1: %longValue255%
+    shipping_street_address_2: %longValue255%
+    shipping_city: %longValue255%
+    shipping_country: Ukraine
+    shipping_region: %longValue255%
+    shipping_zip_code: %longValue255%
+    shipping_telephone: %longValue255%
+    shipping_fax: %longValue255%
+    use_billing_address: No
+
+shipping_with_register_long_values: &shippingWithRegisterSpecialValues
+    shipping_address_choice: New Address
+    shipping_first_name: %specialValue32%
+    shipping_last_name: %specialValue32%
+    shipping_company: %specialValue32%
+    shipping_street_address_1: %specialValue32%
+    shipping_street_address_2: %specialValue32%
+    shipping_city: %specialValue32%
+    shipping_country: Ukraine
+    shipping_region: %specialValue32%
+    shipping_zip_code: %specialValue32%
+    shipping_telephone: %specialValue32%
+    shipping_fax: %specialValue32%
+    use_billing_address: No
+################################################################################
+#                                                                              #
+#                                 Payment Card Data                            #
+#                                                                              #
+################################################################################
+
+front_saved_visa: &visaSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Visa'
+    card_number: '4000000000000002'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+front_else_visa: &visaElse
+    card_type: 'Visa'
+    #card_number: '4832011527418035'
+    card_number: '4000000000000002'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+front_else_visa_direct: &visaElseDirect
+    card_type: 'Visa'
+    card_number: '4832011527418035'
+    expiration_month: '01 - January'
+    expiration_year: '2013'
+    card_verification_number: '111'
+
+front_else_mastercard: &mastercardElse
+    card_type: 'MasterCard'
+    card_number: 5200000000000007
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+################################################################################
+#                                                                              #
+#                                 Payment Method                               #
+#                                                                              #
+################################################################################
+front_payment_checkmoney: &checkMoney
+    payment_method: Check / Money order
+
+front_payment_savedcc: &savedCCVisa
+    payment_method: Credit Card (saved)
+    payment_info: *visaSavedCC
+
+front_payment_paypaldirectuk: &paypalDirectUkMastercard
+    payment_method: PayPal Direct Payment Payflow Edition
+    payment_info: *mastercardElse
+
+front_payment_paypaldirect: &paypalDirectMastercard
+    payment_method: PayPal Direct Payment
+    payment_info: *visaElseDirect
+
+front_payment_payflowpro: &payfloProVisa
+    payment_method: Payflow Pro
+    payment_info: *visaElse
+
+front_payment_authorizenet: &authorizeNetVisa
+    payment_method: Credit Card (Authorize.net)
+    payment_info: *visaElse
+
+################################################################################
+#                                                                              #
+#                                 Shipping Method                              #
+#                                                                              #
+################################################################################
+front_shipping_flatrate: &flatRate
+    shipping_service: Flat Rate
+    shipping_method: Fixed
+
+front_shipping_free: &freeShipping
+    shipping_service: Free Shipping
+    shipping_method: Free
+
+front_shipping_ups: &ups
+    shipping_service: United Parcel Service
+    shipping_method: Ground
+
+front_shipping_upsxml: &upsXml
+    shipping_service: United Parcel Service XML
+    shipping_method: UPS Ground
+
+front_shipping_usps: &usps
+    shipping_service: United States Postal Service
+    shipping_method: Express Mail Flat Rate Envelope Hold For Pickup
+
+front_shipping_fedex: &fedex
+    shipping_service: Federal Express
+    shipping_method: Home Delivery
+
+front_shipping_dhl:
+    shipping_service: DHL
+    shipping_method: International Express
+
+# Data for a release after CE1.6.2
+#
+#front_shipping_dhl_usa: &dhl_usa
+#    shipping_service: DHL USA
+#    shipping_method: Express
+#
+#front_shipping_dhl_int: &dhl_int
+#    shipping_service: DHL
+#    shipping_method: Express easy
+
+################################################################################
+#                                                                              #
+#               Order Data for Signed In Customer                              #
+#                                                                              #
+################################################################################
+signedin_flatrate_checkmoney_different_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqPhysical
+    shipping_address_data: *newShippingSignedInReq
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_use_billing_in_shipping:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqPhysical
+    shipping_address_data:
+        shipping_address_choice: New Address
+        use_billing_address: Yes
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_long_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInLongValues
+    shipping_address_data: *newShippingSignedInLongValues
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_special_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInSpecialValues
+    shipping_address_data: *newShippingSignedInSpecialValues
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_virtual:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqVirtual
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqWithShippingUsa
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_usa:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqWithShippingUsa
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+signedin_flatrate_checkmoney_france:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqWithShippingFrance
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+################################################################################
+#                                                                              #
+#               Order Data for With Registration                               #
+#                                                                              #
+################################################################################
+with_register_flatrate_checkmoney_virtual:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    billing_address_data: *billingWithRegisterReqVirtual
+    payment_data: *checkMoney
+
+with_register_flatrate_checkmoney: &withRegisterFlatrateCheck
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    billing_address_data: *billingWithRegisterReqWithShipping
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+with_register_flatrate_checkmoney_usa:
+    <<: *withRegisterFlatrateCheck
+    billing_address_data: *billingWithRegisterWithShippingUsa
+
+with_register_flatrate_checkmoney_france:
+    <<: *withRegisterFlatrateCheck
+    billing_address_data: *billingWithRegisterWithShippingFrance
+
+with_register_flatrate_checkmoney_different_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    billing_address_data: *billingWithRegisterReq
+    shipping_address_data: *newShippingSignedInReq
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+with_register_flatrate_checkmoney_long_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    billing_address_data: *billingWithRegisterLongValues
+    shipping_address_data: *shippingWithRegisterLongValues
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+with_register_flatrate_checkmoney_special_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    billing_address_data: *billingWithRegisterSpecialValues
+    shipping_address_data: *shippingWithRegisterSpecialValues
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+################################################################################
+#                                                                              #
+#                           Order Data for Guest                               #
+#                                                                              #
+################################################################################
+guest_flatrate_checkmoney: &guestFlatrateCheck
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *guest
+    billing_address_data: *guestBillingReqWithShipping
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+guest_flatrate_checkmoney_usa:
+    <<: *guestFlatrateCheck
+    billing_address_data: *guestBillingWithShippingUsa
+
+guest_flatrate_checkmoney_france:
+    <<: *guestFlatrateCheck
+    billing_address_data: *guestBillingWithShippingFrance
+
+guest_flatrate_checkmoney_virtual:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *guest
+    billing_address_data: *billingGuestReqVirtual
+    payment_data: *checkMoney
+
+################################################################################
+#                                                                              #
+#                           Order Data for Exist Customer                      #
+#                                                                              #
+################################################################################
+exist_flatrate_checkmoney_virtual:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *login
+    billing_address_data: *newBillingSignedInReqVirtual
+    payment_data: *checkMoney
+
+exist_flatrate_checkmoney: &existFlatrateCheck
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *login
+    billing_address_data: *newBillingSignedInReqWithShippingUsa
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+exist_flatrate_checkmoney_usa:
+    <<: *existFlatrateCheck
+    billing_address_data: *newBillingSignedInReqWithShippingUsa
+
+exist_flatrate_checkmoney_france:
+    <<: *existFlatrateCheck
+    billing_address_data: *newBillingSignedInReqWithShippingFrance

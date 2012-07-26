@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="false" syntaxCheck="true" bootstrap="framework/bootstrap.php">
+    <testsuite name="Magento Full Test">
+        <directory>ut/core/Xcom/Chronicle</directory>
+        <directory>ut/core/Xcom/Xfabric</directory>
+        <directory>ut/core/Xcom/Choreography</directory>
+    </testsuite>
+    <filter>
+        <whitelist>
+            <directory>../app/code/core/Xcom</directory>
+            <exclude>
+                <directory prefix="data-upgrade">../app/code/core/Xcom</directory>
+                <directory prefix="mysql4-">../app/code/core/Xcom</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="../tools/reports/logs/coverage.xml"/>
+    </logging>
+</phpunit>

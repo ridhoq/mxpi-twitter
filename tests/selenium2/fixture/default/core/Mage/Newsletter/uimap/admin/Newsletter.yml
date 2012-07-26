@@ -1,0 +1,68 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+# Newsletter Subscribers Manager page
+newsletter_subscribers:
+    mca: newsletter_subscriber/
+    click_xpath: //div[@class='nav-bar']//a[span='Newsletter Subscribers']
+    title: Newsletter Subscribers / Newsletter / Magento Admin
+    uimap:
+        form: &searchSubscribers
+            fieldsets:
+                -
+                    subscribers_grid:
+                        xpath: //div[@id='subscriberGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            export: //button[span='Export']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            subscribers_massaction: //select[@id='subscriberGrid_massaction-select']
+                            export_to: //select[@id='subscriberGrid_export']
+                            filter_massaction: //select[@name='massaction']
+                            filter_type: //select[@id='subscriberGrid_filter_type']
+                            filter_status: //select[@id='subscriberGrid_filter_status']
+                            filter_website: //select[@id='subscriberGrid_filter_website']
+                            filter_store: //select[@id='subscriberGrid_filter_group']
+                            filter_store_view: //select[@id='subscriberGrid_filter_store']
+                        fields:
+                            filter_id: //input[@name='subscriber_id']
+                            filter_email: //input[@name='email']
+                            filter_customer_first_name: //input[@name='firstname']
+                            filter_customer_last_name: //input[@name='lastname']
+                        links:
+                            select_all: //a[text()='Select All']
+                            unselect_all: //a[text()='Unselect All']
+                            select_visible: //a[text()='Select Visible']
+                            unselect_visible: //a[text()='Unselect Visible']
+                        pageelements:
+                            poll_grid_head: //div[@id='subscriberGrid']//thead/tr[@class='headings']
+        messages: &subscribersMesssages
+            success_update: //li[normalize-space(@class)='success-msg' and contains(.,'Total of %qtyOfRecords% record(s) were updated')]
+            success_delete: //li[normalize-space(@class)='success-msg' and contains(.,'Total of %qtyOfRecords% record(s) were deleted')]
+            select_items_to_action: Please select items.

@@ -1,0 +1,66 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+dashboard:
+    mca: dashboard
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'dashboard')]
+    title: "Dashboard / Magento Admin"
+    uimap:
+        form:
+            fieldsets:
+                -
+                    global_header:
+                        xpath: //div[contains(a/img/@class,'logo')]
+                        links:
+                            log_out: //a[@class='link-logout']
+                        pageelements:
+                            admin_logo: //img[@class='logo' and contains(@src,'logo.gif')]
+                -
+                    notification_global:
+                        xpath: //div[@class='notification-global']
+                        links:
+                            invalided_cache: //a[text()='Cache Management']
+                            invalided_index: //a[text()='Index Management']
+                            go_to_notifications: //a[text()='Go to messages inbox' or text()='Go to notifications']
+                -
+                    incoming_message:
+                        xpath: //*[@id='message-popup-window' and @class='message-popup show']
+                        buttons:
+                            close: //a[span='close']
+                -
+                    general_elements:
+                        xpath:
+                        pageelements:
+
+                            qtyElementsInTable: //td[@class='pager']//span[contains(@id,'total-count')]
+                            fieldNameWithValidationMessage: "/ancestor::*[2]//label/descendant-or-self::*[string-length(text())>1]"
+                            loadingHolder: "//div[@id='loading-mask' and not(contains(@style,'display: none'))]"
+        messages:
+            general_notice: "//*/descendant::*[normalize-space(@class)='notice-msg'][string-length(.)>1]"
+            general_success: "//*/descendant::*[normalize-space(@class)='success-msg'][string-length(.)>1]"
+            general_error: "//*/descendant::*[normalize-space(@class)='error-msg'][string-length(.)>1]"
+            general_validation: "//*/descendant::*[normalize-space(@class)='validation-advice' and not(contains(@style,'display: none;'))][string-length(.)>1]"

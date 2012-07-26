@@ -1,0 +1,238 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Reviews and Ratings
+manage_ratings:
+    mca: rating/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'rating/index/')]
+    title: Manage Ratings / Reviews and Ratings / Catalog / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    manage_ratings_grid:
+                        xpath: //div[@id='ratingsGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='rating_id']
+                            filter_rating_name: //input[@name='rating_code']
+                        pageelements:
+                            grid_head: //table[@id='ratingsGrid_table']//tr[@class='headings']
+        buttons:
+            add_new_rating: //button[span='Add New Rating']
+        messages: &ratingMessages
+            success_saved_rating: //li[normalize-space(@class)='success-msg' and contains(.,'The rating has been saved.')]
+            success_deleted_rating: //li[normalize-space(@class)='success-msg' and contains(.,'The rating has been deleted.')]
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+            existing_name: //li[normalize-space(@class)='error-msg' and contains(.,'already exists.')]
+            confirmation_for_delete: Are you sure you want to do this?
+
+new_rating:
+    mca: rating/new/
+    title: New Rating / Manage Ratings / Reviews and Ratings / Catalog / Magento Admin
+    uimap: &newRating
+        form:
+            tabs:
+                -
+                    rating_information:
+                        xpath: //a[@title='Rating Information']/span
+                        fieldsets:
+                            -
+                                rating_title:
+                                    xpath: //div[@id='rating_form']
+                                    fields:
+                                        default_value: //input[@name='rating_code']
+                                        store_view_title: //tr[*/label='%storeViewName%']/td[@class='value']/input
+                            -
+                                rating_visibility:
+                                    xpath: //div[@id='visibility_form']
+                                    multiselects:
+                                        visible_in: //select[@name='stores[]']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_rating: //button[span='Save Rating']
+        messages: *ratingMessages
+
+new_edit_rating:
+    mca: rating/edit/
+    title: New Rating / Manage Ratings / Reviews and Ratings / Catalog / Magento Admin
+    uimap: *newRating
+
+edit_rating:
+    mca: rating/edit/id/%id%/
+    title: %elementTitle% / Manage Ratings / Reviews and Ratings / Catalog / Magento Admin
+    uimap:
+        form: *newRating
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_rating: //button[span='Save Rating']
+            delete_rating: //button[span='Delete Rating']
+        messages: *ratingMessages
+
+manage_all_reviews:
+    mca: catalog_product_review/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'catalog_product_review/index/')]
+    title: All Reviews / Customer Reviews / Reviews and Ratings / Catalog / Magento Admin
+    uimap:
+        form: &manageReviews
+            fieldsets:
+                -
+                    all_reviews_grid: &reviewGrid
+                        xpath: //div[@id='reviwGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            actions: //select[@id='reviwGrid_massaction-select']
+                            filter_massaction: //select[@name='massaction']
+                            filter_status: //select[@name='status']
+                            filter_visible_in: //select[@name='visible_in']
+                            filter_type: //select[@name='type']
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='review_id']
+                            filter_created_on_from: //input[@name='created_at[from]']
+                            filter_created_on_to: //input[@name='created_at[to]']
+                            filter_title: //input[@name='title']
+                            filter_nickname: //input[@name='nickname']
+                            filter_review: //input[@name='detail']
+                            filter_product_name: //input[@name='name']
+                            filter_product_sku: //input[@name='sku']
+                        links:
+                            select_all: //a[text()='Select All']
+                            unselect_all: //a[text()='Unselect All']
+                            select_visible: //a[text()='Select Visible']
+                            unselect_visible: //a[text()='Unselect Visible']
+                            pending_reviews_rss: //a[text()='Pending Reviews RSS']
+        buttons:
+            add_new_review: //button[span='Add New Review']
+        messages: &reviewMessages
+            success_saved_review: //li[normalize-space(@class)='success-msg' and contains(.,'The review has been saved.')]
+            success_deleted_review: //li[normalize-space(@class)='success-msg' and contains(.,'The review has been deleted')]
+            success_deleted_review_massaction: //li[normalize-space(@class)='success-msg' and contains(.,'record(s) have been deleted.')]
+            confirmation_for_delete_all: Are you sure?
+            confirmation_for_delete: Are you sure you want to do this?
+            empty_required_field: "//div[@id='advice-required-entry-%fieldId%' and not(contains(@style,'display: none;'))]"
+            empty_validate_rating: "//div[@id='advice-validate-rating-validate_rating' and not(contains(@style,'display: none;'))]"
+            not_available_rating: //*[@id='rating_detail'][normalize-space(text())="Rating isn't Available"]
+
+manage_pending_reviews:
+    mca: catalog_product_review/pending/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'catalog_product_review/pending/')]
+    title: Pending Reviews / Customer Reviews / Reviews and Ratings / Catalog / Magento Admin
+    uimap:
+        form: *manageReviews
+        messages: *reviewMessages
+
+add_new_review:
+    mca: catalog_product_review/new/
+    title: New Review / Customer Reviews / Reviews and Ratings / Catalog / Magento Admin
+    uimap:
+        form:
+            fieldsets:
+                -
+                    select_product_grid:
+                        xpath: //div[@id='productGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page: //select[@name='limit']
+                            filter_status: //select[@name='status']
+                            filter_websites: //select[@name='websites']
+                        fields:
+                            page: //input[@name='page']
+                            filter_id: //input[@name='entity_id']
+                            filter_name: //input[@name='name']
+                            filter_sku: //input[@name='sku']
+                            filter_price_from: //input[@name='price[from]']
+                            filter_price_to: //input[@name='price[to]']
+                            filter_qty_from: //input[@name='qty[from]']
+                            filter_qty_to: //input[@name='qty[to]']
+                        pageelements:
+                            grid_head: //table[@id='productGrid_table']//tr[@class='headings']
+                -
+                    review_details: &reviewDetails
+                        xpath: //div[@id='add_review_form']
+                        links:
+                            product: //a[text()='%productName%']
+                        radiobuttons:
+                            detailed_rating: //input[@type='radio' and @id='%ratingName%_%stars%']
+                        dropdowns:
+                            status: //select[@name='status_id']
+                        multiselects:
+                            visible_in: //select[@name='select_stores[]']
+                        fields:
+                            nickname: //input[@name='nickname']
+                            summary_of_review: //input[@name='title']
+                            review: //textarea[@name='detail']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_review: //button[span='Save Review']
+        messages: *reviewMessages
+
+edit_review:
+    mca: catalog_product_review/edit/id/%id%/
+    title: Edit Review / Customer Reviews / Reviews and Ratings / Catalog / Magento Admin
+    uimap: &editReview
+        form:
+            fieldsets:
+                -
+                    review_details:
+                        xpath: //div[@id='review_details']
+                        links:
+                            product: //a[text()='%productName%']
+                        radiobuttons:
+                            detailed_rating: //input[@type='radio' and @id='%ratingName%_%stars%']
+                        dropdowns:
+                            status: //select[@name='status_id']
+                        multiselects:
+                            visible_in: //select[@id='select_stores']
+                        fields:
+                            nickname: //input[@name='nickname']
+                            summary_of_review: //input[@name='title']
+                            review: //textarea[@name='detail']
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_review: //button[span='Save Review']
+            delete_review: //button[span='Delete Review']
+        messages: *reviewMessages
+
+edit_pending_review:
+    mca: catalog_product_review/edit/id/%id%/ret/pending/
+    title: Edit Review / Customer Reviews / Reviews and Ratings / Catalog / Magento Admin
+    uimap: *editReview

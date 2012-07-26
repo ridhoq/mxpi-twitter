@@ -1,0 +1,135 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#<----------------------------------------------------------------------------->
+#<-------------------------------All Fields------------------------------------>
+new_page_all_fields:
+    page_information:
+        page_title: new cms page all(%randomize%)
+        url_key: cms_page_url_%randomize%
+        store_view: Default Store View
+        status: Enabled
+    content:
+        content_heading: Content Heading Text
+        widgets:
+            widget_1:
+                widget_type: CMS Page Link
+                anchor_custom_text: CMS Page Link anchor_text_(%randomize%)
+                anchor_custom_title: CMS Page Link anchor_titlte_(%randomize%)
+                template: CMS Page Link Block Template
+                chosen_option:
+                    filter_url_key: about-magento-demo-store
+            widget_2:
+                widget_type: CMS Static Block
+                template: CMS Static Block Default Template
+                chosen_option:
+                    filter_identifier: footer_links
+            widget_3:
+                widget_type: Catalog Category Link
+                anchor_custom_text: Catalog Category Link anchor_text_(%randomize%)
+                anchor_custom_title: Catalog Category Link anchor_titlte_(%randomize%)
+                template: Category Link Block Template
+                chosen_option:
+                    category_path: Default Category
+            widget_4:
+                widget_type: Catalog New Products List
+                number_of_products_to_display: 10
+                template: New Products Grid Template
+                cache_lifetime: 86400
+            widget_5:
+                widget_type: Catalog Product Link
+                anchor_custom_text: Catalog Product Link anchor_text_(%randomize%)
+                anchor_custom_title: Catalog Product Link anchor_titlte_(%randomize%)
+                template: Product Link Block Template
+                chosen_option:
+                    category_path: %noValue%
+                    filter_sku: %noValue%
+            widget_6:
+                widget_type: Orders and Returns
+            widget_7:
+                widget_type: Recently Compared Products
+                number_of_products_to_display_compared_and_viewed: 10
+                template: Compared Products Grid Template
+            widget_8:
+                widget_type: Recently Viewed Products
+                number_of_products_to_display_compared_and_viewed: 10
+                template: Viewed Products Grid Template
+        variable_data:
+            variable_1: Base Unsecure URL
+#            variable_2: Base Secure URL
+#            variable_3: General Contact Name
+#            variable_4: General Contact Email
+#            variable_5: Sales Representative Contact Name
+#            variable_6: Sales Representative Contact Email
+#            variable_7: Custom1 Contact Name
+#            variable_8: Custom1 Contact Email
+#            variable_9: Custom2 Contact Name
+#            variable_10: Custom2 Contact Email
+#            variable_11: Store Name
+#            variable_12: Store Contact Telephone
+#            variable_13: Store Contact Telephone
+    design:
+        layout: 3 columns
+        layout_update_xml: %noValue%
+        custom_design_from: %currentDate%
+        custom_design_to: %currentDate%
+        custom_theme: default
+        custom_layout: 3 columns
+        custom_layout_update_xml: %noValue%
+    meta_data:
+        keywords: Meta Data Keywords
+        description: Meta Data Description
+
+
+#<-----------------------------Required Fields--------------------------------->
+new_cms_page_req:
+    page_information:
+        page_title: new cms page(%randomize%)
+        url_key: cms_page_url_%randomize%
+        status: Enabled
+        store_view: Default Store View
+    content:
+        content_heading: %noValue%
+        widgets:
+            widget_1:
+                widget_type: CMS Page Link
+                anchor_custom_text: CMS Page Link anchor_text_(%randomize%)
+                anchor_custom_title: CMS Page Link anchor_titlte_(%randomize%)
+                template: CMS Page Link Block Template
+                chosen_option:
+                    filter_url_key: about-magento-demo-store
+
+search_cms_page:
+    filter_title: %noValue%
+    filter_url_key: %noValue%
+    filter_layout: %noValue%
+    filter_store_viev: %noValue%
+    filter_status: %noValue%
+    filter_created_from: %noValue%
+    filter_created_to: %noValue%
+    filter_last_modified_from: %noValue%
+    filter_last_modified_to: %noValue%

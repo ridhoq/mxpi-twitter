@@ -1,0 +1,93 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Manage Customer Groups and related pages
+# 'Manage Customer Groups' page
+manage_customer_groups:
+    mca: customer_group/
+    click_xpath: //div[@class='nav-bar']//a[span='Customer Groups']
+    title: Customer Groups / Customers / Magento Admin
+    uimap:
+        form: &searchCustomerGroupsGrid
+            fieldsets:
+                -
+                    customer_group_grid:
+                        xpath: //div[@id='customerGroupGrid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                        dropdowns:
+                            view_per_page:  //select[@name='limit']
+                        fields:
+                            filter_id: //input[@id='customerGroupGrid_filter_time']
+                            filter_group_name: //input[@id='customerGroupGrid_filter_type']
+                            filter_tax_class: //input[@id='customerGroupGrid_filter_class_name']
+                        pageelements:
+                            customer_group_grid_head: //table[@id='customerGroupGrid_table']/thead/tr[@class='headings']
+        buttons:
+            add_new_customer_group: //button[span='Add New Customer Group']
+        messages: &customerGroupsMessages
+            success_deleted_customer_group: //li[normalize-space(@class)='success-msg' and contains(.,'The customer group has been deleted.')]
+            success_saved_customer_group: //li[normalize-space(@class)='success-msg' and contains(.,'The customer group has been saved.')]
+
+# 'New Customer Group' Page
+create_customer_group:
+    mca: customer_group/new/
+    title: New Group / Customer Groups / Customers / Magento Admin
+    uimap:
+        form: &newCustomerGroupForm
+            fieldsets:
+                -
+                    group_information:
+                        xpath: //form[@id='edit_form']
+                        dropdowns:
+                            tax_class: //select[@id='tax_class_id']
+                        fields:
+                            group_name: //input[@id='customer_group_code']
+                        required: [group_name, tax_class]
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            save_customer_group: //button[span='Save Customer Group']
+        messages:
+            empty_group_name: //div[@id='advice-required-entry-customer_group_code' and contains(text(),'This is a required field.') and not(contains(@style,'display: none'))]
+
+
+# 'Edit Customer Group' Page
+edit_customer_group:
+    mca: customer_group/edit/id/%id%/
+    title: %elementTitle% / Customer Groups / Customers / Magento Admin
+    uimap:
+        form: *newCustomerGroupForm
+        buttons:
+            back: //button[span='Back']
+            reset: //button[span='Reset']
+            delete_customer_group: //button[span='Delete Customer Group']
+            save_customer_group: //button[span='Save Customer Group']
+        messages:
+            empty_group_name: //div[@id='advice-required-entry-customer_group_code' and contains(text(),'This is a required field.') and not(contains(@style,'display: none'))]
+            confirmation_for_delete: Are you sure you want to do this?

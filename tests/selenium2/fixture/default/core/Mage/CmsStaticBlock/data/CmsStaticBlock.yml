@@ -1,0 +1,100 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Static Blocks
+search_static_block:
+    filter_block_title: %noValue%
+    filter_block_identifier: %noValue%
+    filter_store_view: %noValue%
+    filter_block_status: %noValue%
+    filter_block_created_from: %noValue%
+    filter_block_created_to: %noValue%
+    filter_block_modified_from: %noValue%
+    filter_block_modified_to: %noValue%
+
+static_block_with_all_widgets:
+    block_title: static_block_title
+    block_identifier: static_block_identifier
+    store_view: All Store Views
+    block_status: Enabled
+    content:
+        widgets:
+            widget_page_link: &widgetPageLink
+                widget_type: CMS Page Link
+                anchor_custom_text: CMS Page Link anchor_text_(%randomize%)
+                anchor_custom_title: CMS Page Link anchor_titlte_(%randomize%)
+                template: CMS Page Link Block Template
+                chosen_option:
+                    filter_url_key: about-magento-demo-store
+            widget_static_block: &widgetStaticBlock
+                widget_type: CMS Static Block
+                template: CMS Static Block Default Template
+                chosen_option:
+                    filter_identifier: footer_links
+            widget_category_link: &widgetCategoryLink
+                widget_type: Catalog Category Link
+                anchor_custom_text: Catalog Category Link anchor_text_(%randomize%)
+                anchor_custom_title: Catalog Category Link anchor_titlte_(%randomize%)
+                template: Category Link Block Template
+                chosen_option:
+                    category_path: Default Category
+            widget_new_products: &widgetNewProducts
+                widget_type: Catalog New Products List
+                number_of_products_to_display: 10
+                template: New Products Grid Template
+                cache_lifetime: 86400
+            widget_product_link: &widgetProductLink
+                widget_type: Catalog Product Link
+                anchor_custom_text: Catalog Product Link anchor_text_(%randomize%)
+                anchor_custom_title: Catalog Product Link anchor_titlte_(%randomize%)
+                template: Product Link Block Template
+                chosen_option:
+                    category_path: %noValue%
+                    filter_sku: %noValue%
+            widget_orders_and_returns: &widgetOrdersAndReturns
+                widget_type: Orders and Returns
+            widget_recently_compared: &widgetRecentlyCompared
+                widget_type: Recently Compared Products
+                number_of_products_to_display_compared_and_viewed: 10
+                template: Compared Products Grid Template
+            widget_recently_viewed: &widgetRecentlyViewed
+                widget_type: Recently Viewed Products
+                number_of_products_to_display_compared_and_viewed: 10
+                template: Viewed Products Grid Template
+        variables:
+            variable_1: Base Unsecure URL
+            variable_2: Base Secure URL
+            variable_3: General Contact Name
+
+new_static_block:
+    block_title: static_block_title_%randomize%
+    block_identifier: static_block_identifier_%randomize%
+    store_view: Default Store View
+    block_status: Enabled
+    content:
+        variables:
+            variable_1: Base Unsecure URL

@@ -1,0 +1,891 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#<-------------------------------------All Fields------------------------------>
+#<-------------------------------CMS Page Link Widget-------------------------->
+cms_page_link_widget:
+    settings:
+        type: CMS Page Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: CMS Page Link Block Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Page Footer
+            select_template: CMS Page Link Inline Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Shopping Cart Sidebar Extra Actions
+            select_template: CMS Page Link Block Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Page Bottom
+            select_template: CMS Page Link Block Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Product Extra Info
+            select_template: CMS Page Link Block Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Left Column
+            select_template: CMS Page Link Block Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: CMS Page Link Block Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Page Top
+            select_template: CMS Page Link Inline Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Alert Urls
+            select_template: CMS Page Link Inline Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Page Header
+            select_template: CMS Page Link Block Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Page Top
+            select_template: CMS Page Link Block Template
+    widget_options:
+        anchor_custom_text: custom_text
+        anchor_custom_title: custom_title
+        chosen_option:
+            filter_url_key: no-route
+
+#<----------------------------CMS Static Block Widget-------------------------->
+cms_static_block_widget:
+    settings:
+        type: CMS Static Block
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Left Column
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Page Footer
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Shopping Cart Sidebar Extra Actions
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Page Bottom
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Product Extra Info
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Left Column
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Page Top
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Alert Urls
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Page Header
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Page Top
+    widget_options:
+        chosen_option:
+            filter_identifier: footer_links
+
+#<-------------------------Catalog Category Link Widget------------------------>
+catalog_category_link_widget:
+    settings:
+        type: Catalog Category Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: Category Link Block Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Page Footer
+            select_template: Category Link Block Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Shopping Cart Sidebar Extra Actions
+            select_template: Category Link Inline Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Page Bottom
+            select_template: Category Link Inline Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Product Extra Info
+            select_template: Category Link Inline Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Left Column
+            select_template: Category Link Inline Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: Category Link Inline Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Page Top
+            select_template: Category Link Inline Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Alert Urls
+            select_template: Category Link Inline Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Page Header
+            select_template: Category Link Inline Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Page Top
+            select_template: Category Link Inline Template
+    widget_options:
+        anchor_custom_text: custom_text
+        anchor_custom_title: custom_title
+        chosen_option:
+            category_path: %noValue%
+
+#<-------------------------Catalog New Products List--------------------------->
+catalog_new_products_list_widget:
+    settings:
+        type: Catalog New Products List
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: New Products Grid Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Right Column
+            select_template: New Products Images and Names Template
+    widget_options:
+        number_of_products_to_display: 10
+        cache_lifetime: 10
+
+#<-------------------------Catalog Product Link-------------------------------->
+catalog_product_link_widget:
+    settings:
+        type: Catalog Product Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: Product Link Block Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Right Column
+            select_template: Product Link Block Template
+    widget_options:
+        anchor_custom_text: custom_text
+        anchor_custom_title: custom_title
+        chosen_option:
+            category_path: %noValue%
+            filter_sku: %noValue%
+
+#<-------------------------Orders and Returns---------------------------------->
+orders_and_returns_widget:
+    settings:
+        type: Orders and Returns
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Right Column
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Right Column
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Right Column
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Right Column
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Right Column
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Left Column
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Right Column
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Right Column
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Right Column
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Right Column
+    widget_options: %noValue%
+
+#<-------------------------Recently Compared Products-------------------------->
+recently_compared_products_widget:
+    settings:
+        type: Recently Compared Products
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: Compared Products Grid Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Right Column
+            select_template: Compared Products Images and Names Template
+    widget_options:
+        number_of_products_to_display_compared_and_viewed: 10
+
+
+#<-------------------------Recently Viewed Products---------------------------->
+recently_viewed_products_widget:
+    settings:
+        type: Recently Viewed Products
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+        sort_order: %noValue%
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_2:
+            select_display_on: Non-Anchor Categories
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                category_path: %noValue%
+        layout_3:
+            select_display_on: All Product Types
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+                product_2:
+                    filter_sku: %noValue%
+                product_3:
+                    filter_sku: %noValue%
+                product_4:
+                    filter_sku: %noValue%
+                product_5:
+                    filter_sku: %noValue%
+                product_6:
+                    filter_sku: %noValue%
+        layout_4:
+            select_display_on: Simple Product
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_1:
+                    filter_sku: %noValue%
+        layout_5:
+            select_display_on: Grouped Product
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_2:
+                    filter_sku: %noValue%
+        layout_6:
+            select_display_on: Configurable Product
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_3:
+                    filter_sku: %noValue%
+        layout_7:
+            select_display_on: Virtual Product
+            select_block_reference: Main Content Area
+            select_template: Viewed Products Grid Template
+            choose_options:
+                product_4:
+                    filter_sku: %noValue%
+        layout_8:
+            select_display_on: Bundle Product
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_5:
+                    filter_sku: %noValue%
+        layout_9:
+            select_display_on: Downloadable Product
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+            choose_options:
+                product_6:
+                    filter_sku: %noValue%
+        layout_10:
+            select_display_on: All Pages
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+        layout_11:
+            select_display_on: Specified Page
+            select_page: CMS Home Page
+            select_block_reference: Right Column
+            select_template: Viewed Products Images and Names Template
+    widget_options:
+        number_of_products_to_display_compared_and_viewed: 10
+
+#<---------------------Required Fields With Layout Updates--------------------->
+#<-------------------------------CMS Page Link Widget-------------------------->
+cms_page_link_widget_req:
+    settings:
+        type: CMS Page Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: CMS Page Link Block Template
+    widget_options:
+        chosen_option:
+            filter_url_key: no-route
+
+#<----------------------------CMS Static Block Widget-------------------------->
+cms_static_block_widget_req:
+    settings:
+        type: CMS Static Block
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Left Column
+    widget_options:
+        chosen_option:
+            filter_identifier: footer_links
+
+#<-------------------------Catalog Category Link Widget------------------------>
+catalog_category_link_widget_req:
+    settings:
+        type: Catalog Category Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+            select_template: Category Link Block Template
+    widget_options:
+        anchor_custom_text: custom_text
+        anchor_custom_title: custom_title
+        chosen_option:
+            category_path: %noValue%
+
+#<-------------------------Catalog New Products List--------------------------->
+catalog_new_products_list_widget_req:
+    settings:
+        type: Catalog New Products List
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+    widget_options:
+        number_of_products_to_display: 10
+
+#<-------------------------Catalog Product Link-------------------------------->
+catalog_product_link_widget_req:
+    settings:
+        type: Catalog Product Link
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+    widget_options:
+        chosen_option:
+            category_path: %noValue%
+            filter_sku: %noValue%
+
+#<-------------------------Orders and Returns---------------------------------->
+orders_and_returns_widget_req:
+    settings:
+        type: Orders and Returns
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+    widget_options: %noValue%
+
+#<-------------------------Recently Compared Products-------------------------->
+recently_compared_products_widget_req:
+    settings:
+        type: Recently Compared Products
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+    widget_options:
+        number_of_products_to_display_compared_and_viewed: 10
+
+
+#<-------------------------Recently Viewed Products---------------------------->
+recently_viewed_products_widget_req:
+    settings:
+        type: Recently Viewed Products
+        design_package_theme: base / default
+    frontend_properties:
+        assign_to_store_views: All Store Views
+        widget_instance_title: test
+    layout_updates:
+        layout_1:
+            select_display_on: Anchor Categories
+            select_block_reference: Right Column
+    widget_options:
+        number_of_products_to_display_compared_and_viewed: 10

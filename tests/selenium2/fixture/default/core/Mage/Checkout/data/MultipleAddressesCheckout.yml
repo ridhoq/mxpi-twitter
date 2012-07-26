@@ -1,0 +1,614 @@
+#
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  test-data
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Test data for Multiple Addresses Checkout(Frontend)
+################################################################################
+#                                                                              #
+#                                 Checkout Method                              #
+#                                                                              #
+################################################################################
+multiple_register: &register
+    checkout_method: register
+
+multiple_login: &login
+    checkout_method: login
+    additional_data:
+        email: %noValue%
+        password: 123123q
+################################################################################
+#                                                                              #
+#                                 Billing Address                              #
+#                                                                              #
+################################################################################
+#<--------------SignedIn---------------->
+multiple_billing_new_signedin_req_physical: &newBillingSignedInReqPhysical
+    billing_first_name: Steven(billing.req)
+    billing_last_name: Stevenson(billing.req)
+    billing_company: %noValue%
+    billing_street_address_1: street address 1(billing.req)
+    billing_street_address_2: %noValue%
+    billing_city: Los Angeles
+    billing_country: United States
+    billing_state: California
+    billing_region: %noValue%
+    billing_zip_code: 90064
+    billing_telephone: (091)019-019(billing.req)
+    billing_fax: %noValue%
+
+
+################################################################################
+#                                                                              #
+#                        General Shipping Address                              #
+#                                                                              #
+################################################################################
+
+general_shipping_address: &generalShippingAddress
+    shipping_first_name: First Name (%randomize%)
+    shipping_last_name: Last Name (%randomize%)
+    shipping_telephone: 10100010010
+    shipping_fax: 230482347
+    shipping_street_address_1: Some address 1 (%randomize%)
+    shipping_street_address_2: Some address 2 (%randomize%)
+    shipping_city: Some City (%randomize%)
+    shipping_zip_code: 94036
+    shipping_state: California
+    shipping_country: United States
+
+general_account_info: &generalAccountInfo
+    first_name: First Name (%randomize%)
+    last_name: Last Name (%randomize%)
+    email: %randomize%@exmaple.com
+    password: 123123q
+    password_confirmation: 123123q
+    company: Company (%randomize%)
+    telephone: 10100010010
+    fax: 230482347
+    street_address_1: Some address 1 (%randomize%)
+    street_address_2: Some address 2 (%randomize%)
+    city: Some City (%randomize%)
+    zip_code: 94036
+    state: California
+    country: United States
+
+################################################################################
+#                                                                              #
+#                                Shipping Address                              #
+#                                                                              #
+################################################################################
+#<--------------SignedIn---------------->
+multiple_shipping_new_signedin_req: &newShippingSignedInReq
+    shipping_first_name: Steven(shipping.req)
+    shipping_last_name: Stevenson(shipping.req)
+    shipping_company: %noValue%
+    shipping_street_address_1: street address 1(shipping.req)
+    shipping_street_address_2: %noValue%
+    shipping_city: Los Angeles
+    shipping_country: United States
+    shipping_state: California
+    shipping_region: %noValue%
+    shipping_zip_code: 90064
+    shipping_telephone: (091)019-019(shipping.req)
+    shipping_fax: %noValue%
+
+multiple_shipping_new_usa: &newShippingUsa
+    shipping_first_name: Chuk
+    shipping_last_name: Norris
+    shipping_company: %noValue%
+    shipping_street_address_1: Chuk Norris street
+    shipping_street_address_2: %noValue%
+    shipping_city: Navasota
+    shipping_country: United States
+    shipping_state: Texas
+    shipping_region: %noValue%
+    shipping_zip_code: 77868
+    shipping_telephone: 1800-2209-7492
+    shipping_fax: %noValue%
+
+multiple_shipping_new_france_1: &newShippingFrance1
+    shipping_first_name: Michèle
+    shipping_last_name: St-Pierre
+    shipping_company: %noValue%
+    shipping_street_address_1: 10, rue Jean Vilar
+    shipping_street_address_2: %noValue%
+    shipping_city: Bergerac
+    shipping_country: France
+    shipping_state: Dordogne
+    shipping_region: %noValue%
+    shipping_zip_code: 24100
+    shipping_telephone: 05 53 57 11 61
+    shipping_fax: %noValue%
+
+multiple_shipping_new_france_2: &newShippingFrance2
+    shipping_first_name: Jean
+    shipping_last_name: Reno
+    shipping_company: %noValue%
+    shipping_street_address_1: 13, rue Jean Vilar
+    shipping_street_address_2: %noValue%
+    shipping_city: Bergerac
+    shipping_country: France
+    shipping_state: Dordogne
+    shipping_region: %noValue%
+    shipping_zip_code: 24100
+    shipping_telephone: 06 88 07 44 27
+    shipping_fax: %noValue%
+
+################################################################################
+#                                                                              #
+#                                 Payment Card Data                            #
+#                                                                              #
+################################################################################
+
+multiple_front_saved_visa: &visaSavedCC
+    name_on_card: 'Test Account'
+    card_type: 'Visa'
+    card_number: '4000000000000002'
+    expiration_month: '07 - July'
+    expiration_year: '2020'
+    card_verification_number: '111'
+
+################################################################################
+#                                                                              #
+#                                 Payment Method                               #
+#                                                                              #
+################################################################################
+multiple_front_payment_checkmoney: &checkMoney
+    payment_method: Check / Money order
+
+multiple_front_payment_credit_card: &creditCard
+    payment_method: Credit Card (saved)
+    payment_info: *visaSavedCC
+
+################################################################################
+#                                                                              #
+#                                 Shipping Method                              #
+#                                                                              #
+################################################################################
+multiple_front_shipping_flatrate: &flatRate
+    shipping_service: Flat Rate
+    shipping_method: Fixed
+
+multiple_front_shipping_free: &free
+    shipping_service: Free Shipping
+    shipping_method: Free
+
+multiple_front_shipping_ups: &ups
+    shipping_service: United Parcel Service
+    shipping_method: Ground
+
+multiple_front_shipping_upsxml: &upsXml
+    shipping_service: United Parcel Service XML
+    shipping_method: UPS Ground
+
+multiple_front_shipping_usps: &usps
+    shipping_service: United States Postal Service
+    shipping_method: Express Mail Flat Rate Envelope Hold For Pickup
+
+multiple_front_shipping_fedex: &fedex
+    shipping_service: Federal Express
+    shipping_method: Home Delivery
+
+multiple_front_shipping_dhl:
+    shipping_service: DHL
+    shipping_method: International Express
+
+# Data for a release after CE1.6.2
+#
+#multiple_front_shipping_dhl_usa: &dhl_usa
+#    shipping_service: DHL USA
+#    shipping_method: Express
+#
+#multiple_front_shipping_dhl_int: &dhl_int
+#    shipping_service: DHL
+#    shipping_method: Express worldwide
+
+################################################################################
+#                                                                              #
+#               Order Data for Signed In Customer                              #
+#                                                                              #
+################################################################################
+multiple_signedin_flatrate_checkmoney_different_address:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: *newBillingSignedInReqPhysical
+    shipping_address_data: *newShippingSignedInReq
+    shipping_data: *flatRate
+    payment_data: *checkMoney
+
+
+################################################################################
+#                                                                              #
+#               Order Data for With Registration                               #
+#                                                                              #
+################################################################################
+
+multiple_with_register_flatrate_checkmoney:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    general_shipping_address: *generalAccountInfo
+    shipping_addresses:
+        new_addresses:
+            address_1: *newShippingSignedInReq
+            address_2: *newShippingSignedInReq
+        existing_addresses:
+            address_1: *newShippingSignedInReq
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    billing_address_data: %noValue%
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    payment_data: *checkMoney
+
+################################################################################
+#                                                                              #
+#                           Order Data for Exist Customer                      #
+#                                                                              #
+################################################################################
+
+multiple_exist_flatrate_checkmoney:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *login
+    billing_address_data: %noValue%
+    general_shipping_address: *generalShippingAddress
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    payment_data: *checkMoney
+
+multiple_test_data:
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    checkout_as_customer: *register
+    general_shipping_address: *generalAccountInfo
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_add_2:
+            shipping_address: %noValue%
+        address_to_ship_1:
+            general_name: opdzs_Simple Product Visible
+            qty: 2
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_2:
+            general_name: %noValue%
+            qty: %noValue%
+            shipping_address: %noValue%
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            change_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+        address_2: %noValue%
+    billing_address_data:
+        existing_address:
+            billing_first_name: Steven(shipping.req)
+            billing_last_name: Stevenson(shipping.req)
+            billing_company: %noValue%
+            billing_street_address_1: street address 1(shipping.req)
+            billing_street_address_2: %noValue%
+            billing_city: Los Angeles
+            billing_country: United States
+            billing_state: California
+            billing_region: %noValue%
+            billing_zip_code: 90064
+            billing_telephone: (091)019-019(shipping.req)
+            billing_fax: %noValue%
+            edit_existing_address: *newBillingSignedInReqPhysical
+        new_address: *newBillingSignedInReqPhysical
+        select_address: *newBillingSignedInReqPhysical
+    payment_data: *checkMoney
+
+################################################################################
+#                                                                              #
+#                     Order Data for ShippingMethodsTests                      #
+#                                                                              #
+################################################################################
+
+#Auxiliary dataset
+multiple_shipping_methods_common_usa: &multipleShippingCommonUsa
+    products_to_add:
+        product_1:
+            general_name: %product_1%
+        product_2:
+            general_name: %product_2%
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_add_2:
+            shipping_address: *newShippingUsa
+        address_1:
+            general_name: %product_1%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+        address_2:
+            general_name: %product_2%
+            qty: 2
+            shipping_address: *newShippingUsa
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: %noValue%
+        address_2:
+            search_shipping_address: *newShippingUsa
+            shipping_method: %noValue%
+    billing_address_data:
+    payment_data: *checkMoney
+#    verify_products_data:
+#        address_1:
+#            search_shipping_address: *newShippingSignedInReq
+#            validate_prod_data:
+#                product_1:
+#                    product_name: %noValue%
+#                    price: $54.95
+#                    qty: 1
+#                    subtotal: $54.95
+#            validate_total_data:
+#                subtotal: $54.95
+#        address_2:
+#            search_shipping_address: *newShippingUsa
+#            validate_prod_data:
+#                product_1:
+#                    product_name: %noValue%
+#                    price: $54.95
+#                    qty: 2
+#                    subtotal: $54.95
+#            validate_total_data:
+#                subtotal: $109.90
+
+#Auxiliary dataset
+multiple_shipping_methods_common_france: &multipleShippingCommonFrance
+    products_to_add:
+        product_1:
+            general_name: %product_1%
+        product_2:
+            general_name: %product_2%
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingFrance1
+        address_to_add_2:
+            shipping_address: *newShippingFrance2
+        address_1:
+            general_name: %product_1%
+            qty: 1
+            shipping_address: *newShippingFrance1
+        address_2:
+            general_name: %product_2%
+            qty: 2
+            shipping_address: *newShippingFrance2
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingFrance1
+            shipping_method: %noValue%
+        address_2:
+            search_shipping_address: *newShippingFrance2
+            shipping_method: %noValue%
+    billing_address_data:
+    payment_data: *checkMoney
+
+multiple_shipping_methods_existing_usa:
+    <<: *multipleShippingCommonUsa
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer: *login
+
+multiple_shipping_methods_existing_france:
+    <<: *multipleShippingCommonFrance
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer: *login
+
+multiple_shipping_methods_loggedin_usa:
+    <<: *multipleShippingCommonUsa
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer:
+        checkout_method: %noValue%
+        additional_data:
+            email_address: %noValue%
+            password: %noValue%
+
+multiple_shipping_methods_loggedin_france:
+    <<: *multipleShippingCommonFrance
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer:
+        checkout_method: %noValue%
+        additional_data:
+            email_address: %noValue%
+            password: %noValue%
+
+multiple_shipping_methods_register_usa:
+    <<: *multipleShippingCommonUsa
+    general_account_info: *generalAccountInfo
+    checkout_as_customer: *register
+
+multiple_shipping_methods_register_france:
+    <<: *multipleShippingCommonFrance
+    general_account_info: *generalAccountInfo
+    checkout_as_customer: *register
+
+################################################################################
+#                                                                              #
+#                     Order Data for PaymentMethodsTests                      #
+#                                                                              #
+################################################################################
+
+#Auxiliary dataset
+multiple_payment_methods_common: &multiplePaymentCommon
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+    billing_address_data: %noValue%
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    payment_data: %noValue%
+
+multiple_payment_methods_existing:
+    <<: *multiplePaymentCommon
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer: *login
+
+multiple_payment_methods_loggedin:
+    <<: *multiplePaymentCommon
+    general_shipping_address: *generalShippingAddress
+    checkout_as_customer:
+        checkout_method: %noValue%
+        additional_data:
+            email_address: %noValue%
+            password: %noValue%
+
+multiple_payment_methods_register:
+    <<: *multiplePaymentCommon
+    general_account_info: *generalAccountInfo
+    checkout_as_customer: *register
+
+################################################################################
+#                                                                              #
+#                     Order Data for InputDataValidation                      #
+#                                                                              #
+################################################################################
+
+#Auxiliary dataset
+multiple_invalid_data_common: &multipleInvalidCommon
+    products_to_add:
+        product_1:
+            general_name: %noValue%
+
+multiple_invalid_data_register:
+    <<: *multipleInvalidCommon
+    general_account_info: *generalAccountInfo
+    checkout_as_customer: *register
+
+multiple_invalid_data_ship_address:
+    <<: *multipleInvalidCommon
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+
+multiple_empty_data_ship_address:
+    <<: *multipleInvalidCommon
+    checkout_as_customer: *login
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+
+
+multiple_invalid_data_bill_address:
+    <<: *multipleInvalidCommon
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    billing_address_data:
+        new_address: *newBillingSignedInReqPhysical
+
+multiple_invalid_data_billing_address:
+    <<: *multipleInvalidCommon
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    billing_address_data:
+        new_address: *newBillingSignedInReqPhysical
+
+multiple_undefined_payment_method:
+    <<: *multipleInvalidCommon
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    billing_address_data: %noValue%
+
+multiple_empty_payment:
+    <<: *multipleInvalidCommon
+    shipping_address_data:
+        address_to_add_1:
+            shipping_address: *newShippingSignedInReq
+        address_to_ship_1:
+            general_name: %noValue%
+            qty: 1
+            shipping_address: *newShippingSignedInReq
+    shipping_data:
+        address_1:
+            search_shipping_address: *newShippingSignedInReq
+            shipping_method: *flatRate
+    billing_address_data: %noValue%
+    payment_data: *creditCard
+

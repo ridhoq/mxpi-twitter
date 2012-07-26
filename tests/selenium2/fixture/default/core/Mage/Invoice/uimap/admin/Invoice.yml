@@ -1,0 +1,173 @@
+# Magento
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Academic Free License (AFL 3.0)
+# that is bundled with this package in the file LICENSE_AFL.txt.
+# It is also available through the world-wide-web at this URL:
+# http://opensource.org/licenses/afl-3.0.php
+# If you did not receive a copy of the license and are unable to
+# obtain it through the world-wide-web, please send an email
+# to license@magentocommerce.com so we can send you a copy immediately.
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade Magento to newer
+# versions in the future. If you wish to customize Magento for your
+# needs please refer to http://www.magentocommerce.com for more information.
+#
+# @category    tests
+# @package     selenium
+# @subpackage  uimaps
+# @author      Magento Core Team <core@magentocommerce.com>
+# @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+# @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+#
+---
+#Manage Sales Orders and related pages
+
+# Sales Invoices page
+manage_sales_invoices:
+    mca: sales_invoice/
+    click_xpath: //ul[@id='nav']//a[contains(@href, 'sales_invoice/')]
+    title: Invoices / Sales / Magento Admin
+    uimap:
+        form: &salesInvoices
+            fieldsets:
+                -
+                    sales_invoice_grid:
+                        xpath: //div[@id='sales_invoice_grid']
+                        buttons:
+                            reset_filter: //button[span='Reset Filter']
+                            search: //button[span='Search']
+                            export: //button[span='Export']
+                            submit: //button[span='Submit']
+                        dropdowns:
+                            export_to: //select[@id='sales_invoice_grid_export']
+                            actions: //select[@id='sales_invoice_grid_massaction-select']
+                            filter_massaction: //select[@id='filter_massaction']
+                            filter_status: //select[@id='filter_state']
+                            view_per_page: //select[@name='limit']
+                        fields:
+                            page: //input[@name='page']
+                            filter_invoice_id: //input[@id='filter_increment_id']
+                            filter_invoice_created_from: //input[@name='created_at[from]']
+                            filter_invoice_created_to: //input[@name='created_at[to]']
+                            filter_order_id: //input[@name='order_increment_id']
+                            filter_order_created_from: //input[@name='order_created_at[from]']
+                            filter_order_created_to: //input[@name='order_created_at[to]']
+                            filter_billing_name: //input[@name='billing_name']
+                            filter_amount_from: //input[@name='grand_total[from]']
+                            filter_amount_to: //input[@name='grand_total[to]']
+                        pageelements:
+                            invoice_grid_head: //*[@id='sales_invoice_grid_table']//thead/tr[@class='headings']
+
+create_invoice:
+    mca: sales_order_invoice/new/order_id/%id%/
+    title: New Invoice / Invoices / Sales / Magento Admin
+    uimap:
+        form: &orderInvoice
+            fieldsets:
+                -
+                    order_number:
+                        xpath: //div[@class='entry-edit'][./div/a[contains(.,'Order #')]]
+                -
+                    account_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Account Information']
+                -
+                    billing_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Billing Address']
+                -
+                    shipping_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Address']
+                -
+                    payment_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Payment Information']
+                -
+                    shipping_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Information']
+                -
+                    items_to_invoice:
+                        xpath: //div[@id='invoice_item_container']/div[@class='grid np']
+                        fields:
+                            qty_to_invoice: //tbody[@class='even'][//*[contains(text(),'%sku%')]]//input[@class='input-text qty-input']
+                        buttons:
+                            update_qty: //button[span[contains(text(),'Update Qty')]]
+                        pageelements:
+                            product_table_head: //table[@class='data order-tables']/thead
+                            product_line:  //table[@class='data order-tables']/tbody
+                -
+                    product_line_to_invoice:
+                        xpath: //div[@id='invoice_item_container']/div[@class='grid np']//tbody[@class]
+                        fields:
+                            product_sku: "[%productNumber%]//*[strong='SKU:']"
+                            product_qty: "[%productNumber%]//td[4]"
+                -
+                    invoice_history:
+                        xpath: //div[@class='box-left entry-edit'][./div/h4='Invoice History']
+                        fields:
+                            invoice_comments: //textarea[@name='invoice[comment_text]']
+                -
+                    invoice_totals:
+                        xpath: //div[@class='box-right entry-edit'][./div/h4='Invoice Totals']
+                        dropdowns:
+                            amount: //select[@name='invoice[capture_case]']
+                        checkboxes:
+                            append_comments: //input[@type='checkbox' and @name='invoice[comment_customer_notify]']
+                            email_copy_of_invoice: //input[@type='checkbox' and @name='invoice[send_email]']
+                        pageelements:
+                            price_totals: //tbody
+                        buttons:
+                            submit_invoice: //button[span='Submit Invoice']
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            reset: //p[@class='form-buttons']//button[span='Reset']
+        messages:
+            confirmation_to_procced: This will create an offline refund. To create an online refund, open an invoice and create credit memo for it. Do you wish to proceed?
+            failure: //li[normalize-space(@class)='error-msg' and contains(.,'PayPal gateway rejected the request.')]
+
+view_invoice:
+    mca: sales_invoice/view/invoice_id/%id%/
+    title: %invoiceId% / Invoices / Sales / Magento Admin
+    uimap:
+        form: &viewInvoice
+            fieldsets:
+                -
+                    order_number:
+                        xpath: //div[@class='entry-edit'][./div/a[contains(.,'Order #')]]
+                -
+                    account_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Account Information']
+                -
+                    billing_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Billing Address']
+                -
+                    shipping_address:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Address']
+                -
+                    payment_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Payment Information']
+                -
+                    shipping_information:
+                        xpath: //div[@class='entry-edit'][./div/h4='Shipping Information']
+                -
+                    items_invoiced:
+                        xpath: //div[@id='invoice_item_container']/div[@class='grid np']
+                        pageelements:
+                            product_table_head: //table[@class='data order-tables']/thead
+                            product_line:  //table[@class='data order-tables']/tbody
+                -
+                    invoice_history:
+                        xpath: //div[@class='box-left entry-edit'][./div/h4='Invoice History']
+                        fields:
+                            invoice_comments: //textarea[@name='invoice[comment_text]']
+                -
+                    invoice_totals:
+                        xpath: //div[@class='box-right entry-edit'][./div/h4='Invoice Totals']
+                        pageelements:
+                            price_totals: //tbody
+        buttons:
+            back: //p[@class='form-buttons']//button[span='Back']
+            send_email: //p[@class='form-buttons']//button[span='Send Email']
+            credit_memo: //p[@class='form-buttons']//button[span='Credit Memo']
+            print: //p[@class='form-buttons']//button[span='Print']
