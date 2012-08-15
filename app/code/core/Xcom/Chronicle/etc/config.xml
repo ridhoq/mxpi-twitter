@@ -377,6 +377,12 @@
                             <message>xcom_chronicle/message_customer_get_inbound</message>
                         </customer_get>
                     </customermanagement>
+                    <hashtagsale>
+                        <start_sale>
+                            <name>com.x.hashtagsale.v1/HTSCart/MakeSaleActiveHTS</name>
+                            <message>xcom_chronicle/message_hashtagsale_create_inbound</message>
+                        </start_sale>
+                    </hashtagsale>
                 </inbound>
                 <inventory>
                     <inventory_stock_item_outofstock>
